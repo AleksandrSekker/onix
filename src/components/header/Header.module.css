@@ -1,0 +1,22 @@
+.headerContainer {
+  padding-top: 1rem;
+  padding-bottom: 1rem;
+  display: flex;
+  flex-wrap: wrap;
+  max-width: 1200px;
+  margin: auto;
+  justify-content: space-between;
+}
+.logo {
+  color: rgb(56, 55, 55);
+  margin-left: 1rem;
+}
+.navigationContent {
+  display: flex;
+  flex-wrap: wrap;
+}
+p {
+  font-size: 1.5rem;
+  margin-left: 1rem;
+  margin-right: 1rem;
+}
