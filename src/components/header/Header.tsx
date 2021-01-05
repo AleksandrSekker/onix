@@ -7,7 +7,7 @@ export const Header = (props: Props) => {
   return (
     <>
       <div className={styles.headerContainer}>
-        <Link to="/" style={{ textDecoration: 'none' }}>
+        <Link to="/onix" style={{ textDecoration: 'none' }}>
           <p className={styles.logo}>Home</p>
         </Link>
 

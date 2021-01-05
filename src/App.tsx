@@ -18,15 +18,14 @@ function App() {
         <Header />
         <FirstSection />
 
-        <Switch>
-          <Route exact path="/" component={Home} />
-          <Route path="/html" component={HtmlPage} />
-          <Route path="/css" component={CssPage} />
-          <Route path="/npm" component={NpmPage} />
-          <Route path="/node" component={NodePage} />
-          <Route path="/vcs" component={VcsPage} />
-          <Route path="/git" component={GitPage} />
-        </Switch>
+        <Route exact path="/onix" component={Home} />
+        <Route path="/html" component={HtmlPage} />
+        <Route path="/css" component={CssPage} />
+        <Route path="/npm" component={NpmPage} />
+        <Route path="/node" component={NodePage} />
+        <Route path="/vcs" component={VcsPage} />
+        <Route path="/git" component={GitPage} />
+
         <Footer />
       </Router>
     </>
