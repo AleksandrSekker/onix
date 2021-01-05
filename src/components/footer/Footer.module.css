@@ -1,0 +1,65 @@
+.footer {
+  max-width: 1200px;
+  margin: auto;
+  padding-left: 1rem;
+  padding-top: 2rem;
+  padding-bottom: 2rem;
+  display: flex;
+  justify-content: space-between;
+}
+.cont1 {
+  display: flex;
+}
+.inputField {
+  padding: 0.8rem;
+  width: 15rem;
+  border: 1px solid gray;
+  border-radius: 0.4rem;
+  margin-right: 1rem;
+}
+.inputField:focus {
+  border: 1px solid blue;
+}
+.inputBtn {
+  width: 6rem;
+  background: rgb(62, 98, 175);
+  border-radius: 0.4rem;
+  border: none;
+  color: white;
+  font-size: 1.1rem;
+}
+.cont2 {
+}
+.cont2 div a {
+  margin-left: 0.5rem;
+  margin-right: 0.5rem;
+  font-size: 2rem;
+  color: rgb(62, 98, 175);
+}
+
+.icons {
+  transition-duration: 1s;
+  transition-property: transform;
+}
+.icons:hover {
+  transform: rotate(360deg);
+  color: black;
+}
+
+.createdby {
+  background: rgb(182, 182, 182);
+  padding: 1rem;
+}
+.createdbyChild {
+  max-width: 1200px;
+  padding-left: 1rem;
+  margin: auto;
+  color: rgb(90, 90, 90);
+  display: flex;
+  justify-content: space-between;
+}
+@media only screen and (max-width: 600px) {
+  .inputField {
+    display: none;
+  }
+}

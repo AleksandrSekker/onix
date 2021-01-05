@@ -17,6 +17,7 @@
 }
 p {
   font-size: 1.5rem;
-  margin-left: 1rem;
-  margin-right: 1rem;
+  margin-left: 0.4rem;
+  margin-right: 0.4rem;
+  color: rgb(56, 55, 55);
 }
