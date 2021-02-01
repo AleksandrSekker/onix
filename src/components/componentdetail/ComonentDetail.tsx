@@ -1,5 +1,5 @@
 import React from 'react';
-import styled from './ComonentDetail.module.css';
+import styled from './ComonentDetail.module.scss';
 interface Props {
   title: string;
   content: string;
@@ -7,7 +7,7 @@ interface Props {
 
 export const ComonentDetail = (props: Props) => {
   return (
-    <div className={styled.container}>
+    <div className="container">
       <h1 className={styled.title}>{props.title}</h1>
       <p className={styled.content}>{props.content}</p>
     </div>

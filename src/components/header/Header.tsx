@@ -1,11 +1,11 @@
 import React, { useState } from 'react';
-import styles from './Header.module.css';
+import styles from './Header.module.scss';
 import { Link } from 'react-router-dom';
 interface Props {}
 
 export const Header = (props: Props) => {
   const [isActive, setisActive] = useState(false);
-  const [navfalse, setnavfalse] = useState(true);
+  const [navfalse, setnavfalse] = useState(false);
   const hamburgerHandler = () => {
     isActive ? setisActive(false) : setisActive(true);
     navfalse ? setnavfalse(false) : setnavfalse(true);
@@ -64,7 +64,7 @@ export const Header = (props: Props) => {
           <Link to="/node" style={{ textDecoration: 'none' }}>
             <p>Node</p>
           </Link>
-          <Link to="/nam" style={{ textDecoration: 'none' }}>
+          <Link to="/npm" style={{ textDecoration: 'none' }}>
             <p>Npm</p>
           </Link>
           <Link to="/html" style={{ textDecoration: 'none' }}>

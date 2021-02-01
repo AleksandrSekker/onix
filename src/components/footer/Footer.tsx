@@ -1,5 +1,5 @@
 import React from 'react';
-import styles from './Footer.module.css';
+import styles from './Footer.module.scss';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
   faLinkedin,
@@ -20,7 +20,7 @@ export const Footer = (props: Props) => {
               placeholder="Placeholder"
               className={styles.inputField}
             />
-            <input type="button" value="Button" className={styles.inputBtn} />
+            <button className={styles.inputBtn}>Button</button>
           </div>
           <div className={styles.cont2}>
             <div>
@@ -38,10 +38,12 @@ export const Footer = (props: Props) => {
         </div>
         <div className={styles.createdby}>
           <div className={styles.createdbyChild}>
-            <h4>Created by Aleksandr Sekker</h4>
-            <a href="https://codepen.io/knyttneve/pen/ZEbQepZ">
+            <h4>
+              &copy; {new Date().getFullYear()} Created by Aleksandr Sekker
+            </h4>
+            {/* <a href="https://codepen.io/knyttneve/pen/ZEbQepZ">
               <h4>Original Design</h4>
-            </a>
+            </a> */}
           </div>
         </div>
       </footer>

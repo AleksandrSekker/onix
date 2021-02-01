@@ -4,12 +4,12 @@ import { Header } from './components/header/Header';
 import { Footer } from './components/footer/Footer';
 import { FirstSection } from './components/firstsection/FirstSection';
 import { Home } from './components/home/Home';
-import { HtmlPage } from './components/htmlpage/HtmlPage';
-import { CssPage } from './components/csspage/CssPage';
-import { NpmPage } from './components/npmpage/NpmPage';
-import { NodePage } from './components/nodepage/NodePage';
+import { HtmlPage } from './components/pages/HtmlPage';
+import { CssPage } from './components/pages/CssPage';
+import { NpmPage } from './components/pages/NpmPage';
+import { NodePage } from './components/pages/NodePage';
 import { VcsPage } from './components/vcspage/VcsPage';
-import { GitPage } from './components/gitpage/GitPage';
+import { GitPage } from './components/pages/GitPage';
 
 function App() {
   return (
