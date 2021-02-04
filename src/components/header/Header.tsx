@@ -1,23 +1,39 @@
 import React, { useState } from 'react';
-import styles from './Header.module.scss';
+import { useSelector, useDispatch } from 'react-redux';
+import { switching, selectCheck } from '../../redux/checked/checkedSlice';
+import styles from '../../scss/Header.module.scss';
 import { Link } from 'react-router-dom';
 interface Props {}
 
 export const Header = (props: Props) => {
   const [isActive, setisActive] = useState(false);
   const [navfalse, setnavfalse] = useState(false);
+  const checked = useSelector(selectCheck);
+  const dispatch = useDispatch();
   const hamburgerHandler = () => {
     isActive ? setisActive(false) : setisActive(true);
     navfalse ? setnavfalse(false) : setnavfalse(true);
   };
+
   return (
     <>
-      <header>
+      <header className={checked ? styles.dark : ''}>
         <div className={styles.headerContainer}>
-          <Link to="/onix" style={{ textDecoration: 'none' }}>
-            <p className={styles.logo}>Home</p>
-          </Link>
-
+          <div className={styles.containerForLogoAndSwitch}>
+            <Link to="/onix" style={{ textDecoration: 'none' }}>
+              <p className={styles.logo}>Home</p>
+            </Link>
+            <div>
+              <label className={styles.switch}>
+                <input
+                  type="checkbox"
+                  checked={checked}
+                  onChange={() => dispatch(switching())}
+                />
+                <span className={`${styles.slider} ${styles.round}`}></span>
+              </label>
+            </div>
+          </div>
           <div className={styles.navigationContent}>
             <Link to="/vcs" style={{ textDecoration: 'none' }}>
               <p>Version Control</p>
@@ -40,7 +56,7 @@ export const Header = (props: Props) => {
           </div>
           <div
             className={`${styles.hamburger}
-           ${isActive ? styles.open : null}
+           ${isActive ? styles.open : ''}
            `}
             onClick={hamburgerHandler}
           >
@@ -52,8 +68,8 @@ export const Header = (props: Props) => {
         <hr />
         <div
           className={`${styles.navcontentVertical} ${
-            navfalse ? styles.navFalse : null
-          }`}
+            navfalse ? styles.navFalse : ''
+          } ${checked ? styles.dark : ''}`}
         >
           <Link to="/vcs" style={{ textDecoration: 'none' }}>
             <p>Version Control</p>

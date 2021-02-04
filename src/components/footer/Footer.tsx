@@ -1,17 +1,20 @@
 import React from 'react';
-import styles from './Footer.module.scss';
+import styles from '../../scss/Footer.module.scss';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import {
   faLinkedin,
   faTelegram,
   faGithub,
 } from '@fortawesome/free-brands-svg-icons';
+import { useSelector } from 'react-redux';
+import { selectCheck } from '../../redux/checked/checkedSlice';
 interface Props {}
 
 export const Footer = (props: Props) => {
+  const checked = useSelector(selectCheck);
   return (
     <>
-      <footer>
+      <footer className={checked ? styles.dark : ''}>
         <hr />
         <div className={styles.footer}>
           <div className={styles.cont1}>
@@ -41,9 +44,6 @@ export const Footer = (props: Props) => {
             <h4>
               &copy; {new Date().getFullYear()} Created by Aleksandr Sekker
             </h4>
-            {/* <a href="https://codepen.io/knyttneve/pen/ZEbQepZ">
-              <h4>Original Design</h4>
-            </a> */}
           </div>
         </div>
       </footer>

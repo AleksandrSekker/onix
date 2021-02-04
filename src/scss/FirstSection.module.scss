@@ -1,0 +1,21 @@
+@import 'variables';
+section {
+  padding-bottom: 2rem;
+}
+section.dark {
+  background: $background-main-dark;
+  transition: 1s;
+  .title,
+  .reviewTitle,
+  p {
+    color: $color-text-dark;
+  }
+}
+.title {
+  text-align: center;
+  margin-top: 2rem;
+  margin-bottom: 2rem;
+}
+.reviewTitle {
+  text-align: center;
+}

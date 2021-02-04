@@ -1,3 +1,4 @@
+@import 'variables';
 p {
   font-size: 1.2rem;
 }
@@ -6,9 +7,21 @@ p {
   margin: auto;
   justify-content: space-between;
 }
-
+div.dark {
+  background: $background-main-dark;
+  transition: 1s;
+  p {
+    color: $color-text-dark;
+  }
+  .firstContainer {
+    background: $background-for-containers-dark;
+  }
+  .secondContainer {
+    background: $background-for-containers-dark;
+  }
+}
 .firstContainer {
-  background: rgb(187, 231, 218);
+  background: $background-for-containers;
   margin-left: 1rem;
   margin-right: 1rem;
   margin-bottom: 2rem;
@@ -16,7 +29,7 @@ p {
   padding: 2rem;
 }
 .secondContainer {
-  background: rgb(187, 231, 218);
+  background: $background-for-containers;
   margin-left: 1rem;
   margin-right: 1rem;
   margin-bottom: 2rem;
@@ -24,10 +37,9 @@ p {
   padding: 2rem;
 }
 .html {
-  color: black;
   margin: auto;
   font-size: 5rem;
-  color: orange;
+  color: $color-html-icon;
 }
 .css {
   font-size: 5rem;
@@ -60,13 +72,13 @@ p {
   width: 0.4rem;
   background: rgb(255, 134, 134);
   display: none;
+  overflow: visible;
 }
 .dot {
   background: red;
   width: 0.8rem;
   height: 0.8rem;
   margin-left: -0.2rem;
-
   border-radius: 100%;
 }
 .dotOne {

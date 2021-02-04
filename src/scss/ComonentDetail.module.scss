@@ -1,0 +1,19 @@
+@import 'variables';
+section.dark {
+  background: $background-main-dark;
+  transition: 1s;
+  .title {
+    color: $color-text-dark;
+  }
+  .content {
+    color: $color-text-dark;
+  }
+}
+.title {
+  text-align: center;
+  margin-top: 3rem;
+  margin-bottom: 2rem;
+}
+.content {
+  margin-bottom: 2rem;
+}

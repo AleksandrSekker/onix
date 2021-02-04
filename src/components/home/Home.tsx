@@ -1,7 +1,7 @@
 import React from 'react';
-import style from './Home.module.scss';
+import style from '../../scss/Home.module.scss';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-// import { faTerminal } from '@fortawesome/free-solid-svg-icons';
+
 import {
   faHtml5,
   faCss3Alt,
@@ -11,12 +11,15 @@ import {
 } from '@fortawesome/free-brands-svg-icons';
 import AOS from 'aos';
 import 'aos/dist/aos.css';
+import { useSelector } from 'react-redux';
+import { selectCheck } from '../../redux/checked/checkedSlice';
 interface Props {}
 
 export const Home = (props: Props) => {
   AOS.init();
+  const checked = useSelector(selectCheck);
   return (
-    <>
+    <div className={checked ? style.dark : ''}>
       <div className={style.flex}>
         <div className={style.flexColumn}>
           <div
@@ -96,6 +99,6 @@ export const Home = (props: Props) => {
           </div>
         </div>
       </div>
-    </>
+    </div>
   );
 };

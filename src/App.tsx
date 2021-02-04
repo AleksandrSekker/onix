@@ -8,7 +8,7 @@ import { HtmlPage } from './components/pages/HtmlPage';
 import { CssPage } from './components/pages/CssPage';
 import { NpmPage } from './components/pages/NpmPage';
 import { NodePage } from './components/pages/NodePage';
-import { VcsPage } from './components/vcspage/VcsPage';
+import { VcsPage } from './components/pages/VcsPage';
 import { GitPage } from './components/pages/GitPage';
 
 function App() {
@@ -17,7 +17,6 @@ function App() {
       <Router>
         <Header />
         <FirstSection />
-
         <Route exact path="/onix" component={Home} />
         <Route path="/html" component={HtmlPage} />
         <Route path="/css" component={CssPage} />
@@ -25,7 +24,6 @@ function App() {
         <Route path="/node" component={NodePage} />
         <Route path="/vcs" component={VcsPage} />
         <Route path="/git" component={GitPage} />
-
         <Footer />
       </Router>
     </>
