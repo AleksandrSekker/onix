@@ -1,15 +1,16 @@
 import React from 'react';
 import { BrowserRouter as Router, Route } from 'react-router-dom';
-import { Header } from './components/header/Header';
-import { Footer } from './components/footer/Footer';
-import { FirstSection } from './components/firstsection/FirstSection';
-import { Home } from './components/home/Home';
+
+import { Home } from './components/pages/Home';
 import { HtmlPage } from './components/pages/HtmlPage';
 import { CssPage } from './components/pages/CssPage';
 import { NpmPage } from './components/pages/NpmPage';
 import { NodePage } from './components/pages/NodePage';
 import { VcsPage } from './components/pages/VcsPage';
 import { GitPage } from './components/pages/GitPage';
+import { Header } from './components/Header';
+import { FirstSection } from './components/FirstSection';
+import { Footer } from './components/Footer';
 
 function App() {
   return (

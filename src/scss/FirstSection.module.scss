@@ -1,21 +1,20 @@
 @import 'variables';
-section {
-  padding-bottom: 2rem;
-}
+
 section.dark {
   background: $background-main-dark;
   transition: 1s;
   .title,
-  .reviewTitle,
+  .review__title,
   p {
     color: $color-text-dark;
   }
 }
 .title {
   text-align: center;
-  margin-top: 2rem;
-  margin-bottom: 2rem;
+  padding-top: 2rem;
+  padding-bottom: 2rem;
 }
-.reviewTitle {
+.review__title {
   text-align: center;
+  padding-bottom: 1rem;
 }

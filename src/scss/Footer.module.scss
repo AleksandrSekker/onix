@@ -2,7 +2,7 @@
 footer.dark {
   background: $created-by-color-dark;
   transition: 1s;
-  .createdby {
+  .created__by {
     background: $created-by-color-dark;
   }
   h4 {
@@ -27,17 +27,17 @@ footer.dark {
 .cont1 {
   display: flex;
 }
-.inputField {
+.input__field {
   padding: 0.8rem;
   width: 15rem;
   border: $input-fild-border;
   border-radius: 0.4rem;
   margin-right: 1rem;
 }
-.inputField:focus {
+.input__field:focus {
   border: $input-fild-border-hover;
 }
-.inputBtn {
+.input__btn {
   width: 6rem;
   background: $input-button-background;
   border-radius: 0.4rem;
@@ -68,11 +68,11 @@ footer.dark {
   }
 }
 
-.createdby {
+.created__by {
   background: $created-by-background;
   padding: 1rem;
 }
-.createdbyChild {
+.created__by__child {
   max-width: 1200px;
   padding-left: 1rem;
   margin: auto;
@@ -81,7 +81,7 @@ footer.dark {
   justify-content: center;
 }
 @media only screen and (max-width: 600px) {
-  .inputField {
+  .input__field {
     display: none;
   }
 }

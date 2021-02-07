@@ -21,9 +21,9 @@ export const Home = (props: Props) => {
   return (
     <div className={checked ? style.dark : ''}>
       <div className={style.flex}>
-        <div className={style.flexColumn}>
+        <div className={style.flex__column}>
           <div
-            className={style.firstContainer}
+            className={style.first__container}
             data-aos="fade-right"
             data-aos-duration="1500"
           >
@@ -37,7 +37,7 @@ export const Home = (props: Props) => {
             </p>
           </div>
           <div
-            className={style.firstContainer}
+            className={style.first__container}
             data-aos="fade-right"
             data-aos-duration="1500"
           >
@@ -49,7 +49,7 @@ export const Home = (props: Props) => {
             </p>
           </div>
           <div
-            className={style.firstContainer}
+            className={style.first__container}
             data-aos="fade-right"
             data-aos-duration="1500"
           >
@@ -58,21 +58,20 @@ export const Home = (props: Props) => {
               Git is a distributed version-control system for tracking changes
               in any set of files, originally designed for coordinating work
               among programmers cooperating on source code during software
-              development. Its goals include speed, data integrity, and support
-              for distributed, non-linear workflows.
+              development.
             </p>
           </div>
         </div>
-        <div className={style.verticalLine}>
-          <div className={`${style.dot} ${style.dotOne}`}></div>
-          <div className={`${style.dot} ${style.dotTwo}`}></div>
-          <div className={`${style.dot} ${style.dotThree}`}></div>
-          <div className={`${style.dot} ${style.dotFour}`}></div>
-          <div className={`${style.dot} ${style.dotFive}`}></div>
+        <div className={style.vertical__line}>
+          <div className={`${style.dot} ${style.dot__one}`}></div>
+          <div className={`${style.dot} ${style.dot__two}`}></div>
+          <div className={`${style.dot} ${style.dot__three}`}></div>
+          <div className={`${style.dot} ${style.dot__four}`}></div>
+          <div className={`${style.dot} ${style.dot__five}`}></div>
         </div>
-        <div className={style.flexColumnTwo}>
+        <div className={style.flex__column__two}>
           <div
-            className={style.secondContainer}
+            className={style.second__сontainer}
             data-aos="fade-left"
             data-aos-duration="1500"
           >
@@ -85,7 +84,7 @@ export const Home = (props: Props) => {
             </p>
           </div>
           <div
-            className={style.secondContainer}
+            className={style.second__сontainer}
             data-aos="fade-left"
             data-aos-duration="1500"
           >

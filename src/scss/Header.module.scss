@@ -1,13 +1,15 @@
 @import 'variables';
 
-.headerContainer {
+.header__container {
   padding: 1rem;
+  margin-bottom: 0;
   display: flex;
   flex-wrap: wrap;
   max-width: 1200px;
   margin: auto;
   justify-content: space-between;
 }
+
 header.dark {
   background: $background-main-dark;
   transition: 1s;
@@ -22,8 +24,11 @@ header.dark {
   }
 }
 
-.containerForLogoAndSwitch {
+.container__for__logo__and__switch {
   display: flex;
+  .link__decoration {
+    text-decoration: none;
+  }
   .logo {
     color: $text-color;
   }
@@ -85,8 +90,11 @@ header.dark {
   }
 }
 
-.navigationContent {
+.navigation__content {
   display: none;
+  .link__decoration {
+    text-decoration: none;
+  }
 }
 p {
   font-size: 1.5rem;
@@ -141,7 +149,7 @@ p {
   }
 }
 
-.navcontentVertical {
+.navcontent__vertical {
   text-align: center;
   position: fixed;
   top: 10;
@@ -151,29 +159,33 @@ p {
   transform: translateX(100%);
   transition: 1s;
   z-index: 1;
+
   p {
     margin-bottom: 2rem;
     margin-top: 2rem;
   }
+  .link__decoration {
+    text-decoration: none;
+  }
 }
-.navcontentVertical.dark {
+.navcontent__vertical.dark {
   background-color: $background-main-dark;
   p {
     color: $color-text-dark;
   }
 }
-.navFalse {
+.nav__false {
   transform: translateX(0%);
 }
 
-@media only screen and (min-width: 600px) {
+@media only screen and (min-width: 768px) {
   .hamburger {
     display: none;
   }
-  .navigationContent {
+  .navigation__content {
     display: flex;
   }
-  .navcontentVertical {
+  .navcontent__vertical {
     display: none;
   }
 }
