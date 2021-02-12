@@ -7,7 +7,7 @@ import {
   faGithub,
 } from '@fortawesome/free-brands-svg-icons';
 import { useSelector } from 'react-redux';
-import { selectCheck } from '../redux/checked/checkedSlice';
+import { selectCheck } from '../redux/checkedSlice';
 interface Props {}
 
 export const Footer = (props: Props) => {

@@ -17,6 +17,7 @@ function App() {
     <>
       <Router>
         <Header />
+
         <FirstSection />
         <Route exact path="/onix" component={Home} />
         <Route path="/html" component={HtmlPage} />

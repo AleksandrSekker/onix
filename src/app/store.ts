@@ -1,6 +1,6 @@
 import { configureStore, ThunkAction, Action } from '@reduxjs/toolkit';
 
-import checkedReducer from '../redux/checked/checkedSlice';
+import checkedReducer from '../redux/checkedSlice';
 
 export const store = configureStore({
   reducer: {

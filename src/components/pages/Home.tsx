@@ -12,7 +12,7 @@ import {
 import AOS from 'aos';
 import 'aos/dist/aos.css';
 import { useSelector } from 'react-redux';
-import { selectCheck } from '../../redux/checked/checkedSlice';
+import { selectCheck } from '../../redux/checkedSlice';
 interface Props {}
 
 export const Home = (props: Props) => {

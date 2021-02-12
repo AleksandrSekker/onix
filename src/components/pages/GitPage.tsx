@@ -1,7 +1,7 @@
 import React from 'react';
 import styled from '../../scss/ComonentDetail.module.scss';
 import { useSelector } from 'react-redux';
-import { selectCheck } from '../../redux/checked/checkedSlice';
+import { selectCheck } from '../../redux/checkedSlice';
 
 interface Props {}
 

@@ -1,6 +1,6 @@
 import React from 'react';
 import { useSelector } from 'react-redux';
-import { selectCheck } from '../../redux/checked/checkedSlice';
+import { selectCheck } from '../../redux/checkedSlice';
 import styled from '../../scss/ComonentDetail.module.scss';
 
 interface Props {}

@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { useSelector, useDispatch } from 'react-redux';
 import styles from '../scss/Header.module.scss';
 import { Link } from 'react-router-dom';
-import { switching, selectCheck } from '../redux/checked/checkedSlice';
+import { switching, selectCheck } from '../redux/checkedSlice';
 
 export const Header = () => {
   const [isActive, setisActive] = useState(false);
