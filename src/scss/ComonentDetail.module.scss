@@ -2,10 +2,9 @@
 section.dark {
   background: $background-main-dark;
   transition: 1s;
-  .title {
-    color: $color-text-dark;
-  }
-  .content {
+
+  h1,
+  p {
     color: $color-text-dark;
   }
 }

@@ -11,6 +11,7 @@ import { GitPage } from './components/pages/GitPage';
 import { Header } from './components/Header';
 import { FirstSection } from './components/FirstSection';
 import { Footer } from './components/Footer';
+import { ArrayBiography } from './components/pages/ArrayBiography';
 
 function App() {
   return (
@@ -26,6 +27,7 @@ function App() {
         <Route path="/node" component={NodePage} />
         <Route path="/vcs" component={VcsPage} />
         <Route path="/git" component={GitPage} />
+        <Route path="/array" component={ArrayBiography} />
         <Footer />
       </Router>
     </>

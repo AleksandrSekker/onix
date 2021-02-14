@@ -20,6 +20,7 @@ export const Header = () => {
   const npm: String = 'Npm';
   const html: String = 'HTML';
   const css: String = 'CSS';
+  const array: String = 'Array Biography';
   return (
     <>
       <header className={checked ? styles.dark : ''}>
@@ -59,6 +60,9 @@ export const Header = () => {
             <Link to="/css" className={styles.link__decoration}>
               <p>{css}</p>
             </Link>
+            <Link to="/array" className={styles.link__decoration}>
+              <p>{array}</p>
+            </Link>
           </div>
           <div
             className={`${styles.hamburger}
@@ -94,6 +98,9 @@ export const Header = () => {
           </Link>
           <Link to="/css" className={styles.link__decoration}>
             <p>{css}</p>
+          </Link>
+          <Link to="/array" className={styles.link__decoration}>
+            <p>{array}</p>
           </Link>
         </div>
       </header>
