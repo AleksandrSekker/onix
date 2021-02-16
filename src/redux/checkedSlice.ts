@@ -6,7 +6,7 @@ interface CheckedState {
 }
 
 const initialState: CheckedState = {
-  value: true,
+  value: false,
 };
 
 export const checkedSlice = createSlice({

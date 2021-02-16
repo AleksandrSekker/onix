@@ -1,0 +1,42 @@
+@import 'variables';
+.input__field {
+  padding: 0.8rem;
+  width: 15rem;
+  border: $input-fild-border;
+  border-radius: 0.4rem;
+  margin-right: 1rem;
+  margin-top: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+.input__field:focus {
+  border: $input-fild-border-hover;
+}
+.input__palindrom {
+  width: 25rem;
+}
+.formflex {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;
+}
+.input__submit {
+  border-radius: 0.4rem;
+  border: none;
+  font-size: 1.1rem;
+  transition: all 1s;
+  color: $input-button-text;
+  padding: 1rem 4rem;
+
+  cursor: pointer;
+  background: $input-button-background;
+
+  &:hover {
+    margin-left: 1rem;
+    background: $input-button-background-hover;
+  }
+}
+@media only screen and (min-width: 1200px) {
+  .formflex {
+    flex-direction: row;
+  }
+}

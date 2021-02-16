@@ -9,8 +9,8 @@ export const FirstSection = (props: Props) => {
   const checked = useSelector(selectCheck);
   const styleProps = useSpring({
     config: { duration: 1000 },
-    to: { marginLeft: 0 },
-    from: { marginLeft: 1000 },
+    to: { opacity: 1 },
+    from: { opacity: 0 },
   });
   const title = 'Entry task to internship';
   const reviewTitle = 'Review Project';
