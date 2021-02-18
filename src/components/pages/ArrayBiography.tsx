@@ -7,7 +7,13 @@ import stylei from '../../scss/Input.module.scss';
 import { v4 as uuid } from 'uuid';
 import data from '../Data';
 import { Button } from '../Button';
-
+import { useForm } from 'react-hook-form';
+import { motion, AnimatePresence } from 'framer-motion';
+interface IFormInputs {
+  number: number;
+  text: string;
+  palindrom: string;
+}
 export const ArrayBiography = () => {
   const checked = useSelector(selectCheck);
   const [number, setnumber] = useState(1);
@@ -16,9 +22,10 @@ export const ArrayBiography = () => {
   const [palindromText, setpalindromText] = useState('');
   const [filtering, setfiltering] = useState('');
   const [state, setstate] = useState(data);
+  const [showAlert, setshowAlert] = useState(false);
 
   const arrayTitle = 'Array Biography';
-
+  const { register, errors, handleSubmit } = useForm<IFormInputs>();
   const addOneStatic = () => {
     setstate([...state, { year: 1910, title: 'Mark Twain Dies' }]);
     console.log(state);
@@ -28,19 +35,24 @@ export const ArrayBiography = () => {
     setstate([...state]);
     console.log(state);
   };
-  const onSubmitPusToArray = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
+  const onSubmitPusToArray = () => {
     setstate([...state, { year: number, title: text }]);
     console.log(state);
     setnumber(1);
     settext('');
+    setshowAlert(true);
+    setTimeout(() => {
+      setshowAlert(false);
+    }, 2000);
   };
   const palindromHandler = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-    if (palindromvalue === palindromvalue.split('').reverse().join('')) {
-      setpalindromText('it is true');
-    } else {
-      setpalindromText('it is false');
+    if (palindromvalue !== '') {
+      if (palindromvalue === palindromvalue.split('').reverse().join('')) {
+        setpalindromText('it is true');
+      } else {
+        setpalindromText('it is false');
+      }
     }
   };
   const filterHandler = (e: React.FormEvent<HTMLFormElement>) => {
@@ -73,6 +85,21 @@ export const ArrayBiography = () => {
     : state.filter((x) =>
         x.title.toLowerCase().includes(filtering.toLocaleLowerCase())
       );
+  const containerVariant = {
+    textHoverTitle: {
+      scale: 1.1,
+      originX: 0,
+      color: 'rgb(182, 2, 0)',
+    },
+    textHoverYear: { scale: 1.5, color: 'rgb(1, 172, 0)' },
+    buttonAnimation: {
+      scale: [1, 1.1, 1],
+      transition: { duration: 0.7, repeat: Infinity },
+    },
+    alertInitial: { x: -100, opacity: 0 },
+    alertAnimate: { x: 0, opacity: 1, transition: { duration: 1 } },
+    exitAlert: { x: -1000, transition: { duration: 1 } },
+  };
 
   return (
     <section className={checked ? styled.dark : ''}>
@@ -92,55 +119,116 @@ export const ArrayBiography = () => {
         {results.map((a) => {
           return (
             <React.Fragment key={uuid()}>
-              <div className={styles.flex}>
-                <p>{a.title}</p>
-                <p>{a.year}</p>
-              </div>
+              <motion.div
+                drag="y"
+                dragConstraints={{ top: -100, bottom: 100 }}
+                className={styles.flex}
+              >
+                <motion.p
+                  variants={containerVariant}
+                  whileHover="textHoverTitle"
+                >
+                  {a.title}
+                </motion.p>
+                <motion.p
+                  variants={containerVariant}
+                  whileHover="textHoverYear"
+                >
+                  {a.year}
+                </motion.p>
+              </motion.div>
             </React.Fragment>
           );
         })}
         <div className={styles.flex}>
-          <div onClick={sortedUseSort}>
+          <motion.div
+            onClick={sortedUseSort}
+            variants={containerVariant}
+            whileHover="buttonAnimation"
+          >
             <Button text="Sorted by sort" color="btn__sorted__by__sort" />
-          </div>
-          <div onClick={sortedUseBabel}>
+          </motion.div>
+          <motion.div
+            onClick={sortedUseBabel}
+            variants={containerVariant}
+            whileHover="buttonAnimation"
+          >
             <Button text="bubble sort" color="btn__sorted__use__bubble" />
-          </div>
-          <div onClick={addOneStatic}>
+          </motion.div>
+          <motion.div
+            onClick={addOneStatic}
+            variants={containerVariant}
+            whileHover="buttonAnimation"
+          >
             <Button text="Add" color="btn__add" />
-          </div>
+          </motion.div>
 
-          <div onClick={removeLastItem}>
+          <motion.div
+            onClick={removeLastItem}
+            variants={containerVariant}
+            whileHover="buttonAnimation"
+          >
             <Button text="Remove" color="btn__remove" />
-          </div>
+          </motion.div>
         </div>
         <div className={styles.flex}>
-          <form onSubmit={onSubmitPusToArray} className={stylei.formflex}>
-            <input
-              type="number"
-              value={number}
-              className={stylei.input__field}
-              placeholder="Please type year"
-              onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-                setnumber(parseInt(e.target.value))
-              }
-            />
-            <input
-              type="text"
-              value={text}
-              className={stylei.input__field}
-              placeholder="Please type text"
-              onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-                settext(e.target.value)
-              }
-            />
-            <input
+          <form
+            onSubmit={handleSubmit(onSubmitPusToArray)}
+            className={stylei.formflex}
+          >
+            <div className={stylei.valid__flex}>
+              <input
+                name="number"
+                ref={register({ required: true })}
+                type="number"
+                value={number}
+                className={stylei.input__field}
+                placeholder="Please type year"
+                onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+                  setnumber(parseInt(e.target.value))
+                }
+              />
+              <h5 className={stylei.valid__text}>
+                {errors.number && 'Year is required'}
+              </h5>
+            </div>
+            <div className={stylei.valid__flex}>
+              <input
+                name="text"
+                ref={register({ required: true })}
+                type="text"
+                value={text}
+                className={stylei.input__field}
+                placeholder="Please type text"
+                onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
+                  settext(e.target.value)
+                }
+              />
+              <h5 className={stylei.valid__text}>
+                {errors.text && 'text is required'}
+              </h5>
+            </div>
+            <motion.input
+              variants={containerVariant}
+              whileHover="buttonAnimation"
               type="submit"
               value="Push value"
               className={stylei.input__submit}
             />
+            <AnimatePresence>
+              {showAlert && (
+                <motion.h2
+                  variants={containerVariant}
+                  initial="alertInitial"
+                  animate="alertAnimate"
+                  exit="exitAlert"
+                >
+                  Item added successfully
+                </motion.h2>
+              )}
+            </AnimatePresence>
           </form>
-          <form onSubmit={palindromHandler}>
+          <form onSubmit={palindromHandler} className={stylei.formflex}>
             <input
               type="text"
               value={palindromvalue}

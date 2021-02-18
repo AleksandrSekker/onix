@@ -19,24 +19,25 @@
   flex-wrap: wrap;
   flex-direction: column;
 }
+.valid__flex {
+  display: flex;
+  flex-direction: column;
+}
+.valid__text {
+  color: red;
+}
 .input__submit {
   border-radius: 0.4rem;
   border: none;
   font-size: 1.1rem;
-  transition: all 1s;
   color: $input-button-text;
   padding: 1rem 4rem;
 
   cursor: pointer;
   background: $input-button-background;
+  margin-bottom: 2rem;
 
   &:hover {
-    margin-left: 1rem;
     background: $input-button-background-hover;
-  }
-}
-@media only screen and (min-width: 1200px) {
-  .formflex {
-    flex-direction: row;
   }
 }

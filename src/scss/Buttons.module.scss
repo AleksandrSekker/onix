@@ -3,12 +3,12 @@
   border-radius: 0.4rem;
   border: none;
   font-size: 1.1rem;
-  transition: all 1s;
+  // transition: all 1s;
 
   cursor: pointer;
-  &:hover {
-    margin-left: 1rem;
-  }
+  // &:hover {
+  //   margin-left: 1rem;
+  // }
 }
 .btn_array {
   color: $input-button-text;
