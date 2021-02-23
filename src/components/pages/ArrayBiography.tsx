@@ -1,6 +1,7 @@
 import React, { useState } from 'react';
 import { useSelector } from 'react-redux';
 import { selectCheck } from '../../redux/checkedSlice';
+import { faCogs } from '@fortawesome/free-solid-svg-icons';
 import styled from '../../scss/ComonentDetail.module.scss';
 import styles from '../../scss/Array.module.scss';
 import stylei from '../../scss/Input.module.scss';
@@ -9,34 +10,26 @@ import data from '../Data';
 import { Button } from '../Button';
 import { useForm } from 'react-hook-form';
 import { motion, AnimatePresence } from 'framer-motion';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 interface IFormInputs {
   number: number;
   text: string;
-  palindrom: string;
 }
 export const ArrayBiography = () => {
   const checked = useSelector(selectCheck);
   const [number, setnumber] = useState(1);
+  const [numbermodal, setnumbermodal] = useState(1);
   const [text, settext] = useState(String);
-  const [palindromvalue, setpalindromvalue] = useState(String);
-  const [palindromText, setpalindromText] = useState('');
+  const [textmodal, settextmodal] = useState(String);
   const [filtering, setfiltering] = useState('');
   const [state, setstate] = useState(data);
   const [showAlert, setshowAlert] = useState(false);
-
+  const [modal, setmodal] = useState(false);
   const arrayTitle = 'Array Biography';
   const { register, errors, handleSubmit } = useForm<IFormInputs>();
-  const addOneStatic = () => {
-    setstate([...state, { year: 1910, title: 'Mark Twain Dies' }]);
-    console.log(state);
-  };
-  const removeLastItem = () => {
-    state.pop();
-    setstate([...state]);
-    console.log(state);
-  };
-  const onSubmitPusToArray = () => {
-    setstate([...state, { year: number, title: text }]);
+
+  const onSubmitPushToArray = () => {
+    setstate([...state, { text: { year: number, title: text, id: uuid() } }]);
     console.log(state);
     setnumber(1);
     settext('');
@@ -45,21 +38,12 @@ export const ArrayBiography = () => {
       setshowAlert(false);
     }, 2000);
   };
-  const palindromHandler = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-    if (palindromvalue !== '') {
-      if (palindromvalue === palindromvalue.split('').reverse().join('')) {
-        setpalindromText('it is true');
-      } else {
-        setpalindromText('it is false');
-      }
-    }
-  };
+
   const filterHandler = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
   };
   const sortedUseSort = () => {
-    let arr = [...state].sort((a, b) => a.year - b.year);
+    let arr = [...state].sort((a, b) => a.text.year - b.text.year);
     setstate(arr);
     console.log(state);
   };
@@ -69,10 +53,10 @@ export const ArrayBiography = () => {
     var n = A.length;
     for (var i = 0; i < n - 1; i++) {
       for (var j = 0; j < n - 1 - i; j++) {
-        if (A[j + 1]['year'] < A[j]['year']) {
-          var t = A[j + 1]['year'];
-          A[j + 1]['year'] = A[j]['year'];
-          A[j]['year'] = t;
+        if (A[j + 1]['text']['year'] < A[j]['text']['year']) {
+          var t = A[j + 1]['text']['year'];
+          A[j + 1]['text']['year'] = A[j]['text']['year'];
+          A[j]['text']['year'] = t;
         }
       }
     }
@@ -83,8 +67,18 @@ export const ArrayBiography = () => {
   const results = !filtering
     ? state
     : state.filter((x) =>
-        x.title.toLowerCase().includes(filtering.toLocaleLowerCase())
+        x.text.title.toLowerCase().includes(filtering.toLocaleLowerCase())
       );
+  const deleteHandler = (a: string) => {
+    setstate(state.filter((el: any) => el.text.id !== a));
+  };
+  const apdateHandler = (a: string) => {
+    const objindex = state.findIndex((obj) => obj.text.id === a);
+    state[objindex] = {
+      text: { year: numbermodal, title: textmodal, id: uuid() },
+    };
+    setstate([...state]);
+  };
   const containerVariant = {
     textHoverTitle: {
       scale: 1.1,
@@ -99,8 +93,11 @@ export const ArrayBiography = () => {
     alertInitial: { x: -100, opacity: 0 },
     alertAnimate: { x: 0, opacity: 1, transition: { duration: 1 } },
     exitAlert: { x: -1000, transition: { duration: 1 } },
-  };
 
+    modalinitial: { opacity: 0, scale: 0.75 },
+    modalanimate: { opacity: 1, scale: 1 },
+    modalexit: { opacity: 0, scale: 0 },
+  };
   return (
     <section className={checked ? styled.dark : ''}>
       <div className="container">
@@ -118,25 +115,94 @@ export const ArrayBiography = () => {
         </form>
         {results.map((a) => {
           return (
-            <React.Fragment key={uuid()}>
-              <motion.div
-                drag="y"
-                dragConstraints={{ top: -100, bottom: 100 }}
-                className={styles.flex}
-              >
+            <React.Fragment key={a.text.id}>
+              <motion.div className={styles.flex}>
                 <motion.p
                   variants={containerVariant}
                   whileHover="textHoverTitle"
                 >
-                  {a.title}
+                  {a.text.title}
                 </motion.p>
-                <motion.p
-                  variants={containerVariant}
-                  whileHover="textHoverYear"
-                >
-                  {a.year}
-                </motion.p>
+                <motion.div className={styles.flexAround}>
+                  <motion.p
+                    variants={containerVariant}
+                    whileHover="textHoverYear"
+                  >
+                    {a.text.year}
+                  </motion.p>
+
+                  <div
+                    onClick={() => {
+                      setmodal(!modal);
+                    }}
+                  >
+                    <FontAwesomeIcon icon={faCogs} />
+                  </div>
+                </motion.div>
               </motion.div>
+              <AnimatePresence>
+                {modal && (
+                  <motion.div
+                    className={styles.modal}
+                    variants={containerVariant}
+                    initial="modalinitial"
+                    animate="modalanimate"
+                    exit="modalexit"
+                  >
+                    <div>
+                      <form className={stylei.formflex}>
+                        <div className={stylei.valid__flex}>
+                          <input
+                            name="number"
+                            type="number"
+                            value={numbermodal}
+                            className={stylei.input__field}
+                            placeholder="Please type year"
+                            onChange={(
+                              e: React.ChangeEvent<HTMLInputElement>
+                            ) => setnumbermodal(parseInt(e.target.value))}
+                          />
+                        </div>
+                        <div className={stylei.valid__flex}>
+                          <input
+                            name="text"
+                            type="text"
+                            value={textmodal}
+                            className={stylei.input__field}
+                            placeholder="Please type text"
+                            onChange={(
+                              e: React.ChangeEvent<HTMLInputElement>
+                            ) => settextmodal(e.target.value)}
+                          />
+                        </div>
+
+                        <motion.div
+                          onClick={() => apdateHandler(a.text.id)}
+                          variants={containerVariant}
+                          whileHover="buttonAnimation"
+                        >
+                          <input
+                            type="button"
+                            className={stylei.input__submit}
+                            value="Update"
+                          />
+                        </motion.div>
+                      </form>
+                      <motion.div
+                        onClick={() => deleteHandler(a.text.id)}
+                        variants={containerVariant}
+                        whileHover="buttonAnimation"
+                      >
+                        <input
+                          type="button"
+                          className={stylei.input__delete}
+                          value="Remove"
+                        />
+                      </motion.div>
+                    </div>
+                  </motion.div>
+                )}
+              </AnimatePresence>
             </React.Fragment>
           );
         })}
@@ -155,25 +221,10 @@ export const ArrayBiography = () => {
           >
             <Button text="bubble sort" color="btn__sorted__use__bubble" />
           </motion.div>
-          <motion.div
-            onClick={addOneStatic}
-            variants={containerVariant}
-            whileHover="buttonAnimation"
-          >
-            <Button text="Add" color="btn__add" />
-          </motion.div>
-
-          <motion.div
-            onClick={removeLastItem}
-            variants={containerVariant}
-            whileHover="buttonAnimation"
-          >
-            <Button text="Remove" color="btn__remove" />
-          </motion.div>
         </div>
         <div className={styles.flex}>
           <form
-            onSubmit={handleSubmit(onSubmitPusToArray)}
+            onSubmit={handleSubmit(onSubmitPushToArray)}
             className={stylei.formflex}
           >
             <div className={stylei.valid__flex}>
@@ -227,18 +278,6 @@ export const ArrayBiography = () => {
                 </motion.h2>
               )}
             </AnimatePresence>
-          </form>
-          <form onSubmit={palindromHandler} className={stylei.formflex}>
-            <input
-              type="text"
-              value={palindromvalue}
-              className={`${stylei.input__field} ${stylei.input__palindrom}`}
-              placeholder="Please type text and prees enter to check if text is palindrom"
-              onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-                setpalindromvalue(e.target.value)
-              }
-            />
-            <p>{palindromText}</p>
           </form>
         </div>
       </div>
