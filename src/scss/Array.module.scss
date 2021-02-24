@@ -3,12 +3,10 @@
 .flex {
   display: flex;
   justify-content: space-between;
+  flex-wrap: wrap;
 }
 .flexAround {
   display: flex;
-
-  // justify-self: space-around;
-  // flex-wrap: wrap;
 }
 form {
   .filter__input {

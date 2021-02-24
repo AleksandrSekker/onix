@@ -24,12 +24,14 @@ export const ArrayBiography = () => {
   const [filtering, setfiltering] = useState('');
   const [state, setstate] = useState(data);
   const [showAlert, setshowAlert] = useState(false);
-  const [modal, setmodal] = useState(false);
   const arrayTitle = 'Array Biography';
   const { register, errors, handleSubmit } = useForm<IFormInputs>();
 
   const onSubmitPushToArray = () => {
-    setstate([...state, { text: { year: number, title: text, id: uuid() } }]);
+    setstate([
+      ...state,
+      { text: { year: number, title: text, id: uuid(), ismodal: false } },
+    ]);
     console.log(state);
     setnumber(1);
     settext('');
@@ -75,8 +77,13 @@ export const ArrayBiography = () => {
   const apdateHandler = (a: string) => {
     const objindex = state.findIndex((obj) => obj.text.id === a);
     state[objindex] = {
-      text: { year: numbermodal, title: textmodal, id: uuid() },
+      text: { year: numbermodal, title: textmodal, id: uuid(), ismodal: false },
     };
+    setstate([...state]);
+  };
+  const modalHandler = (a: string) => {
+    const objindex = state.findIndex((obj) => obj.text.id === a);
+    state[objindex].text.ismodal = !state[objindex].text.ismodal;
     setstate([...state]);
   };
   const containerVariant = {
@@ -117,8 +124,8 @@ export const ArrayBiography = () => {
 
         {results.map((a) => {
           return (
-            <AnimatePresence>
-              <React.Fragment key={a.text.id}>
+            <AnimatePresence key={a.text.id}>
+              <React.Fragment>
                 <motion.div
                   className={styles.flex}
                   initial={{ x: -1000, opacity: 0 }}
@@ -142,7 +149,7 @@ export const ArrayBiography = () => {
 
                     <div
                       onClick={() => {
-                        setmodal(!modal);
+                        modalHandler(a.text.id);
                       }}
                     >
                       <FontAwesomeIcon icon={faCogs} />
@@ -150,7 +157,7 @@ export const ArrayBiography = () => {
                   </motion.div>
                 </motion.div>
                 <AnimatePresence>
-                  {modal && (
+                  {a.text.ismodal && (
                     <motion.div
                       className={styles.modal}
                       variants={containerVariant}
