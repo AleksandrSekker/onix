@@ -11,6 +11,7 @@ import { Button } from '../Button';
 import { useForm } from 'react-hook-form';
 import { motion, AnimatePresence } from 'framer-motion';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { cloneDeep } from 'lodash';
 interface IFormInputs {
   number: number;
   text: string;
@@ -77,18 +78,20 @@ export const ArrayBiography = () => {
     setstate(state.filter((el) => el.text.id !== a));
   };
   const apdateHandler = (a: string) => {
-    const objindex = state.findIndex((obj) => obj.text.id === a);
-    state[objindex] = {
+    const newstate = cloneDeep(state);
+    const objindex = newstate.findIndex((obj) => obj.text.id === a);
+    newstate[objindex] = {
       text: { year: numbermodal, title: textmodal, id: uuid(), ismodal: false },
     };
 
-    setstate([...state]);
+    setstate([...newstate]);
   };
   const modalHandler = (a: string) => {
-    const objindex = state.findIndex((obj) => obj.text.id === a);
+    const newstate = cloneDeep(state);
 
-    state[objindex].text.ismodal = !state[objindex].text.ismodal;
-    setstate([...state]);
+    const objindex = newstate.findIndex((obj) => obj.text.id === a);
+    newstate[objindex].text.ismodal = !newstate[objindex].text.ismodal;
+    setstate([...newstate]);
   };
   const containerVariant = {
     textHoverTitle: {
@@ -132,10 +135,10 @@ export const ArrayBiography = () => {
                 <motion.div
                   key={a.text.id}
                   className={styles.flex}
-                  initial={{ x: -1000, opacity: 0 }}
+                  initial={{ x: -100, opacity: 0 }}
                   animate={{ x: 0, opacity: 1 }}
                   transition={{ duration: 0.8 }}
-                  exit={{ x: -1000, opacity: 0 }}
+                  exit={{ x: -100, opacity: 0 }}
                 >
                   <motion.p
                     variants={containerVariant}
