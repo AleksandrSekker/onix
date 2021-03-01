@@ -12,19 +12,13 @@ export const FirstSection = (props: Props) => {
     to: { opacity: 1 },
     from: { opacity: 0 },
   });
-  const title = 'Entry task to internship';
-  const reviewTitle = 'Review Project';
+  const title = 'Internship project';
+
   return (
     <section className={`${checked ? styled.dark : ''}`}>
       <animated.div style={styleProps}>
         <div className="container" style={styleProps}>
           <h1 className={styled.title}>{title}</h1>
-          <h2 className={styled.review__title}>{reviewTitle}</h2>
-          <p>
-            This is website about git, node, html, css. In main page you can see
-            small review about this technologies, if clicked in navbar button
-            you will see page with more detail information
-          </p>
         </div>
       </animated.div>
     </section>

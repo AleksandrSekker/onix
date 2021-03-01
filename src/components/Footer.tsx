@@ -19,7 +19,7 @@ export const Footer = (props: Props) => {
   return (
     <>
       <footer className={checked ? styles.dark : ''}>
-        <hr />
+
         <div className={styles.footer}>
           <div className={styles.cont1}>
             <input

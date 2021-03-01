@@ -1,9 +1,14 @@
-@import 'variables';
+@import "variables";
 
 .flex {
   display: flex;
+
   justify-content: space-between;
-  flex-wrap: wrap;
+}
+@media only screen and (max-width: 1024px) {
+  .flex {
+    flex-direction: column;
+  }
 }
 .flexAround {
   display: flex;
@@ -33,7 +38,6 @@ form {
 }
 .modal {
   width: 300px;
-  height: 300px;
   border-radius: 15;
   background-color: rgb(218, 216, 216);
   border-radius: 2rem;
