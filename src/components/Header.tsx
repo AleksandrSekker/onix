@@ -125,7 +125,13 @@ export const Header = () => {
                 {array}
               </motion.p>
             </Link>
+            <Link to='/pomodoro' className={styles.link__decoration}>
+              <motion.p variants={itemMenuAnimate} whileHover='hover'>
+                Pomodoro app
+              </motion.p>
+            </Link>
           </div>
+
           <div
             className={`${styles.hamburger}
            ${isActive ? styles.open : ""}

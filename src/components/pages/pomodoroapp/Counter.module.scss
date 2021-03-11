@@ -1,0 +1,19 @@
+.main {
+  background: rgb(224, 114, 114);
+  text-align: center;
+  padding: 2rem 0;
+  margin-top: 1rem;
+  h1 {
+    font-size: 5rem;
+    color: white;
+  }
+  button {
+    background: white;
+    color: rgb(224, 114, 114);
+    padding: 1rem 4rem;
+    outline: none;
+    border: none;
+    border-radius: 0.2rem;
+    font-size: 2rem;
+  }
+}

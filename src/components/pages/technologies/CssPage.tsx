@@ -1,15 +1,15 @@
-import React from 'react';
-import styled from '../../scss/ComonentDetail.module.scss';
-import { useSelector } from 'react-redux';
-import { selectCheck } from '../../redux/checkedSlice';
+import React from "react";
+import styled from "../../../scss/ComonentDetail.module.scss";
+import { useSelector } from "react-redux";
+import { selectCheck } from "../../../redux/checkedSlice";
 interface Props {}
 
 export const CssPage = (props: Props) => {
   const checked = useSelector(selectCheck);
-  const css = 'CSS';
+  const css = "CSS";
   return (
-    <section className={checked ? styled.dark : ''}>
-      <div className="container">
+    <section className={checked ? styled.dark : ""}>
+      <div className='container'>
         <h1 className={styled.title}>{css}</h1>
         <p className={styled.content}>
           Cascading Style Sheets (CSS) is a style sheet language used for

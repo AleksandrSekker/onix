@@ -1,0 +1,115 @@
+.array {
+  background: white;
+  margin: 0.4rem;
+  border-radius: 0.4rem;
+  padding: 1rem;
+  .flex__container {
+    display: flex;
+    justify-content: space-between;
+    .title__container {
+      display: flex;
+    }
+    .edit__container {
+      display: flex;
+    }
+  }
+}
+.add {
+  display: block;
+  width: 100%;
+  border: none;
+  background-color: #b84f4d;
+  color: white;
+  outline: none;
+  padding: 14px 28px;
+  font-size: 16px;
+  cursor: pointer;
+  text-align: center;
+  border-radius: 0.5rem;
+}
+.modal {
+  background: white;
+  margin: 1rem 0;
+  padding-top: 1rem;
+  display: flex;
+  flex-direction: column;
+  border-radius: 0.5rem;
+
+  p {
+    color: rgb(44, 41, 41);
+    margin-left: 1rem;
+  }
+  input {
+    margin-left: 1rem;
+    &::placeholder {
+      color: rgb(150, 148, 148);
+    }
+  }
+}
+.link__add {
+  text-decoration: underline;
+}
+.title__input {
+  background: transparent;
+  border: none;
+  outline: none;
+  font-size: 1.5rem;
+  color: rgb(44, 41, 41);
+}
+.flex {
+  display: flex;
+  margin: 1rem 0;
+}
+.numberInput {
+  outline: none;
+  width: 4rem;
+  height: 2rem;
+  background: rgb(228, 219, 219);
+  border: none;
+  border-radius: 0.3rem;
+  padding-left: 1rem;
+  margin-right: 1rem;
+}
+.chevron {
+  width: 2rem;
+  margin-left: 0.5rem;
+  border: none;
+  border-radius: 0.3rem;
+  outline: none;
+}
+.subtitle__input {
+  background: transparent;
+  border: none;
+  outline: none;
+  font-size: 1.5rem;
+  color: rgb(44, 41, 41);
+}
+.modal__footer__background {
+  margin-top: 2rem;
+  background: rgb(228, 219, 219);
+  display: flex;
+  justify-content: flex-end;
+  border-bottom-right-radius: 0.5rem;
+  border-bottom-left-radius: 0.5rem;
+  padding: 0.5rem;
+  .modal__footer {
+    margin-left: auto;
+    .cancel {
+      background: transparent;
+      color: rgb(68, 67, 67);
+      margin-right: 1rem;
+      font-size: 1.3rem;
+      border: none;
+      outline: none;
+    }
+    .save {
+      background: rgb(68, 67, 67);
+      color: white;
+      font-size: 1.3rem;
+      outline: none;
+      padding: 0.4rem 2rem;
+      border: none;
+      border-radius: 0.3rem;
+    }
+  }
+}

@@ -1,16 +1,16 @@
-import React from 'react';
-import { useSelector } from 'react-redux';
-import { selectCheck } from '../../redux/checkedSlice';
-import styled from '../../scss/ComonentDetail.module.scss';
+import React from "react";
+import { useSelector } from "react-redux";
+import { selectCheck } from "../../../redux/checkedSlice";
+import styled from "../../../scss/ComonentDetail.module.scss";
 
 interface Props {}
 
 export const VcsPage = (props: Props) => {
   const checked = useSelector(selectCheck);
-  const vcs = 'VCS';
+  const vcs = "VCS";
   return (
-    <section className={checked ? styled.dark : ''}>
-      <div className="container">
+    <section className={checked ? styled.dark : ""}>
+      <div className='container'>
         <h1 className={styled.title}>{vcs}</h1>
         <p className={styled.content}>
           In software engineering, version control (also known as revision

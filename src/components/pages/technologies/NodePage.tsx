@@ -1,15 +1,15 @@
-import React from 'react';
-import styled from '../../scss/ComonentDetail.module.scss';
-import { useSelector } from 'react-redux';
-import { selectCheck } from '../../redux/checkedSlice';
+import React from "react";
+import styled from "../../../scss/ComonentDetail.module.scss";
+import { useSelector } from "react-redux";
+import { selectCheck } from "../../../redux/checkedSlice";
 interface Props {}
 
 export const NodePage = (props: Props) => {
   const checked = useSelector(selectCheck);
-  const node = 'Node.js';
+  const node = "Node.js";
   return (
-    <section className={checked ? styled.dark : ''}>
-      <div className="container">
+    <section className={checked ? styled.dark : ""}>
+      <div className='container'>
         <h1 className={styled.title}>{node}</h1>
         <p className={styled.content}>
           Node.js is an open-source, cross-platform, back-end, JavaScript

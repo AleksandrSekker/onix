@@ -1,16 +1,16 @@
-import React from 'react';
-import styled from '../../scss/ComonentDetail.module.scss';
-import { useSelector } from 'react-redux';
-import { selectCheck } from '../../redux/checkedSlice';
+import React from "react";
+import styled from "../../../scss/ComonentDetail.module.scss";
+import { useSelector } from "react-redux";
+import { selectCheck } from "../../../redux/checkedSlice";
 
 interface Props {}
 
 export const GitPage = (props: Props) => {
   const checked = useSelector(selectCheck);
-  const git = 'Git';
+  const git = "Git";
   return (
-    <section className={checked ? styled.dark : ''}>
-      <div className="container">
+    <section className={checked ? styled.dark : ""}>
+      <div className='container'>
         <h1 className={styled.title}>{git}</h1>
         <p className={styled.content}>
           Git (/ɡɪt/)[7] is a distributed version-control system for tracking

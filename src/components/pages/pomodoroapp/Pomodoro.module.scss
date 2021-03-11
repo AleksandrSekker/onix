@@ -1,0 +1,27 @@
+.background {
+  background: rgb(224, 92, 92);
+  padding: 2rem 0;
+}
+.container {
+  max-width: 500px;
+  margin: 0 auto;
+}
+.header {
+  display: flex;
+  justify-content: space-between;
+  p {
+    color: white;
+    .logo {
+      margin-right: 0.5rem;
+    }
+  }
+  button {
+    background: rgb(224, 114, 114);
+    border: none;
+    color: white;
+    font-size: 1.2rem;
+    border-radius: 0.4rem;
+    padding: 0.5rem 1rem;
+    outline: none;
+  }
+}

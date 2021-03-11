@@ -2,15 +2,17 @@ import React from "react";
 import { Route, Switch, useLocation } from "react-router-dom";
 import { animated, useTransition } from "react-spring";
 import { Home } from "./components/pages/Home";
-import { HtmlPage } from "./components/pages/HtmlPage";
-import { CssPage } from "./components/pages/CssPage";
-import { NpmPage } from "./components/pages/NpmPage";
-import { NodePage } from "./components/pages/NodePage";
-import { VcsPage } from "./components/pages/VcsPage";
-import { GitPage } from "./components/pages/GitPage";
+import { HtmlPage } from "./components/pages/technologies/HtmlPage";
+import { CssPage } from "./components/pages/technologies/CssPage";
+import { NpmPage } from "./components/pages/technologies/NpmPage";
+import { NodePage } from "./components/pages/technologies/NodePage";
+import { VcsPage } from "./components/pages/technologies/VcsPage";
+import { GitPage } from "./components/pages/technologies/GitPage";
 import { Header } from "./components/Header";
 import { Footer } from "./components/Footer";
 import { ArrayBiography } from "./components/pages/ArrayBiography";
+
+import { Pomodoro } from "./components/pages/pomodoroapp/Pomodoro";
 
 function App() {
   const location = useLocation();
@@ -36,6 +38,7 @@ function App() {
                 <Route path='/vcs' component={VcsPage} />
                 <Route path='/git' component={GitPage} />
                 <Route path='/array' component={ArrayBiography} />
+                <Route path='/pomodoro' component={Pomodoro} />
               </Switch>
               <Footer />
             </div>

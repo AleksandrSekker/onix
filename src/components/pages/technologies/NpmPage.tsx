@@ -1,16 +1,16 @@
-import React from 'react';
-import styled from '../../scss/ComonentDetail.module.scss';
-import { useSelector } from 'react-redux';
-import { selectCheck } from '../../redux/checkedSlice';
+import React from "react";
+import styled from "../../../scss/ComonentDetail.module.scss";
+import { useSelector } from "react-redux";
+import { selectCheck } from "../../../redux/checkedSlice";
 
 interface Props {}
 
 export const NpmPage = (props: Props) => {
   const checked = useSelector(selectCheck);
-  const npm = 'Package manager, npm';
+  const npm = "Package manager, npm";
   return (
-    <section className={checked ? styled.dark : ''}>
-      <div className="container">
+    <section className={checked ? styled.dark : ""}>
+      <div className='container'>
         <h1 className={styled.title}>{npm}</h1>
         <p className={styled.content}>
           A package manager or package-management system is a collection of
