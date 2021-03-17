@@ -47,18 +47,16 @@ export const ArrayBiography = () => {
   };
 
   const sortedUseSort = () => {
-    const sortable: string[] = Object.keys(state).sort(
-      (a, b) => state[a].year - state[b].year
-    );
-    console.log(sortable);
+    const sortable = Object.keys(state)
+      .sort((a, b) => state[a].year - state[b].year)
+      .reduce((r: any, k: any) => ((r[k] = state[k]), r), {});
 
-    // console.log(state);
-    // console.log(sortable);
+    setstate(sortable);
   };
 
   const sortedUseBabel = () => {
-    const A = { ...state };
-    console.log(A.length);
+    // const A = { ...state };
+    // state.key.year
     // const A = [...state];
     // var n = A.length;
     // for (var i = 0; i < n - 1; i++) {
