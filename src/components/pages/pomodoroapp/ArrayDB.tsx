@@ -101,7 +101,7 @@ export const ArrayDB = (props: Props) => {
             </div>
             <p>{results.subtitle}</p>
 
-            {/* <button onClick={() => deleteHandler(results._id)}>delete</button> */}
+            <button onClick={() => deleteHandler(results._id)}>delete</button>
           </div>
         );
       })}

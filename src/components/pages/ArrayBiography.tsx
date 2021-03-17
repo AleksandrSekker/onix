@@ -12,29 +12,31 @@ import { useForm } from "react-hook-form";
 import { motion, AnimatePresence } from "framer-motion";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { cloneDeep } from "lodash";
+
 interface IFormInputs {
   number: number;
   text: string;
 }
+
 export const ArrayBiography = () => {
   const checked = useSelector(selectCheck);
   const [number, setnumber] = useState(1);
   const [numbermodal, setnumbermodal] = useState(1);
   const [text, settext] = useState(String);
   const [textmodal, settextmodal] = useState(String);
-  const [filtering, setfiltering] = useState("");
   const [state, setstate] = useState(data);
   const [showAlert, setshowAlert] = useState(false);
   const arrayTitle = "Array Biography";
   const { register, errors, handleSubmit } = useForm<IFormInputs>();
 
   const onSubmitPushToArray = () => {
-    setstate([
-      ...state,
-      {
-        text: { year: number, title: text, id: uuid(), ismodal: false },
-      },
-    ]);
+    const newstate = cloneDeep(state);
+    const somenew: any = {
+      ...newstate,
+      [uuid()]: { year: number, title: text, id: uuid(), ismodal: false },
+    };
+    console.log(somenew);
+    setstate(somenew);
     console.log(state);
     setnumber(1);
     settext("");
@@ -44,54 +46,60 @@ export const ArrayBiography = () => {
     }, 2000);
   };
 
-  const filterHandler = (e: React.FormEvent<HTMLFormElement>) => {
-    e.preventDefault();
-  };
   const sortedUseSort = () => {
-    let arr = [...state].sort((a, b) => a.text.year - b.text.year);
-    setstate(arr);
-    console.log(state);
+    const sortable: string[] = Object.keys(state).sort(
+      (a, b) => state[a].year - state[b].year
+    );
+    console.log(sortable);
+
+    // console.log(state);
+    // console.log(sortable);
   };
 
   const sortedUseBabel = () => {
-    const A = [...state];
-    var n = A.length;
-    for (var i = 0; i < n - 1; i++) {
-      for (var j = 0; j < n - 1 - i; j++) {
-        if (A[j + 1]["text"]["year"] < A[j]["text"]["year"]) {
-          var t = A[j + 1]["text"]["year"];
-          A[j + 1]["text"]["year"] = A[j]["text"]["year"];
-          A[j]["text"]["year"] = t;
-        }
-      }
-    }
-    setstate(A);
-    console.log(A);
+    const A = { ...state };
+    console.log(A.length);
+    // const A = [...state];
+    // var n = A.length;
+    // for (var i = 0; i < n - 1; i++) {
+    //   for (var j = 0; j < n - 1 - i; j++) {
+    //     if (A[j + 1]["text"]["year"] < A[j]["text"]["year"]) {
+    //       var t = A[j + 1]["text"]["year"];
+    //       A[j + 1]["text"]["year"] = A[j]["text"]["year"];
+    //       A[j]["text"]["year"] = t;
+    //     }
+    //   }
+    // }
+    // setstate(A);
+    // console.log(A);
   };
 
-  const results = !filtering
-    ? state
-    : state.filter(x =>
-        x.text.title.toLowerCase().includes(filtering.toLocaleLowerCase())
-      );
-  const deleteHandler = (a: string) => {
-    setstate(state.filter(el => el.text.id !== a));
+  const deleteHandler = (a: any) => {
+    const newstate = cloneDeep(state);
+    delete newstate[a];
+    setstate(newstate);
+    console.log(state);
+    console.log(newstate);
   };
   const apdateHandler = (a: string) => {
     const newstate = cloneDeep(state);
-    const objindex = newstate.findIndex(obj => obj.text.id === a);
-    newstate[objindex] = {
-      text: { year: numbermodal, title: textmodal, id: uuid(), ismodal: false },
-    };
 
-    setstate([...newstate]);
+    newstate[a] = {
+      year: numbermodal,
+      title: textmodal,
+      id: uuid(),
+      ismodal: false,
+    };
+    console.log(newstate);
+    console.log(state);
+    setstate({ ...newstate });
   };
   const modalHandler = (a: string) => {
     const newstate = cloneDeep(state);
-
-    const objindex = newstate.findIndex(obj => obj.text.id === a);
-    newstate[objindex].text.ismodal = !newstate[objindex].text.ismodal;
-    setstate([...newstate]);
+    newstate[a].ismodal = !newstate[a].ismodal;
+    setstate(newstate);
+    console.log(state);
+    console.log(newstate);
   };
   const containerVariant = {
     textHoverTitle: {
@@ -117,23 +125,13 @@ export const ArrayBiography = () => {
     <section className={checked ? styled.dark : ""}>
       <div className='container'>
         <h1 className={styled.title}>{arrayTitle}</h1>
-        <form onSubmit={filterHandler}>
-          <input
-            type='text'
-            value={filtering}
-            placeholder='Search by text'
-            className={styles.filter__input}
-            onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-              setfiltering(e.target.value)
-            }
-          />
-        </form>
+
         <AnimatePresence>
-          {results.map(a => {
+          {Object.entries(state).map(([key, value]) => {
             return (
-              <div key={a.text.id}>
+              <div key={key}>
                 <motion.div
-                  key={a.text.id}
+                  key={value.id}
                   className={styles.flex}
                   initial={{ x: -100, opacity: 0 }}
                   animate={{ x: 0, opacity: 1 }}
@@ -142,28 +140,28 @@ export const ArrayBiography = () => {
                   <motion.p
                     variants={containerVariant}
                     whileHover='textHoverTitle'>
-                    {a.text.title}
+                    {value.title}
                   </motion.p>
                   <motion.div className={styles.flexAround}>
                     <motion.p
                       variants={containerVariant}
                       whileHover='textHoverYear'>
-                      {a.text.year}
+                      {value.year}
                     </motion.p>
 
                     <p
                       onClick={() => {
-                        modalHandler(a.text.id);
+                        modalHandler(key);
                       }}>
                       <FontAwesomeIcon icon={faPen} />
                     </p>
-                    <p onClick={() => deleteHandler(a.text.id)}>
+                    <p onClick={() => deleteHandler(key)}>
                       <FontAwesomeIcon icon={faTrash} />
                     </p>
                   </motion.div>
                 </motion.div>
                 <AnimatePresence>
-                  {a.text.ismodal && (
+                  {value.ismodal && (
                     <motion.div
                       className={styles.modal}
                       variants={containerVariant}
@@ -197,7 +195,7 @@ export const ArrayBiography = () => {
                         </div>
 
                         <motion.div
-                          onClick={() => apdateHandler(a.text.id)}
+                          onClick={() => apdateHandler(key)}
                           variants={containerVariant}
                           whileHover='buttonAnimation'>
                           <input
@@ -208,7 +206,7 @@ export const ArrayBiography = () => {
                         </motion.div>
                       </form>
                       <motion.div
-                        onClick={() => deleteHandler(a.text.id)}
+                        onClick={() => deleteHandler(value.id)}
                         variants={containerVariant}
                         whileHover='buttonAnimation'>
                         <input
