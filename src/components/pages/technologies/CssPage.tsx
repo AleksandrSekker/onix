@@ -2,9 +2,8 @@ import React from "react";
 import styled from "../../../scss/ComonentDetail.module.scss";
 import { useSelector } from "react-redux";
 import { selectCheck } from "../../../redux/checkedSlice";
-interface Props {}
 
-export const CssPage = (props: Props) => {
+export const CssPage = () => {
   const checked = useSelector(selectCheck);
   const css = "CSS";
   return (

@@ -20,12 +20,12 @@ interface IFormInputs {
 
 export const ArrayBiography = () => {
   const checked = useSelector(selectCheck);
-  const [number, setnumber] = useState(1);
-  const [numbermodal, setnumbermodal] = useState(1);
-  const [text, settext] = useState(String);
-  const [textmodal, settextmodal] = useState(String);
-  const [state, setstate] = useState(data);
-  const [showAlert, setshowAlert] = useState(false);
+  const [number, setNumber] = useState(1);
+  const [numberModal, setNumberModal] = useState(1);
+  const [text, setText] = useState(String);
+  const [textModal, setTextModal] = useState(String);
+  const [state, setState] = useState(data);
+  const [showAlert, setShowAlert] = useState(false);
   const arrayTitle = "Array Biography";
   const { register, errors, handleSubmit } = useForm<IFormInputs>();
 
@@ -36,68 +36,69 @@ export const ArrayBiography = () => {
       [uuid()]: { year: number, title: text, id: uuid(), ismodal: false },
     };
     console.log(somenew);
-    setstate(somenew);
+    setState(somenew);
     console.log(state);
-    setnumber(1);
-    settext("");
-    setshowAlert(true);
+    setNumber(1);
+    setText("");
+    setShowAlert(true);
     setTimeout(() => {
-      setshowAlert(false);
+      setShowAlert(false);
     }, 2000);
   };
 
   const sortedUseSort = () => {
     const sortable = Object.keys(state)
       .sort((a, b) => state[a].year - state[b].year)
-      .reduce((r: any, k: any) => ((r[k] = state[k]), r), {});
-
-    setstate(sortable);
+      // eslint-disable-next-line
+      .reduce((r: any, k: string) => ((r[k] = state[k]), r), {});
+    setState(sortable);
   };
 
   const sortedUseBabel = () => {
-    // const A = { ...state };
-    // state.key.year
-    // const A = [...state];
-    // var n = A.length;
-    // for (var i = 0; i < n - 1; i++) {
-    //   for (var j = 0; j < n - 1 - i; j++) {
-    //     if (A[j + 1]["text"]["year"] < A[j]["text"]["year"]) {
-    //       var t = A[j + 1]["text"]["year"];
-    //       A[j + 1]["text"]["year"] = A[j]["text"]["year"];
-    //       A[j]["text"]["year"] = t;
-    //     }
-    //   }
-    // }
-    // setstate(A);
-    // console.log(A);
+    const A = { ...state };
+    var n = Object.keys(A).length;
+
+    console.log(n);
+
+    for (var i = 0; i < n - 1; i++) {
+      for (var j = 0; j < n - 1 - i; j++) {
+        if (Object.values(A)[j + 1].year < Object.values(A)[j].year) {
+          var t = Object.values(A)[j + 1].year;
+          Object.values(A)[j + 1].year = Object.values(A)[j].year;
+          Object.values(A)[j].year = t;
+        }
+      }
+    }
+    console.log(A);
+    setState(A);
   };
 
   const deleteHandler = (a: any) => {
-    const newstate = cloneDeep(state);
-    delete newstate[a];
-    setstate(newstate);
+    const newState = cloneDeep(state);
+    delete newState[a];
+    setState(newState);
     console.log(state);
-    console.log(newstate);
+    console.log(newState);
   };
   const apdateHandler = (a: string) => {
-    const newstate = cloneDeep(state);
+    const newState = cloneDeep(state);
 
-    newstate[a] = {
-      year: numbermodal,
-      title: textmodal,
+    newState[a] = {
+      year: numberModal,
+      title: textModal,
       id: uuid(),
       ismodal: false,
     };
-    console.log(newstate);
+    console.log(newState);
     console.log(state);
-    setstate({ ...newstate });
+    setState({ ...newState });
   };
   const modalHandler = (a: string) => {
-    const newstate = cloneDeep(state);
-    newstate[a].ismodal = !newstate[a].ismodal;
-    setstate(newstate);
+    const newState = cloneDeep(state);
+    newState[a].ismodal = !newState[a].ismodal;
+    setState(newState);
     console.log(state);
-    console.log(newstate);
+    console.log(newState);
   };
   const containerVariant = {
     textHoverTitle: {
@@ -171,24 +172,24 @@ export const ArrayBiography = () => {
                           <input
                             name='number'
                             type='number'
-                            value={numbermodal}
+                            value={numberModal}
                             className={stylei.input__field}
                             placeholder='Please type year'
                             onChange={(
                               e: React.ChangeEvent<HTMLInputElement>
-                            ) => setnumbermodal(parseInt(e.target.value))}
+                            ) => setNumberModal(parseInt(e.target.value))}
                           />
                         </div>
                         <div className={stylei.valid__flex}>
                           <input
                             name='text'
                             type='text'
-                            value={textmodal}
+                            value={textModal}
                             className={stylei.input__field}
                             placeholder='Please type text'
                             onChange={(
                               e: React.ChangeEvent<HTMLInputElement>
-                            ) => settextmodal(e.target.value)}
+                            ) => setTextModal(e.target.value)}
                           />
                         </div>
 
@@ -248,7 +249,7 @@ export const ArrayBiography = () => {
                 className={stylei.input__field}
                 placeholder='Please type year'
                 onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-                  setnumber(parseInt(e.target.value))
+                  setNumber(parseInt(e.target.value))
                 }
               />
               <h5 className={stylei.valid__text}>
@@ -264,7 +265,7 @@ export const ArrayBiography = () => {
                 className={stylei.input__field}
                 placeholder='Please type text'
                 onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-                  settext(e.target.value)
+                  setText(e.target.value)
                 }
               />
               <h5 className={stylei.valid__text}>

@@ -1,16 +1,16 @@
 import React, { useEffect, useState } from "react";
 import styles from "./Counter.module.scss";
 export const Counter = () => {
-  const [minutes, setminutes] = useState(25);
-  const [seconds, setseconds] = useState(0);
-  const [start, setstart] = useState(false);
+  const [minutes, setMinutes] = useState(25);
+  const [seconds, setSeconds] = useState(0);
+  const [start, setStart] = useState(false);
 
   useEffect(() => {
     if (start === true) {
-      seconds > 0 && setTimeout(() => setseconds(seconds - 1), 1000);
+      seconds > 0 && setTimeout(() => setSeconds(seconds - 1), 1000);
       if (minutes > 0 && seconds === 0) {
-        setminutes(minutes - 1);
-        setseconds(59);
+        setMinutes(minutes - 1);
+        setSeconds(59);
       }
     }
   }, [minutes, seconds, start]);
@@ -26,7 +26,7 @@ export const Counter = () => {
       )}
       <button
         onClick={() => {
-          setstart(!start);
+          setStart(!start);
         }}>
         {start ? "Stop" : "Start"}
       </button>

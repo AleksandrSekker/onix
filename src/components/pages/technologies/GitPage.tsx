@@ -3,9 +3,7 @@ import styled from "../../../scss/ComonentDetail.module.scss";
 import { useSelector } from "react-redux";
 import { selectCheck } from "../../../redux/checkedSlice";
 
-interface Props {}
-
-export const GitPage = (props: Props) => {
+export const GitPage = () => {
   const checked = useSelector(selectCheck);
   const git = "Git";
   return (

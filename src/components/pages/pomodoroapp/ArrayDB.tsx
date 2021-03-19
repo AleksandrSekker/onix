@@ -6,26 +6,27 @@ import {
   faCheckCircle,
   faChevronDown,
   faChevronUp,
-  faEdit,
   faPlusCircle,
+  faTrash,
 } from "@fortawesome/free-solid-svg-icons";
 import { AnimatePresence, motion } from "framer-motion";
 interface Props {}
 
 export const ArrayDB = (props: Props) => {
-  const [state, setstate] = useState([]);
-  const [title, settitle] = useState(String);
-  const [subtitle, setsubtitle] = useState(String);
-  const [year, setyear] = useState(1);
-  const [isChange, setisChange] = useState(true);
-  const [isModal, setisModal] = useState(false);
-  const [linkAdd, setlinkAdd] = useState(false);
+  const [state, setState] = useState([]);
+  const [title, setTitle] = useState(String);
+  const [subTitle, setSubTitle] = useState(String);
+  const [year, setYear] = useState(1);
+  const [isChange, setIsChange] = useState(true);
+  const [isModal, setIsModal] = useState(false);
+  const [linkAdd, setLinkAdd] = useState(false);
   useEffect(() => {
     const fetchData = async () => {
       const result = await axios(
         "https://guarded-brook-68937.herokuapp.com/api/todo"
       );
-      setstate(result.data);
+      setState(result.data);
+      console.log(result.data);
     };
     fetchData();
   }, [isChange]);
@@ -35,7 +36,7 @@ export const ArrayDB = (props: Props) => {
       url: "https://guarded-brook-68937.herokuapp.com/api/todo",
       data: {
         title: title,
-        subtitle: subtitle,
+        subtitle: subTitle,
         year: year,
       },
       headers: {
@@ -46,7 +47,7 @@ export const ArrayDB = (props: Props) => {
       .then(function (response: any) {
         if (response.status >= 200 && response.status < 300) {
           console.log("success");
-          setisChange(!isChange);
+          setIsChange(!isChange);
         }
       })
       .catch((error: string) => {
@@ -59,7 +60,7 @@ export const ArrayDB = (props: Props) => {
       .then(function (response: any) {
         if (response.status >= 200 && response.status < 300) {
           console.log("success");
-          setisChange(!isChange);
+          setIsChange(!isChange);
         }
       })
       .catch((error: string) => {
@@ -67,17 +68,18 @@ export const ArrayDB = (props: Props) => {
       });
   };
   const modalToggler = () => {
-    setisModal(!isModal);
+    setIsModal(!isModal);
   };
+
   const result = state;
   const modalVariant = {
-    modalinitial: { opacity: 0, scale: 0.3 },
-    modalanimate: {
+    modalInitial: { opacity: 0, scale: 0.3 },
+    modalAnimate: {
       opacity: 1,
       scale: 1,
       transition: { duration: 0.8 },
     },
-    modalexit: { opacity: 0, scale: 0, transition: { duration: 1 } },
+    modalExit: { opacity: 0, scale: 0, transition: { duration: 1 } },
   };
 
   return (
@@ -95,13 +97,14 @@ export const ArrayDB = (props: Props) => {
               <div className={styles.edit__container}>
                 <p>{results.year}</p>
                 <p>
-                  <FontAwesomeIcon icon={faEdit} />
+                  <FontAwesomeIcon
+                    icon={faTrash}
+                    onClick={() => deleteHandler(results._id)}
+                  />
                 </p>
               </div>
             </div>
             <p>{results.subtitle}</p>
-
-            <button onClick={() => deleteHandler(results._id)}>delete</button>
           </div>
         );
       })}
@@ -110,16 +113,16 @@ export const ArrayDB = (props: Props) => {
           <motion.div
             className={styles.modal}
             variants={modalVariant}
-            initial='modalinitial'
-            animate='modalanimate'
-            exit='modalexit'>
+            initial='modalInitial'
+            animate='modalAnimate'
+            exit='modalExit'>
             <input
               type='text'
               className={styles.title__input}
               placeholder='What are you working on?'
               autoFocus
               onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-                settitle(e.target.value)
+                setTitle(e.target.value)
               }
             />
             <p>Est Pomodoros</p>
@@ -129,20 +132,20 @@ export const ArrayDB = (props: Props) => {
                 className={styles.numberInput}
                 value={year}
                 onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-                  setyear(parseInt(e.target.value))
+                  setYear(parseInt(e.target.value))
                 }
               />
               <button
                 className={styles.chevron}
                 onClick={() => {
-                  setyear(year + 1);
+                  setYear(year + 1);
                 }}>
                 <FontAwesomeIcon icon={faChevronUp} />
               </button>
               <button
                 className={styles.chevron}
                 onClick={() => {
-                  setyear(year - 1);
+                  setYear(year - 1);
                 }}>
                 <FontAwesomeIcon icon={faChevronDown} />
               </button>
@@ -153,14 +156,14 @@ export const ArrayDB = (props: Props) => {
                 className={styles.subtitle__input}
                 placeholder='Some notes...'
                 onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-                  setsubtitle(e.target.value)
+                  setSubTitle(e.target.value)
                 }
               />
             ) : (
               <p
                 className={styles.link__add}
                 onClick={() => {
-                  setlinkAdd(!linkAdd);
+                  setLinkAdd(!linkAdd);
                 }}>
                 + Add notes
               </p>

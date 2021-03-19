@@ -1,4 +1,4 @@
-import { faCheckCircle, faCogs } from "@fortawesome/free-solid-svg-icons";
+import { faCheckCircle } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React from "react";
 import { ArrayDB } from "./ArrayDB";
@@ -15,9 +15,6 @@ export const Pomodoro = (props: Props) => {
             <FontAwesomeIcon icon={faCheckCircle} className={styles.logo} />
             Pomodoro app
           </p>
-          <button>
-            <FontAwesomeIcon icon={faCogs} /> Setting
-          </button>
         </div>
         <Counter />
         <ArrayDB />

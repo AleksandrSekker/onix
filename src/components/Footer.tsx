@@ -1,43 +1,41 @@
-import React from 'react';
-import styles from '../scss/Footer.module.scss';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import React from "react";
+import styles from "../scss/Footer.module.scss";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import {
   faLinkedin,
   faTelegram,
   faGithub,
-} from '@fortawesome/free-brands-svg-icons';
-import { useSelector } from 'react-redux';
-import { selectCheck } from '../redux/checkedSlice';
-interface Props {}
+} from "@fortawesome/free-brands-svg-icons";
+import { useSelector } from "react-redux";
+import { selectCheck } from "../redux/checkedSlice";
 
-export const Footer = (props: Props) => {
+export const Footer = () => {
   const checked = useSelector(selectCheck);
-  const buttonText = 'Button';
-  const creatorName = 'Created by Aleksandr Sekker';
+  const buttonText = "Button";
+  const creatorName = "Created by Aleksandr Sekker";
   const currentYear = new Date().getFullYear();
 
   return (
     <>
-      <footer className={checked ? styles.dark : ''}>
-
+      <footer className={checked ? styles.dark : ""}>
         <div className={styles.footer}>
           <div className={styles.cont1}>
             <input
-              type="text"
-              placeholder="Placeholder"
+              type='text'
+              placeholder='Placeholder'
               className={styles.input__field}
             />
             <button className={styles.input__btn}>{buttonText}</button>
           </div>
           <div className={styles.cont2}>
             <div>
-              <a href="https://github.com/AleksandrSekker">
+              <a href='https://github.com/AleksandrSekker'>
                 <FontAwesomeIcon icon={faGithub} className={styles.icons} />
               </a>
-              <a href="https://t.me/sekk_er">
+              <a href='https://t.me/sekk_er'>
                 <FontAwesomeIcon icon={faTelegram} className={styles.icons} />
               </a>
-              <a href="https://www.linkedin.com/in/aleksandr-sekker-521352161/">
+              <a href='https://www.linkedin.com/in/aleksandr-sekker-521352161/'>
                 <FontAwesomeIcon icon={faLinkedin} className={styles.icons} />
               </a>
             </div>

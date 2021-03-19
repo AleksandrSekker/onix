@@ -8,8 +8,8 @@ import { faChevronDown } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 export const Header = () => {
-  const [isActive, setisActive] = useState(false);
-  const [navfalse, setnavfalse] = useState(false);
+  const [isActive, setIsActive] = useState(false);
+  const [navFalse, setNavFalse] = useState(false);
   const [isHover, toggleHover] = React.useState(false);
   const subMenuAnimate = {
     enter: {
@@ -38,8 +38,8 @@ export const Header = () => {
   const checked = useSelector(selectCheck);
   const dispatch = useDispatch();
   const hamburgerHandler = () => {
-    isActive ? setisActive(false) : setisActive(true);
-    navfalse ? setnavfalse(false) : setnavfalse(true);
+    isActive ? setIsActive(false) : setIsActive(true);
+    navFalse ? setNavFalse(false) : setNavFalse(true);
   };
 
   const toggleHoverMenu = () => {
@@ -145,7 +145,7 @@ export const Header = () => {
 
         <div
           className={`${styles.navcontent__vertical} ${
-            navfalse ? styles.nav__false : ""
+            navFalse ? styles.nav__false : ""
           } ${checked ? styles.dark : ""}`}>
           <Link to='/vcs' className={styles.link__decoration}>
             <p>{versionControl}</p>

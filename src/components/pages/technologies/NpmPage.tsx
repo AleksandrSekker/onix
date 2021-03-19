@@ -3,9 +3,7 @@ import styled from "../../../scss/ComonentDetail.module.scss";
 import { useSelector } from "react-redux";
 import { selectCheck } from "../../../redux/checkedSlice";
 
-interface Props {}
-
-export const NpmPage = (props: Props) => {
+export const NpmPage = () => {
   const checked = useSelector(selectCheck);
   const npm = "Package manager, npm";
   return (
