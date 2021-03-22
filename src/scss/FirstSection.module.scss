@@ -1,4 +1,4 @@
-@import 'variables';
+@import "variables";
 
 section.dark {
   background: $background-main-dark;
@@ -17,4 +17,8 @@ section.dark {
 .review__title {
   text-align: center;
   padding-bottom: 1rem;
+}
+.flex {
+  display: flex;
+  justify-content: space-between;
 }

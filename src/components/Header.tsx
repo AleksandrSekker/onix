@@ -130,6 +130,12 @@ export const Header = () => {
                 Pomodoro app
               </motion.p>
             </Link>
+
+            <Link to='/counries' className={styles.link__decoration}>
+              <motion.p variants={itemMenuAnimate} whileHover='hover'>
+                Rest Countries
+              </motion.p>
+            </Link>
           </div>
 
           <div

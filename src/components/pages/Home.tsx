@@ -1,6 +1,6 @@
-import React from 'react';
-import style from '../../scss/Home.module.scss';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import React from "react";
+import style from "../../scss/Home.module.scss";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
 import {
   faHtml5,
@@ -8,25 +8,26 @@ import {
   faGitAlt,
   faNodeJs,
   faNpm,
-} from '@fortawesome/free-brands-svg-icons';
-import AOS from 'aos';
-import 'aos/dist/aos.css';
-import { useSelector } from 'react-redux';
-import { selectCheck } from '../../redux/checkedSlice';
+} from "@fortawesome/free-brands-svg-icons";
+import AOS from "aos";
+import "aos/dist/aos.css";
+import { useSelector } from "react-redux";
+import { selectCheck } from "../../redux/checkedSlice";
+import { FirstSection } from "../FirstSection";
 interface Props {}
 
 export const Home = (props: Props) => {
   AOS.init();
   const checked = useSelector(selectCheck);
   return (
-    <div className={checked ? style.dark : ''}>
+    <div className={checked ? style.dark : ""}>
+      <FirstSection />
       <div className={style.flex}>
         <div className={style.flex__column}>
           <div
             className={style.first__container}
-            data-aos="fade-right"
-            data-aos-duration="1500"
-          >
+            data-aos='fade-right'
+            data-aos-duration='1500'>
             <FontAwesomeIcon icon={faHtml5} className={style.html} />
 
             <p>
@@ -38,9 +39,8 @@ export const Home = (props: Props) => {
           </div>
           <div
             className={style.first__container}
-            data-aos="fade-right"
-            data-aos-duration="1500"
-          >
+            data-aos='fade-right'
+            data-aos-duration='1500'>
             <FontAwesomeIcon icon={faNodeJs} className={style.node} />
             <p>
               Node.js is an open-source, cross-platform, back-end, JavaScript
@@ -50,9 +50,8 @@ export const Home = (props: Props) => {
           </div>
           <div
             className={style.first__container}
-            data-aos="fade-right"
-            data-aos-duration="1500"
-          >
+            data-aos='fade-right'
+            data-aos-duration='1500'>
             <FontAwesomeIcon icon={faGitAlt} className={style.git} />
             <p>
               Git is a distributed version-control system for tracking changes
@@ -72,9 +71,8 @@ export const Home = (props: Props) => {
         <div className={style.flex__column__two}>
           <div
             className={style.second__сontainer}
-            data-aos="fade-left"
-            data-aos-duration="1500"
-          >
+            data-aos='fade-left'
+            data-aos-duration='1500'>
             <FontAwesomeIcon icon={faCss3Alt} className={style.css} />
             <p>
               Cascading Style Sheets is a style sheet language used for
@@ -85,9 +83,8 @@ export const Home = (props: Props) => {
           </div>
           <div
             className={style.second__сontainer}
-            data-aos="fade-left"
-            data-aos-duration="1500"
-          >
+            data-aos='fade-left'
+            data-aos-duration='1500'>
             <FontAwesomeIcon icon={faNpm} className={style.npm} />
             <p>
               npm is a package manager for the JavaScript programming language.

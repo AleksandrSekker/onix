@@ -13,6 +13,8 @@ import { Footer } from "./components/Footer";
 import { ArrayBiography } from "./components/pages/ArrayBiography";
 
 import { Pomodoro } from "./components/pages/pomodoroapp/Pomodoro";
+import RestCountries from "./components/pages/countries/RestCountries";
+import { DetailCoutnry } from "./components/pages/countries/DetailCoutnry";
 
 function App() {
   const location = useLocation();
@@ -39,6 +41,8 @@ function App() {
                 <Route path='/git' component={GitPage} />
                 <Route path='/array' component={ArrayBiography} />
                 <Route path='/pomodoro' component={Pomodoro} />
+                <Route path='/counries' component={RestCountries} />
+                <Route path='/:handle' component={DetailCoutnry} />
               </Switch>
               <Footer />
             </div>
