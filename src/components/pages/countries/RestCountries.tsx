@@ -1,5 +1,6 @@
 import { faSearch } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import { motion } from "framer-motion";
 import React, { Component } from "react";
 import { Link } from "react-router-dom";
 import { v4 as uuid } from "uuid";
@@ -14,24 +15,24 @@ interface State {
   capital: string;
   flag: string;
   apiDirection: string;
-  detailcall: string;
 }
 
 export default class RestCountries extends Component<Props, State> {
   state: any = { apiDirection: "all" };
 
   dataCall = async () => {
-    await fetch(`https://restcountries.eu/rest/v2/${this.state.apiDirection}`)
-      .then(res => res.json())
-      .then(result => {
-        this.setState({
-          isLoaded: true,
-          items: result,
-        });
-      })
-      .catch(error => {
-        console.error(error);
+    try {
+      const response = await fetch(
+        `https://restcountries.eu/rest/v2/${this.state.apiDirection}`
+      );
+      const json = await response.json();
+      this.setState({
+        items: json,
+        isLoaded: true,
       });
+    } catch (error) {
+      console.error(error);
+    }
   };
   componentDidMount() {
     this.dataCall();
@@ -47,7 +48,7 @@ export default class RestCountries extends Component<Props, State> {
   submitForm = (e: any) => {
     e.preventDefault();
   };
-  detailPageHandler = () => {};
+
   render() {
     const { isLoaded, items, inputString } = this.state;
 
@@ -67,22 +68,29 @@ export default class RestCountries extends Component<Props, State> {
             }
           />
         </div>
+
         {!isLoaded ? (
-          <div>Loading...</div>
+          <div className={styles.loader__container}>
+            <div className={styles.loader}></div>
+          </div>
         ) : (
           <div className={styles.card}>
             {items.map(({ name, population, region, capital, flag }: State) => (
               <Link to={`/${name}`} className={styles.link} key={uuid()}>
-                <div className={styles.cards} onClick={this.detailPageHandler}>
-                  <img src={flag} alt='' />
+                <motion.div
+                  className={styles.cards}
+                  whileHover={{
+                    scale: 0.8,
+                    rotate: 360,
+                    transition: { duration: 1 },
+                  }}
+                  whileTap={{ scale: 1.1 }}>
+                  <img src={flag} alt='flag' />
                   <p>{name}</p>
                   <p>Population: {population}</p>
                   <p>Region: {region}</p>
                   <p>Capital: {capital}</p>
-                  {/* <Link to={`/${name}`}> */}
-                  {/* <button>Detail</button> */}
-                  {/* </Link> */}
-                </div>
+                </motion.div>
               </Link>
             ))}
           </div>

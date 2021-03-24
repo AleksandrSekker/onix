@@ -21,12 +21,23 @@ export const ArrayDB = (props: Props) => {
   const [isModal, setIsModal] = useState(false);
   const [linkAdd, setLinkAdd] = useState(false);
   useEffect(() => {
+    let isCancelled = false;
     const fetchData = async () => {
-      const result = await axios(
-        "https://guarded-brook-68937.herokuapp.com/api/todo"
-      );
-      setState(result.data);
-      console.log(result.data);
+      try {
+        const result = await axios(
+          "https://guarded-brook-68937.herokuapp.com/api/todo"
+        );
+        if (!isCancelled) {
+          setState(result.data);
+          console.log(result.data);
+        }
+      } catch (error) {
+        if (!isCancelled) {
+          console.log({ error: error.message });
+        }
+      } finally {
+        isCancelled = true;
+      }
     };
     fetchData();
   }, [isChange]);

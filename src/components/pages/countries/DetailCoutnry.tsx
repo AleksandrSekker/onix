@@ -4,12 +4,24 @@ import { useParams } from "react-router-dom";
 import { v4 as uuid } from "uuid";
 import styles from "./DetailCoutnry.module.scss";
 interface Props {
+  currencies: [{ name: string }];
+  languages: [{ name: string }];
+  borders: [{ border: string }];
   name: string;
+  flag: string;
+  nativeName: string;
+  population: string;
+  region: string;
+  subregion: string;
+  capital: string;
+  topLevelDomain: string;
 }
-
+interface ParamTypes {
+  handle: string;
+}
 export const DetailCoutnry = (props: Props) => {
   const [state, setState] = useState([]);
-  const { handle }: any = useParams();
+  const { handle } = useParams<ParamTypes>();
   useEffect(() => {
     const fetchData = async () => {
       const result = await axios(
@@ -19,11 +31,10 @@ export const DetailCoutnry = (props: Props) => {
     };
     fetchData();
   }, [handle]);
-  console.log(state);
 
   return (
     <div className='container'>
-      {state.map((data: any) => {
+      {state.map((data: Props) => {
         return (
           <div key={uuid()} className={styles.display}>
             <div>
@@ -46,7 +57,7 @@ export const DetailCoutnry = (props: Props) => {
                   <p>Top Level Domain: {data.topLevelDomain}</p>
                   <div className={styles.text__flex}>
                     <p> Currencies:</p>
-                    {data.currencies.map((currenci: any) => {
+                    {data.currencies.map(currenci => {
                       return (
                         <p className={styles.text__flex__child} key={uuid()}>
                           {currenci.name},
@@ -56,7 +67,7 @@ export const DetailCoutnry = (props: Props) => {
                   </div>
                   <div className={styles.text__flex}>
                     <p>Languages:</p>
-                    {data.languages.map((language: any) => {
+                    {data.languages.map((language: { name: string }) => {
                       return (
                         <p className={styles.text__flex__child} key={uuid()}>
                           {language.name},
@@ -68,7 +79,7 @@ export const DetailCoutnry = (props: Props) => {
               </div>
               <div className={styles.border__country}>
                 <p>Border Countries:</p>
-                {data.borders.map((border: string[]) => {
+                {data.borders.map(border => {
                   return <button key={uuid()}>{border}</button>;
                 })}
               </div>
