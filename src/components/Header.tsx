@@ -174,6 +174,13 @@ export const Header = () => {
           <Link to='/array' className={styles.link__decoration}>
             <p>{array}</p>
           </Link>
+          <Link to='/pomodoro' className={styles.link__decoration}>
+            <p>Pomodoro app</p>
+          </Link>
+
+          <Link to='/counries' className={styles.link__decoration}>
+            <p>Rest Countries</p>
+          </Link>
         </div>
       </header>
     </>
