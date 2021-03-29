@@ -23,7 +23,7 @@ interface Props {
 interface ParamTypes {
   handle: string;
 }
-export const DetailCoutnry = (props: Props) => {
+export const DetailCoutnry = () => {
   const [state, setState] = useState([]);
   const [isLoaded, setIsLoaded] = useState(Boolean);
   const { handle } = useParams<ParamTypes>();
@@ -64,89 +64,106 @@ export const DetailCoutnry = (props: Props) => {
   };
   return (
     <div className='container'>
-      {state.map((data: Props) => {
-        return (
-          <div key={uuid()}>
-            {!isLoaded ? (
-              <Loader />
-            ) : (
-              <div key={uuid()} className={styles.display}>
-                <div>
-                  <AnimatePresence>
-                    {showAlert && (
-                      <motion.div
-                        variants={containerVariant}
-                        initial='alertInitial'
-                        animate='alertAnimate'
-                        exit='exitAlert'
-                        className={styles.alert__container}>
-                        <p>{alertMessage}</p>
-                        <FontAwesomeIcon icon={faTimes} onClick={closeAlert} />
-                      </motion.div>
-                    )}
-                  </AnimatePresence>
-                  <img
-                    src={data.flag}
-                    alt='flag'
-                    className={styles.image}
-                    onLoad={onLoad}
-                    onError={onErrorHandler}
-                  />
-                </div>
+      {state.map(
+        ({
+          flag,
+          name,
+          nativeName,
+          population,
+          region,
+          subregion,
+          capital,
+          topLevelDomain,
+          currencies,
+          languages,
+          borders,
+        }: Props) => {
+          return (
+            <div key={uuid()}>
+              {!isLoaded ? (
+                <Loader />
+              ) : (
+                <div key={uuid()} className={styles.display}>
+                  <div>
+                    <AnimatePresence>
+                      {showAlert && (
+                        <motion.div
+                          variants={containerVariant}
+                          initial='alertInitial'
+                          animate='alertAnimate'
+                          exit='exitAlert'
+                          className={styles.alert__container}>
+                          <p>{alertMessage}</p>
+                          <FontAwesomeIcon
+                            icon={faTimes}
+                            onClick={closeAlert}
+                          />
+                        </motion.div>
+                      )}
+                    </AnimatePresence>
+                    <img
+                      src={flag}
+                      alt='flag'
+                      className={styles.image}
+                      onLoad={onLoad}
+                      onError={onErrorHandler}
+                    />
+                  </div>
 
-                <div className={styles.text__block}>
-                  <p className={styles.country__name}>{data.name}</p>
-                  <div className={styles.detail__container}>
-                    <div>
-                      <p>
-                        Native name:
-                        {data.nativeName}
-                      </p>
-                      <p>Population: {data.population}</p>
-                      <p>Region: {data.region}</p>
-                      <p>Sub Region: {data.subregion}</p>
-                      <p>Capital: {data.capital}</p>
-                    </div>
-                    <div>
-                      <p>Top Level Domain: {data.topLevelDomain}</p>
-                      <div className={styles.text__flex}>
-                        <p> Currencies:</p>
-                        {data.currencies.map(currenci => {
-                          return (
-                            <p
-                              className={styles.text__flex__child}
-                              key={uuid()}>
-                              {currenci.name},
-                            </p>
-                          );
-                        })}
+                  <div className={styles.text__block}>
+                    <p className={styles.country__name}>{name}</p>
+                    <div className={styles.detail__container}>
+                      <div>
+                        <p>
+                          Native name:
+                          {nativeName}
+                        </p>
+                        <p>Population: {population}</p>
+                        <p>Region: {region}</p>
+                        <p>Sub Region: {subregion}</p>
+                        <p>Capital: {capital}</p>
                       </div>
-                      <div className={styles.text__flex}>
-                        <p>Languages:</p>
-                        {data.languages.map((language: { name: string }) => {
-                          return (
-                            <p
-                              className={styles.text__flex__child}
-                              key={uuid()}>
-                              {language.name},
-                            </p>
-                          );
-                        })}
+                      <div>
+                        <p>Top Level Domain: {topLevelDomain}</p>
+                        <div className={styles.text__flex}>
+                          <p> Currencies:</p>
+                          {currencies.map(currenci => {
+                            return (
+                              <p
+                                className={styles.text__flex__child}
+                                key={uuid()}>
+                                {currenci.name},
+                              </p>
+                            );
+                          })}
+                        </div>
+                        <div className={styles.text__flex}>
+                          <p>Languages:</p>
+                          {languages.map((language: { name: string }) => {
+                            return (
+                              <p
+                                className={styles.text__flex__child}
+                                key={uuid()}>
+                                {language.name},
+                              </p>
+                            );
+                          })}
+                        </div>
                       </div>
                     </div>
-                  </div>
-                  <div className={styles.border__country}>
-                    <p>Border Countries:</p>
-                    {data.borders.map(border => {
-                      return <button key={uuid()}>{border}</button>;
-                    })}
+                    <div className={styles.border__country}>
+                      <p>Border Countries:</p>
+                      {borders.map(border => {
+                        return <button key={uuid()}>{border}</button>;
+                      })}
+                    </div>
                   </div>
                 </div>
-              </div>
-            )}
-          </div>
-        );
-      })}
+              )}
+            </div>
+          );
+        }
+      )}
     </div>
   );
 };

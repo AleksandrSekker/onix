@@ -7,7 +7,14 @@ import { Loader } from "../../Loader";
 import { Link } from "react-router-dom";
 import { Button } from "../../Button";
 
-interface Props {}
+interface Props {
+  id: string;
+  name: string;
+  flag: string;
+  population: string;
+  region: string;
+  capital: string;
+}
 
 export const LessonSeven = (props: Props) => {
   const [state, setState] = useState([]);
@@ -37,6 +44,7 @@ export const LessonSeven = (props: Props) => {
       setIsLoaded(false);
     };
   }, []);
+
   const handleOnDragEnd = (result: any) => {
     if (!result.destination) return;
     const items = Array.from(state);
@@ -44,49 +52,34 @@ export const LessonSeven = (props: Props) => {
     items.splice(result.destination.index, 0, reorderedItem);
     setState(items);
   };
-  const nameTernary = () => {
-    isNameActive === true ? setIsNameActive(false) : setIsNameActive(true);
+  const ternary = (x: boolean, y: any) => {
+    x === true ? y(false) : y(true);
   };
-  const regionTernary = () => {
-    isRegionActive === true
-      ? setIsRegionActive(false)
-      : setIsRegionActive(true);
-  };
-  const populationTernary = () => {
-    isPopulationActive === true
-      ? setIsPopulationActive(false)
-      : setIsPopulationActive(true);
-  };
-  const capitalTernary = () => {
-    isCapitalActive === true
-      ? setIsCapitalActive(false)
-      : setIsCapitalActive(true);
-  };
-  const nameHanler = (event: any) => {
-    nameTernary();
+  const nameHanler = () => {
+    ternary(isNameActive, setIsNameActive);
   };
   const populationHandler = () => {
-    populationTernary();
+    ternary(isPopulationActive, setIsPopulationActive);
   };
   const regionHandler = () => {
-    regionTernary();
+    ternary(isRegionActive, setIsRegionActive);
   };
   const capitalHandler = () => {
-    capitalTernary();
+    ternary(isCapitalActive, setIsCapitalActive);
   };
-  const keyboardEvents = (event: any) => {
+  const keyboardEvents = (event: KeyboardEvent) => {
     switch (event.key) {
       case "1":
-        nameTernary();
+        ternary(isNameActive, setIsNameActive);
         break;
       case "2":
-        populationTernary();
+        ternary(isPopulationActive, setIsPopulationActive);
         break;
       case "3":
-        regionTernary();
+        ternary(isRegionActive, setIsRegionActive);
         break;
       case "4":
-        capitalTernary();
+        ternary(isCapitalActive, setIsCapitalActive);
         break;
       default:
         break;
@@ -99,6 +92,7 @@ export const LessonSeven = (props: Props) => {
       window.removeEventListener("keydown", keyboardEvents);
     };
   });
+
   return (
     <div className='container'>
       <p className={styles.hot__keys__text}>
@@ -115,7 +109,10 @@ export const LessonSeven = (props: Props) => {
                 {...provided.droppableProps}
                 ref={provided.innerRef}>
                 {state.map(
-                  ({ id, name, flag, population, region, capital }, index) => {
+                  (
+                    { id, name, flag, population, region, capital }: Props,
+                    index
+                  ) => {
                     return (
                       <Draggable key={id} draggableId={id} index={index}>
                         {provided => (
