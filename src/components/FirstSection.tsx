@@ -19,23 +19,10 @@ export const FirstSection = () => {
         <div className='container' style={styleProps}>
           <h1 className={styled.title}>{title}</h1>
           <div className={styles.flex}>
-            <div>
-              <p>Rest Country.</p>
-              <p>User able to:</p>
-              <p> See all countries from the API on the homepage</p>
-              <p>Search for a country using an input field</p>
-              <p>
-                Click on a country to see more detailed information on a
-                separate page
-              </p>
-            </div>
-            <div>
-              <p>Pomodoro App</p>
-              <p>User able to:</p>
-              <p> See all task from the API</p>
-              <p>Add and delete task to db</p>
-              <p>Start or stop timer</p>
-            </div>
+            <p>
+              Почти всё задание в Lesson 7, кроме картинки с алертом она в
+              детальной странице
+            </p>
           </div>
         </div>
       </animated.div>

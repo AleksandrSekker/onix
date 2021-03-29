@@ -33,6 +33,14 @@
     }
   }
 }
+.alert__container {
+  padding: 1rem;
+  background: rgb(216, 215, 215);
+  margin-bottom: 2rem;
+  border-radius: 0.5rem;
+  display: flex;
+  justify-content: space-between;
+}
 
 @media only screen and (max-width: 600px) {
   .detail__container {

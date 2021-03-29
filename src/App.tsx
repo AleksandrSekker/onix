@@ -15,6 +15,7 @@ import { ArrayBiography } from "./components/pages/ArrayBiography";
 import { Pomodoro } from "./components/pages/pomodoroapp/Pomodoro";
 import RestCountries from "./components/pages/countries/RestCountries";
 import { DetailCoutnry } from "./components/pages/countries/DetailCoutnry";
+import { LessonSeven } from "./components/pages/lesson7/LessonSeven";
 
 function App() {
   const location = useLocation();
@@ -42,6 +43,7 @@ function App() {
                 <Route path='/array' component={ArrayBiography} />
                 <Route path='/pomodoro' component={Pomodoro} />
                 <Route path='/counries' component={RestCountries} />
+                <Route path='/lessonseven' component={LessonSeven} />
                 <Route path='/:handle' component={DetailCoutnry} />
               </Switch>
               <Footer />

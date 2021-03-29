@@ -1,4 +1,7 @@
+import { faTimes } from "@fortawesome/free-solid-svg-icons";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import axios from "axios";
+import { AnimatePresence, motion } from "framer-motion";
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { v4 as uuid } from "uuid";
@@ -24,6 +27,15 @@ export const DetailCoutnry = (props: Props) => {
   const [state, setState] = useState([]);
   const [isLoaded, setIsLoaded] = useState(Boolean);
   const { handle } = useParams<ParamTypes>();
+  const [alertMessage, setAlertMessage] = useState(String);
+  const [showAlert, setShowAlert] = useState(true);
+  const onLoad = () => {
+    setAlertMessage("Image successfully loaded");
+  };
+  const onErrorHandler = () => {
+    console.log("error");
+    setAlertMessage("Image don't loaded");
+  };
   useEffect(() => {
     const fetchData = async () => {
       try {
@@ -39,9 +51,17 @@ export const DetailCoutnry = (props: Props) => {
     fetchData();
     return () => {
       setIsLoaded(false);
+      setShowAlert(false);
     };
   }, [handle]);
-
+  const closeAlert = () => {
+    setShowAlert(false);
+  };
+  const containerVariant = {
+    alertInitial: { x: -1000, opacity: 0 },
+    alertAnimate: { x: 0, opacity: 1, transition: { duration: 2 } },
+    exitAlert: { x: -1000, transition: { duration: 1 } },
+  };
   return (
     <div className='container'>
       {state.map((data: Props) => {
@@ -52,8 +72,28 @@ export const DetailCoutnry = (props: Props) => {
             ) : (
               <div key={uuid()} className={styles.display}>
                 <div>
-                  <img src={data.flag} alt='' className={styles.image} />
+                  <AnimatePresence>
+                    {showAlert && (
+                      <motion.div
+                        variants={containerVariant}
+                        initial='alertInitial'
+                        animate='alertAnimate'
+                        exit='exitAlert'
+                        className={styles.alert__container}>
+                        <p>{alertMessage}</p>
+                        <FontAwesomeIcon icon={faTimes} onClick={closeAlert} />
+                      </motion.div>
+                    )}
+                  </AnimatePresence>
+                  <img
+                    src={data.flag}
+                    alt='flag'
+                    className={styles.image}
+                    onLoad={onLoad}
+                    onError={onErrorHandler}
+                  />
                 </div>
+
                 <div className={styles.text__block}>
                   <p className={styles.country__name}>{data.name}</p>
                   <div className={styles.detail__container}>

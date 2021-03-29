@@ -136,6 +136,11 @@ export const Header = () => {
                 Rest Countries
               </motion.p>
             </Link>
+            <Link to='/lessonseven' className={styles.link__decoration}>
+              <motion.p variants={itemMenuAnimate} whileHover='hover'>
+                Lesson 7
+              </motion.p>
+            </Link>
           </div>
 
           <div
@@ -180,6 +185,9 @@ export const Header = () => {
 
           <Link to='/counries' className={styles.link__decoration}>
             <p>Rest Countries</p>
+          </Link>
+          <Link to='/lessonseven' className={styles.link__decoration}>
+            <p>Lesson 7</p>
           </Link>
         </div>
       </header>
