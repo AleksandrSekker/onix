@@ -5,6 +5,7 @@ import { AnimatePresence, motion } from "framer-motion";
 import React, { useEffect, useState } from "react";
 import { useParams } from "react-router-dom";
 import { v4 as uuid } from "uuid";
+import { Error } from "../../Error";
 import { Loader } from "../../Loader";
 import styles from "./DetailCoutnry.module.scss";
 interface Props {
@@ -29,6 +30,7 @@ export const DetailCoutnry = () => {
   const { handle } = useParams<ParamTypes>();
   const [alertMessage, setAlertMessage] = useState(String);
   const [showAlert, setShowAlert] = useState(true);
+  const [isError, setisError] = useState(false);
   const onLoad = () => {
     setAlertMessage("Image successfully loaded");
   };
@@ -46,6 +48,7 @@ export const DetailCoutnry = () => {
         setIsLoaded(true);
       } catch (error) {
         console.log(error);
+        setisError(true);
       }
     };
     fetchData();
@@ -80,6 +83,7 @@ export const DetailCoutnry = () => {
         }: Props) => {
           return (
             <div key={uuid()}>
+              {isError && <Error />}
               {!isLoaded ? (
                 <Loader />
               ) : (

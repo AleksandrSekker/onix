@@ -6,6 +6,7 @@ import { v4 as uuid } from "uuid";
 import { Loader } from "../../Loader";
 import { Link } from "react-router-dom";
 import { Button } from "../../Button";
+import { Error } from "../../Error";
 
 interface Props {
   id: string;
@@ -23,6 +24,7 @@ export const LessonSeven = (props: Props) => {
   const [isPopulationActive, setIsPopulationActive] = useState(false);
   const [isRegionActive, setIsRegionActive] = useState(false);
   const [isCapitalActive, setIsCapitalActive] = useState(false);
+  const [isError, setisError] = useState(false);
   const dataCall = async () => {
     try {
       const response = await fetch(`https://restcountries.eu/rest/v2/all`);
@@ -33,8 +35,10 @@ export const LessonSeven = (props: Props) => {
       }));
       setIsLoaded(true);
       setState(newArr);
+      console.log(response.statusText);
     } catch (error) {
       console.error(error);
+      setisError(true);
     }
   };
   useEffect(() => {
@@ -98,6 +102,7 @@ export const LessonSeven = (props: Props) => {
       <p className={styles.hot__keys__text}>
         Горячиt клавиши для подсвечивания активных элементов 1, 2, 3, 4
       </p>
+      {isError && <Error />}
       {!isLoaded ? (
         <Loader />
       ) : (

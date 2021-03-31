@@ -47,7 +47,7 @@ export const ArrayBiography = () => {
   };
 
   const sortedUseSort = () => {
-    const sortable = Object.keys(state)
+    const sortable = cloneDeep(Object.keys(state))
       .sort((a, b) => state[a].year - state[b].year)
       // eslint-disable-next-line
       .reduce((r: any, k: string) => ((r[k] = state[k]), r), {});
@@ -55,22 +55,19 @@ export const ArrayBiography = () => {
   };
 
   const sortedUseBabel = () => {
-    const A = { ...state };
-    var n = Object.keys(A).length;
-
-    console.log(n);
-
-    for (var i = 0; i < n - 1; i++) {
-      for (var j = 0; j < n - 1 - i; j++) {
-        if (Object.values(A)[j + 1].year < Object.values(A)[j].year) {
-          var t = Object.values(A)[j + 1].year;
-          Object.values(A)[j + 1].year = Object.values(A)[j].year;
-          Object.values(A)[j].year = t;
+    const array: any = cloneDeep(Object.values({ ...state }));
+    const n = array.length;
+    for (let i = 0; i < n - 1; i++) {
+      for (let j = 0; j < n - 1 - i; j++) {
+        if (array[j + 1]["year"] < array[j]["year"]) {
+          const t = array[j + 1]["year"];
+          array[j + 1]["year"] = array[j]["year"];
+          array[j]["year"] = t;
         }
       }
     }
-    console.log(A);
-    setState(A);
+
+    setState(array);
   };
 
   const deleteHandler = (a: any) => {
