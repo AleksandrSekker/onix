@@ -1,6 +1,4 @@
-import React, { useEffect, useState } from "react";
-
-import { DragDropContext, Draggable, Droppable } from "react-beautiful-dnd";
+import React, { useEffect, useRef, useState } from "react";
 import styles from "./LessonSeven.module.scss";
 import { v4 as uuid } from "uuid";
 import { Loader } from "../../Loader";
@@ -34,6 +32,9 @@ export const LessonSeven = (props: Props) => {
   const [cardColor, setcardColor] = useState("lightgrey");
   const [showAlert, setshowAlert] = useState(false);
   const [alertMessage, setalertMessage] = useState("");
+
+  const draggingItem: any = useRef();
+  const dragOverItem: any = useRef();
   const dataCall = async () => {
     try {
       const response = await fetch(`https://restcountries.eu/rest/v2/all`);
@@ -55,13 +56,6 @@ export const LessonSeven = (props: Props) => {
     return () => setIsLoaded(false);
   }, []);
 
-  const handleOnDragEnd = (result: any) => {
-    if (!result.destination) return;
-    const items = Array.from(state);
-    const [reorderedItem] = items.splice(result.source.index, 1);
-    items.splice(result.destination.index, 0, reorderedItem);
-    setState(items);
-  };
   const ternary = (x: boolean, y: any) => (x === true ? y(false) : y(true));
   const ternaryStyles = (x: boolean) => (x ? styles.active : "");
   const ternaryStylesRightClick = (x: boolean) =>
@@ -157,6 +151,24 @@ export const LessonSeven = (props: Props) => {
   const mouseOutHandler = () => {
     alert("Mouse out from button");
   };
+  const handleDragStart = (e: any, position: any) => {
+    draggingItem.current = position;
+    console.log(e.target.innerHTML);
+  };
+
+  const handleDragEnter = (e: any, position: any) => {
+    dragOverItem.current = position;
+    console.log(e.target.innerHTML);
+    const listCopy = [...state];
+    console.log(draggingItem.current, dragOverItem.current);
+    const draggingItemContent = listCopy[draggingItem.current];
+    listCopy.splice(draggingItem.current, 1);
+    listCopy.splice(dragOverItem.current, 0, draggingItemContent);
+
+    draggingItem.current = dragOverItem.current;
+    dragOverItem.current = null;
+    setState(listCopy);
+  };
   return (
     <div className='container'>
       <p className={styles.text__review}>
@@ -193,86 +205,67 @@ export const LessonSeven = (props: Props) => {
       {!isLoaded ? (
         <Loader />
       ) : (
-        <DragDropContext onDragEnd={handleOnDragEnd}>
-          <Droppable droppableId={styles.card}>
-            {provided => (
-              <div
-                className={styles.card}
-                {...provided.droppableProps}
-                ref={provided.innerRef}>
-                {state.map(
-                  (
-                    { id, name, flag, population, region, capital }: Props,
-                    index
-                  ) => {
-                    return (
-                      <Draggable key={id} draggableId={id} index={index}>
-                        {provided => (
-                          <div
-                            className={styles.cards}
-                            ref={provided.innerRef}
-                            {...provided.draggableProps}
-                            {...provided.dragHandleProps}>
-                            <img src={flag} alt='flag' />
-                            <motion.div
-                              variants={cardBackgroundVariant}
-                              animate='animate'>
-                              <p
-                                onClick={nameHanler}
-                                onContextMenu={nameRightClickHandler}
-                                className={`${ternaryStyles(
-                                  isNameActive
-                                )} ${ternaryStylesRightClick(nameRightClick)}`}>
-                                {name}
-                              </p>
-                              <p
-                                onClick={populationHandler}
-                                onContextMenu={populationRightClickHandler}
-                                className={`${ternaryStyles(
-                                  isPopulationActive
-                                )} ${ternaryStylesRightClick(
-                                  populationRightClick
-                                )}`}>
-                                Population: {population}
-                              </p>
-                              <p
-                                onClick={regionHandler}
-                                onContextMenu={regionRightClickHandler}
-                                className={`${ternaryStyles(
-                                  isRegionActive
-                                )} ${ternaryStylesRightClick(
-                                  regionRightClick
-                                )}`}>
-                                Region: {region}
-                              </p>
-                              <p
-                                onClick={capitalHandler}
-                                onContextMenu={capitalRightClickHandler}
-                                className={`${ternaryStyles(
-                                  isCapitalActive
-                                )} ${ternaryStylesRightClick(
-                                  capitalRightClick
-                                )}`}>
-                                Capital: {capital}
-                              </p>
-                              <Link to={`/${name}`} className={styles.link}>
-                                <Button
-                                  text='Detail page'
-                                  color='btn__sorted__use__bubble'
-                                />
-                              </Link>
-                            </motion.div>
-                          </div>
-                        )}
-                      </Draggable>
-                    );
-                  }
-                )}
-                {provided.placeholder}
-              </div>
+        <div className={styles.card}>
+          {state &&
+            state.map(
+              (
+                { id, name, flag, population, region, capital },
+                index: number
+              ) => (
+                <div
+                  onDragStart={e => handleDragStart(e, index)}
+                  onDragOver={e => e.preventDefault()}
+                  onDragEnter={e => handleDragEnter(e, index)}
+                  key={index}
+                  draggable
+                  className={styles.cards}>
+                  <img src={flag} alt='flag' />
+                  <motion.div
+                    variants={cardBackgroundVariant}
+                    animate='animate'>
+                    <p
+                      onClick={nameHanler}
+                      onContextMenu={nameRightClickHandler}
+                      className={`${ternaryStyles(
+                        isNameActive
+                      )} ${ternaryStylesRightClick(nameRightClick)}`}>
+                      {name}
+                    </p>
+                    <p
+                      onClick={populationHandler}
+                      onContextMenu={populationRightClickHandler}
+                      className={`${ternaryStyles(
+                        isPopulationActive
+                      )} ${ternaryStylesRightClick(populationRightClick)}`}>
+                      Population: {population}
+                    </p>
+                    <p
+                      onClick={regionHandler}
+                      onContextMenu={regionRightClickHandler}
+                      className={`${ternaryStyles(
+                        isRegionActive
+                      )} ${ternaryStylesRightClick(regionRightClick)}`}>
+                      Region: {region}
+                    </p>
+                    <p
+                      onClick={capitalHandler}
+                      onContextMenu={capitalRightClickHandler}
+                      className={`${ternaryStyles(
+                        isCapitalActive
+                      )} ${ternaryStylesRightClick(capitalRightClick)}`}>
+                      Capital: {capital}
+                    </p>
+                    <Link to={`/${name}`} className={styles.link}>
+                      <Button
+                        text='Detail page'
+                        color='btn__sorted__use__bubble'
+                      />
+                    </Link>
+                  </motion.div>
+                </div>
+              )
             )}
-          </Droppable>
-        </DragDropContext>
+        </div>
       )}
     </div>
   );
