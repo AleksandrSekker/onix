@@ -1,13 +1,7 @@
-import { faSearch } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { AnimatePresence, motion } from "framer-motion";
 import React, { Component } from "react";
-
-import { Link } from "react-router-dom";
-import { v4 as uuid } from "uuid";
-
 import { Loader } from "../../Loader";
-import styles from "./RestCountries.module.scss";
+import { CardCountry } from "./CardCountry";
+import { SearchCountry } from "./SearchCountry";
 interface Props {}
 interface State {
   isLoaded: boolean;
@@ -48,59 +42,22 @@ export default class RestCountries extends Component<Props, State> {
       this.dataCall();
     }
   }
-  submitForm = (e: any) => {
+  submitForm = (e: React.ChangeEvent<HTMLInputElement>): void =>
     e.preventDefault();
-  };
-  variantCard = {
-    cardHover: {
-      scale: 0.8,
-      rotate: 360,
-      transition: { duration: 1 },
-    },
-  };
+
+  onChangeInputHandler = (e: React.ChangeEvent<HTMLInputElement>) =>
+    this.setState({ apiDirection: `name/${e.target.value}` });
 
   render() {
     const { isLoaded, items, inputString } = this.state;
 
     return (
       <div className='container'>
-        <div className={styles.inputContainer}>
-          <p>
-            <FontAwesomeIcon icon={faSearch} />
-          </p>
-          <input
-            type='text'
-            value={inputString}
-            className={styles.input__field}
-            placeholder='Search for a country'
-            onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-              this.setState({ apiDirection: `name/${e.target.value}` })
-            }
-          />
-        </div>
-        {!isLoaded ? (
-          <Loader />
-        ) : (
-          <div className={styles.card}>
-            {items.map(({ name, population, region, capital, flag }: State) => (
-              <Link to={`/${name}`} className={styles.link} key={uuid()}>
-                <AnimatePresence>
-                  <motion.div
-                    className={styles.cards}
-                    variants={this.variantCard}
-                    whileHover='cardHover'
-                    whileTap={{ scale: 1.1 }}>
-                    <img src={flag} alt='flag' />
-                    <p>{name}</p>
-                    <p>Population: {population}</p>
-                    <p>Region: {region}</p>
-                    <p>Capital: {capital}</p>
-                  </motion.div>
-                </AnimatePresence>
-              </Link>
-            ))}
-          </div>
-        )}
+        <SearchCountry
+          inputString={inputString}
+          onChangeInputHandler={this.onChangeInputHandler}
+        />
+        {!isLoaded ? <Loader /> : <CardCountry items={items} />}
       </div>
     );
   }

@@ -33,10 +33,15 @@ export const DetailCoutnry = () => {
   const [isError, setisError] = useState(false);
   const onLoad = () => {
     setAlertMessage("Image successfully loaded");
+    setTimeout(() => {
+      setShowAlert(false);
+    }, 2000);
   };
   const onErrorHandler = () => {
-    console.log("error");
     setAlertMessage("Image don't loaded");
+    setTimeout(() => {
+      setShowAlert(false);
+    }, 2000);
   };
   useEffect(() => {
     const fetchData = async () => {
@@ -61,8 +66,8 @@ export const DetailCoutnry = () => {
     setShowAlert(false);
   };
   const containerVariant = {
-    alertInitial: { x: -1000, opacity: 0 },
-    alertAnimate: { x: 0, opacity: 1, transition: { duration: 2 } },
+    alertInitial: { x: -100, opacity: 0 },
+    alertAnimate: { x: 0, opacity: 1, transition: { duration: 1 } },
     exitAlert: { x: -1000, transition: { duration: 1 } },
   };
   return (

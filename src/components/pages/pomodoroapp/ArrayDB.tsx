@@ -1,22 +1,10 @@
 import axios from "axios";
-import React, { useState, useEffect } from "react";
-import styles from "./Array.module.scss";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import {
-  faCheckCircle,
-  faChevronDown,
-  faChevronUp,
-  faPlusCircle,
-  faTrash,
-} from "@fortawesome/free-solid-svg-icons";
-import { AnimatePresence, motion } from "framer-motion";
+import React, { useState, useEffect, useRef } from "react";
 import { Loader } from "../../Loader";
-interface Props {
-  title: string;
-  _id: string;
-  year: number;
-  subtitle: string;
-}
+import dataCall from "../../DataCall";
+import { Error } from "../../Error";
+import { TableData } from "./TableData";
+import { AddModal } from "./AddModal";
 
 export const ArrayDB = () => {
   const [state, setState] = useState([]);
@@ -27,19 +15,15 @@ export const ArrayDB = () => {
   const [isModal, setIsModal] = useState(false);
   const [linkAdd, setLinkAdd] = useState(false);
   const [isLoaded, setIsLoaded] = useState(Boolean);
-  const fetchData = async () => {
-    try {
-      const result = await axios(
-        "https://guarded-brook-68937.herokuapp.com/api/todo"
-      );
-      setIsLoaded(true);
-      setState(result.data);
-    } catch (error) {
-      console.log({ error: error.message });
-    }
-  };
+  const [isError, setisError] = useState(false);
+
   useEffect(() => {
-    fetchData();
+    dataCall(
+      "https://guarded-brook-68937.herokuapp.com/api/todo",
+      setIsLoaded,
+      setState,
+      setisError
+    );
     return () => {
       setIsLoaded(false);
     };
@@ -84,136 +68,54 @@ export const ArrayDB = () => {
     setIsModal(!isModal);
   };
 
-  const result = state;
-  const modalVariant = {
-    modalInitial: { opacity: 0, scale: 0.3 },
-    modalAnimate: {
-      opacity: 1,
-      scale: 1,
-      transition: { duration: 0.8 },
-    },
-    modalExit: { opacity: 0, scale: 0, transition: { duration: 1 } },
-  };
-  const taskVariant = {
-    initial: { x: -100, opacity: 0, transition: { duration: 1 } },
-    animate: { x: 0, opacity: 1, transition: { duration: 1 } },
+  const draggingItem: any = useRef();
+  const dragOverItem: any = useRef();
+  const handleDragStart = (
+    e: React.DragEvent<HTMLDivElement>,
+    position: number
+  ) => {
+    draggingItem.current = position;
   };
 
+  const handleDragEnter = (
+    e: React.DragEvent<HTMLDivElement>,
+    position: number
+  ) => {
+    dragOverItem.current = position;
+    const listCopy = [...state];
+    const draggingItemContent = listCopy[draggingItem.current];
+    listCopy.splice(draggingItem.current, 1);
+    listCopy.splice(dragOverItem.current, 0, draggingItemContent);
+
+    draggingItem.current = dragOverItem.current;
+    dragOverItem.current = null;
+    setState(listCopy);
+  };
+  const result = state;
   return (
     <div>
+      {isError && <Error />}
       {!isLoaded ? (
         <Loader />
       ) : (
-        <div>
-          {result.map((results: Props) => {
-            return (
-              <motion.div
-                key={results._id}
-                className={styles.array}
-                variants={taskVariant}
-                initial='initial'
-                animate='animate'>
-                <div className={styles.flex__container}>
-                  <div className={styles.title__container}>
-                    <p>
-                      <FontAwesomeIcon icon={faCheckCircle} />
-                    </p>
-                    <p>{results.title}</p>
-                  </div>
-                  <div className={styles.edit__container}>
-                    <p>{results.year}</p>
-                    <p>
-                      <FontAwesomeIcon
-                        icon={faTrash}
-                        onClick={() => deleteHandler(results._id)}
-                      />
-                    </p>
-                  </div>
-                </div>
-                <p>{results.subtitle}</p>
-              </motion.div>
-            );
-          })}
-        </div>
+        <TableData
+          result={result}
+          handleDragEnter={handleDragEnter}
+          handleDragStart={handleDragStart}
+          deleteHandler={deleteHandler}
+        />
       )}
-
-      <AnimatePresence>
-        {isModal ? (
-          <motion.div
-            className={styles.modal}
-            variants={modalVariant}
-            initial='modalInitial'
-            animate='modalAnimate'
-            exit='modalExit'>
-            <input
-              type='text'
-              className={styles.title__input}
-              placeholder='What are you working on?'
-              autoFocus
-              onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-                setTitle(e.target.value)
-              }
-            />
-            <p>Est Pomodoros</p>
-            <div className={styles.flex}>
-              <input
-                type='number'
-                className={styles.numberInput}
-                value={year}
-                onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-                  setYear(parseInt(e.target.value))
-                }
-              />
-              <button
-                className={styles.chevron}
-                onClick={() => {
-                  setYear(year + 1);
-                }}>
-                <FontAwesomeIcon icon={faChevronUp} />
-              </button>
-              <button
-                className={styles.chevron}
-                onClick={() => {
-                  setYear(year - 1);
-                }}>
-                <FontAwesomeIcon icon={faChevronDown} />
-              </button>
-            </div>
-            {linkAdd ? (
-              <input
-                type='text'
-                className={styles.subtitle__input}
-                placeholder='Some notes...'
-                onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-                  setSubTitle(e.target.value)
-                }
-              />
-            ) : (
-              <p
-                className={styles.link__add}
-                onClick={() => {
-                  setLinkAdd(!linkAdd);
-                }}>
-                + Add notes
-              </p>
-            )}
-            <div className={styles.modal__footer__background}>
-              <div className={styles.modal__footer}>
-                <button onClick={modalToggler} className={styles.cancel}>
-                  Cancel
-                </button>
-                <button onClick={pushHandler} className={styles.save}>
-                  Save
-                </button>
-              </div>
-            </div>
-          </motion.div>
-        ) : (
-          <motion.button className={styles.add} onClick={modalToggler}>
-            <FontAwesomeIcon icon={faPlusCircle} /> Add Task
-          </motion.button>
-        )}
-      </AnimatePresence>
+      <AddModal
+        isModal={isModal}
+        setTitle={setTitle}
+        year={year}
+        setYear={setYear}
+        linkAdd={linkAdd}
+        setSubTitle={setSubTitle}
+        setLinkAdd={setLinkAdd}
+        modalToggler={modalToggler}
+        pushHandler={pushHandler}
+      />
     </div>
   );
 };
