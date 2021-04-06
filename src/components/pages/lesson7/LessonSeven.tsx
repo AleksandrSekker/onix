@@ -4,7 +4,7 @@ import { Loader } from "../../Loader";
 import dataCall from "../../DataCall";
 import { Error } from "../../Error";
 import { Cards } from "./Cards";
-
+import { Pagination } from "../../Pagination";
 export const LessonSeven = () => {
   const [state, setState] = useState([]);
   const [isLoaded, setIsLoaded] = useState(Boolean);
@@ -13,6 +13,8 @@ export const LessonSeven = () => {
   const [isRegionActive, setIsRegionActive] = useState(false);
   const [isCapitalActive, setIsCapitalActive] = useState(false);
   const [isError, setisError] = useState(false);
+  const [currentPage, setCurrentPage]: any = useState(1);
+  const [postsPerPage] = useState(10);
 
   const url = "https://restcountries.eu/rest/v2/all";
 
@@ -90,26 +92,41 @@ export const LessonSeven = () => {
     dragOverItem.current = null;
     setState(listCopy);
   };
+  // Pagination
+  const indexOfLastPost = currentPage * postsPerPage;
+  const indexOfFirstPost = indexOfLastPost - postsPerPage;
+  const currentPosts = setState(state.slice(indexOfFirstPost, indexOfLastPost));
+
+  const paginate = (pageNumber: number) => {
+    setCurrentPage(pageNumber);
+  };
   return (
     <div className='container'>
       {isError && <Error />}
       {!isLoaded ? (
         <Loader />
       ) : (
-        <Cards
-          state={state}
-          handleDragEnter={handleDragEnter}
-          handleDragStart={handleDragStart}
-          nameHanler={nameHanler}
-          ternaryStyles={ternaryStyles}
-          isNameActive={isNameActive}
-          populationHandler={populationHandler}
-          isPopulationActive={isPopulationActive}
-          regionHandler={regionHandler}
-          isRegionActive={isRegionActive}
-          capitalHandler={capitalHandler}
-          isCapitalActive={isCapitalActive}
-        />
+        <>
+          <Pagination
+            paginate={paginate}
+            postsPerPage={postsPerPage}
+            totalPosts={state.length}
+          />
+          <Cards
+            state={currentPosts}
+            handleDragEnter={handleDragEnter}
+            handleDragStart={handleDragStart}
+            nameHanler={nameHanler}
+            ternaryStyles={ternaryStyles}
+            isNameActive={isNameActive}
+            populationHandler={populationHandler}
+            isPopulationActive={isPopulationActive}
+            regionHandler={regionHandler}
+            isRegionActive={isRegionActive}
+            capitalHandler={capitalHandler}
+            isCapitalActive={isCapitalActive}
+          />
+        </>
       )}
     </div>
   );

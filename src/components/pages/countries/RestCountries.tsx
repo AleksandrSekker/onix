@@ -4,18 +4,19 @@ import { CardCountry } from "./CardCountry";
 import { SearchCountry } from "./SearchCountry";
 interface Props {}
 interface State {
-  isLoaded: boolean;
-  items: [];
-  name: string;
-  population: string;
-  region: string;
-  capital: string;
-  flag: string;
-  apiDirection: string;
+  isLoaded?: boolean;
+  items?: any;
+  name?: string;
+  population?: string;
+  region?: string;
+  capital?: string;
+  flag?: string;
+  apiDirection?: string;
+  inputString?: any;
 }
 
 export default class RestCountries extends Component<Props, State> {
-  state: any = { apiDirection: "all" };
+  state: State = { apiDirection: "all" };
 
   dataCall = async () => {
     try {
@@ -33,14 +34,17 @@ export default class RestCountries extends Component<Props, State> {
   };
   componentDidMount() {
     this.dataCall();
+    // first call
   }
   componentWillUnmount() {
     this.setState({ isLoaded: false, items: [] });
+    // unsubscirbe
   }
   componentDidUpdate(prevProps: Object[], prevState: { apiDirection: string }) {
     if (prevState.apiDirection !== this.state.apiDirection) {
       this.dataCall();
     }
+    // update call
   }
   submitForm = (e: React.ChangeEvent<HTMLInputElement>): void =>
     e.preventDefault();

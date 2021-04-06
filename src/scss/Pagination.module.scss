@@ -1,0 +1,15 @@
+.pagination {
+  display: flex;
+  flex-wrap: wrap;
+  .page__item {
+    background-color: rgb(179, 173, 173);
+    width: 3rem;
+    text-align: center;
+    margin: 0.1rem;
+    border-radius: 0.5rem;
+
+    .page__link {
+      color: white;
+    }
+  }
+}

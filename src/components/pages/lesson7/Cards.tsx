@@ -5,7 +5,7 @@ import { Link } from "react-router-dom";
 import { Button } from "../../Button";
 
 interface Props {
-  state: never[];
+  state: any;
   handleDragStart: (
     e: React.DragEvent<HTMLDivElement>,
     position: number
