@@ -95,7 +95,7 @@ export const LessonSeven = () => {
   // Pagination
   const indexOfLastPost = currentPage * postsPerPage;
   const indexOfFirstPost = indexOfLastPost - postsPerPage;
-  const currentPosts = setState(state.slice(indexOfFirstPost, indexOfLastPost));
+  const currentPosts = state.slice(indexOfFirstPost, indexOfLastPost);
 
   const paginate = (pageNumber: number) => {
     setCurrentPage(pageNumber);
