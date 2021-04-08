@@ -20,8 +20,8 @@ export const FirstSection = () => {
           <h1 className={styled.title}>{title}</h1>
           <div className={styles.flex}>
             <p>
-              Почти всё задание в Lesson 7, кроме картинки с алертом она в
-              детальной странице
+              {/* Почти всё задание в Lesson 7, кроме картинки с алертом она в
+              детальной странице */}
             </p>
           </div>
         </div>

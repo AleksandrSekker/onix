@@ -51,7 +51,13 @@ export default class RestCountries extends Component<Props, State> {
 
   onChangeInputHandler = (e: React.ChangeEvent<HTMLInputElement>) =>
     this.setState({ apiDirection: `name/${e.target.value}` });
-
+  variantCard = {
+    cardHover: {
+      scale: 0.8,
+      rotate: 360,
+      transition: { duration: 1 },
+    },
+  };
   render() {
     const { isLoaded, items, inputString } = this.state;
 
@@ -61,7 +67,11 @@ export default class RestCountries extends Component<Props, State> {
           inputString={inputString}
           onChangeInputHandler={this.onChangeInputHandler}
         />
-        {!isLoaded ? <Loader /> : <CardCountry items={items} />}
+        {!isLoaded ? (
+          <Loader />
+        ) : (
+          <CardCountry items={items} variantCard={this.variantCard} />
+        )}
       </div>
     );
   }

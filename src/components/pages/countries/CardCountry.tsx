@@ -5,6 +5,15 @@ import { Link } from "react-router-dom";
 import { AnimatePresence, motion } from "framer-motion";
 interface Props {
   items: [];
+  variantCard: {
+    cardHover: {
+      scale: number;
+      rotate: number;
+      transition: {
+        duration: number;
+      };
+    };
+  };
 }
 interface State {
   name: string;
@@ -13,14 +22,7 @@ interface State {
   capital: string;
   flag: string;
 }
-export const CardCountry = ({ items }: Props) => {
-  const variantCard = {
-    cardHover: {
-      scale: 0.8,
-      rotate: 360,
-      transition: { duration: 1 },
-    },
-  };
+export const CardCountry = ({ items, variantCard }: Props) => {
   return (
     <div className={styles.card}>
       {items.map(({ name, population, region, capital, flag }: State) => (

@@ -1,16 +1,18 @@
 import axios from "axios";
 import React, { useState, useEffect, useRef } from "react";
 import { Loader } from "../../Loader";
-import dataCall from "../../DataCall";
 import { Error } from "../../Error";
 import { TableData } from "./TableData";
 import { AddModal } from "./AddModal";
-
+import dataCall from "../../DataCall";
 export const ArrayDB = () => {
-  const [state, setState] = useState([]);
+  const [state, setState]: any = useState([]);
   const [title, setTitle] = useState(String);
+  const [titleForUpdate, settitleForUpdate] = useState(String);
   const [subTitle, setSubTitle] = useState(String);
+  const [subtitleForUpdate, setsubtitleForUpdate] = useState(String);
   const [year, setYear] = useState(1);
+  const [yearForUpdate, setyearForUpdate] = useState(Number);
   const [isChange, setIsChange] = useState(true);
   const [isModal, setIsModal] = useState(false);
   const [linkAdd, setLinkAdd] = useState(false);
@@ -28,6 +30,7 @@ export const ArrayDB = () => {
       setIsLoaded(false);
     };
   }, [isChange]);
+  console.log(state);
   const pushHandler = async () => {
     try {
       const response = await axios({
@@ -37,6 +40,8 @@ export const ArrayDB = () => {
           title: title,
           subtitle: subTitle,
           year: year,
+          ismodal: false,
+          isactive: false,
         },
         headers: {
           "Content-Type": "application/json",
@@ -64,10 +69,66 @@ export const ArrayDB = () => {
       console.log(error);
     }
   };
+  const updateHandlerModal = async (id: string, index: number) => {
+    try {
+      const response = await axios({
+        method: "put",
+        url: `https://guarded-brook-68937.herokuapp.com/api/todo/${id}`,
+        data: {
+          title: result[index].title,
+          subtitle: result[index].subtitle,
+          year: result[index].year,
+          ismodal: !result[index].ismodal,
+          isactive: false,
+        },
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+        },
+      });
+      if (response.status >= 200 && response.status < 300) {
+        console.log("success");
+        setIsChange(!isChange);
+      }
+    } catch (error) {
+      console.error(error);
+    }
+  };
+  const updateHandlerAll = async (
+    id: string,
+    titleUpdate: string,
+    subtitleUpdate: string,
+    yearUpdate: number
+  ) => {
+    try {
+      const response = await axios({
+        method: "put",
+        url: `https://guarded-brook-68937.herokuapp.com/api/todo/${id}`,
+        data: {
+          title: titleUpdate,
+          subtitle: subtitleUpdate,
+          year: yearUpdate,
+          ismodal: false,
+          isactive: false,
+        },
+        headers: {
+          "Content-Type": "application/json",
+          Accept: "application/json",
+        },
+      });
+      if (response.status >= 200 && response.status < 300) {
+        console.log("success");
+        setIsChange(!isChange);
+      }
+    } catch (error) {
+      console.error(error);
+    }
+  };
   const modalToggler = () => {
     setIsModal(!isModal);
   };
 
+  // dragging
   const draggingItem: any = useRef();
   const dragOverItem: any = useRef();
   const handleDragStart = (
@@ -91,6 +152,15 @@ export const ArrayDB = () => {
     dragOverItem.current = null;
     setState(listCopy);
   };
+  const modalVariant = {
+    modalInitial: { opacity: 0, scale: 0.3 },
+    modalAnimate: {
+      opacity: 1,
+      scale: 1,
+      transition: { duration: 0.8 },
+    },
+    modalExit: { opacity: 0, scale: 0, transition: { duration: 1 } },
+  };
   const result = state;
   return (
     <div>
@@ -103,6 +173,15 @@ export const ArrayDB = () => {
           handleDragEnter={handleDragEnter}
           handleDragStart={handleDragStart}
           deleteHandler={deleteHandler}
+          updateHandlerModal={updateHandlerModal}
+          modalVariant={modalVariant}
+          titleForUpdate={titleForUpdate}
+          settitleForUpdate={settitleForUpdate}
+          subtitleForUpdate={subtitleForUpdate}
+          setsubtitleForUpdate={setsubtitleForUpdate}
+          yearForUpdate={yearForUpdate}
+          setyearForUpdate={setyearForUpdate}
+          updateHandlerAll={updateHandlerAll}
         />
       )}
       <AddModal

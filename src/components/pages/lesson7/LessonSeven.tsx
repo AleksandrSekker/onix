@@ -1,10 +1,12 @@
 import React, { useEffect, useRef, useState } from "react";
 import styles from "./LessonSeven.module.scss";
 import { Loader } from "../../Loader";
-import dataCall from "../../DataCall";
+
+import { DataCallWithPagination } from "../../DataCallWithPagination";
 import { Error } from "../../Error";
 import { Cards } from "./Cards";
 import { Pagination } from "../../Pagination";
+
 export const LessonSeven = () => {
   const [state, setState] = useState([]);
   const [isLoaded, setIsLoaded] = useState(Boolean);
@@ -13,15 +15,24 @@ export const LessonSeven = () => {
   const [isRegionActive, setIsRegionActive] = useState(false);
   const [isCapitalActive, setIsCapitalActive] = useState(false);
   const [isError, setisError] = useState(false);
-  const [currentPage, setCurrentPage]: any = useState(1);
-  const [postsPerPage] = useState(10);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [postsPerPage] = useState(20);
+  const [current, setCurrent] = useState([]);
 
   const url = "https://restcountries.eu/rest/v2/all";
 
   useEffect(() => {
-    dataCall(url, setIsLoaded, setState, setisError);
+    DataCallWithPagination(
+      url,
+      setIsLoaded,
+      setState,
+      setisError,
+      postsPerPage,
+      setCurrent
+    );
+
     return () => setIsLoaded(false);
-  }, []);
+  }, [postsPerPage]);
 
   // onclick events
 
@@ -67,6 +78,16 @@ export const LessonSeven = () => {
 
     return () => window.removeEventListener("keydown", keyboardEvents);
   });
+
+  // Pagination
+  const indexOfLastPost = currentPage * postsPerPage;
+  const indexOfFirstPost = indexOfLastPost - postsPerPage;
+  // const currentPosts = state.slice(indexOfFirstPost, indexOfLastPost);
+
+  const paginate = (pageNumber: number) => {
+    setCurrentPage(pageNumber);
+    setCurrent(state.slice(indexOfFirstPost, indexOfLastPost));
+  };
   // Drag events
   const draggingItem: React.MutableRefObject<any> = useRef();
   const dragOverItem: React.MutableRefObject<
@@ -84,21 +105,13 @@ export const LessonSeven = () => {
     position: number
   ) => {
     dragOverItem.current = position;
-    const listCopy = [...state];
+    const listCopy = [...current];
     const draggingItemContent = listCopy[draggingItem.current];
     listCopy.splice(draggingItem.current, 1);
     listCopy.splice(dragOverItem.current, 0, draggingItemContent);
     draggingItem.current = dragOverItem.current;
     dragOverItem.current = null;
-    setState(listCopy);
-  };
-  // Pagination
-  const indexOfLastPost = currentPage * postsPerPage;
-  const indexOfFirstPost = indexOfLastPost - postsPerPage;
-  const currentPosts = state.slice(indexOfFirstPost, indexOfLastPost);
-
-  const paginate = (pageNumber: number) => {
-    setCurrentPage(pageNumber);
+    setCurrent(listCopy);
   };
   return (
     <div className='container'>
@@ -113,7 +126,7 @@ export const LessonSeven = () => {
             totalPosts={state.length}
           />
           <Cards
-            state={currentPosts}
+            state={current}
             handleDragEnter={handleDragEnter}
             handleDragStart={handleDragStart}
             nameHanler={nameHanler}

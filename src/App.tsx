@@ -10,7 +10,7 @@ import { VcsPage } from "./components/pages/technologies/VcsPage";
 import { GitPage } from "./components/pages/technologies/GitPage";
 import { Header } from "./components/Header";
 import { Footer } from "./components/Footer";
-import { ArrayBiography } from "./components/pages/ArrayBiography";
+import { ArrayBiography } from "./components/pages/array/ArrayBiography";
 
 import { Pomodoro } from "./components/pages/pomodoroapp/Pomodoro";
 import RestCountries from "./components/pages/countries/RestCountries";
