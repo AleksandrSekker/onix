@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import { Loader } from "../../Loader";
 import { CardCountry } from "./CardCountry";
 import { SearchCountry } from "./SearchCountry";
+import { Error } from "../../Error";
 interface Props {}
 interface State {
   isLoaded?: boolean;
@@ -13,6 +14,7 @@ interface State {
   flag?: string;
   apiDirection?: string;
   inputString?: any;
+  isError?: boolean;
 }
 
 export default class RestCountries extends Component<Props, State> {
@@ -23,13 +25,22 @@ export default class RestCountries extends Component<Props, State> {
       const response = await fetch(
         `https://restcountries.eu/rest/v2/${this.state.apiDirection}`
       );
+
       const json = await response.json();
-      this.setState({
-        items: json,
-        isLoaded: true,
-      });
+      response.ok
+        ? this.setState({
+            items: json,
+            isLoaded: true,
+            isError: false,
+          })
+        : this.setState({
+            isError: true,
+          });
     } catch (error) {
       console.error(error);
+      this.setState({
+        isError: true,
+      });
     }
   };
   componentDidMount() {
@@ -41,7 +52,10 @@ export default class RestCountries extends Component<Props, State> {
     // unsubscirbe
   }
   componentDidUpdate(prevProps: Object[], prevState: { apiDirection: string }) {
-    if (prevState.apiDirection !== this.state.apiDirection) {
+    if (
+      prevState.apiDirection !== this.state.apiDirection &&
+      this.state.apiDirection !== "name/"
+    ) {
       this.dataCall();
     }
     // update call
@@ -67,8 +81,11 @@ export default class RestCountries extends Component<Props, State> {
           inputString={inputString}
           onChangeInputHandler={this.onChangeInputHandler}
         />
+
         {!isLoaded ? (
           <Loader />
+        ) : this.state.isError ? (
+          <Error />
         ) : (
           <CardCountry items={items} variantCard={this.variantCard} />
         )}
