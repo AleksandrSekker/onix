@@ -1,21 +1,21 @@
 import React from "react";
 import { Route, Switch, useLocation } from "react-router-dom";
 import { animated, useTransition } from "react-spring";
-import { Home } from "./components/pages/Home";
-import { HtmlPage } from "./components/pages/technologies/HtmlPage";
-import { CssPage } from "./components/pages/technologies/CssPage";
-import { NpmPage } from "./components/pages/technologies/NpmPage";
-import { NodePage } from "./components/pages/technologies/NodePage";
-import { VcsPage } from "./components/pages/technologies/VcsPage";
-import { GitPage } from "./components/pages/technologies/GitPage";
-import { Header } from "./components/Header";
-import { Footer } from "./components/Footer";
-import { ArrayBiography } from "./components/pages/array/ArrayBiography";
+import { Home } from "./pages/Home/Home";
+import { HtmlPage } from "./pages/technologies/HtmlPage";
+import { CssPage } from "./pages/technologies/CssPage";
+import { NpmPage } from "./pages/technologies/NpmPage";
+import { NodePage } from "./pages/technologies/NodePage";
+import { VcsPage } from "./pages/technologies/VcsPage";
+import { GitPage } from "./pages/technologies/GitPage";
+import { Header } from "./layout/Header/Header";
+import { Footer } from "./layout/Footer/Footer";
+import { ArrayBiography } from "./pages/ArrayBiography/ArrayBiography";
 
-import { Pomodoro } from "./components/pages/pomodoroapp/Pomodoro";
-import RestCountries from "./components/pages/countries/RestCountries";
-import { DetailCoutnry } from "./components/pages/countries/DetailCoutnry";
-import { LessonSeven } from "./components/pages/lesson7/LessonSeven";
+import { Pomodoro } from "./pages/pomodoroapp/Pomodoro";
+import RestCountries from "./pages/RestCountries/RestCountries";
+import { DetailCoutnry } from "./pages/RestCountries/components/DetailCoutnry";
+import { LessonSeven } from "./pages/lesson7/LessonSeven";
 
 function App() {
   const location = useLocation();
@@ -26,7 +26,7 @@ function App() {
   });
 
   return (
-    <div className='dark'>
+    <div>
       <main>
         <Header />
         {transitions.map(({ item, props, key }) => (

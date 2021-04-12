@@ -1,0 +1,38 @@
+@import "../../../styles/variables";
+.input__btn {
+  border-radius: 0.4rem;
+  border: none;
+  font-size: 1.1rem;
+  cursor: pointer;
+  outline: none;
+}
+.btn_array {
+  color: $input-button-text;
+  padding: 1rem 4rem;
+  margin: 0.5rem 0;
+}
+
+.btn__sorted__by__sort {
+  background: $input-button-background;
+  &:hover {
+    background: $input-button-background-hover;
+  }
+}
+.btn__sorted__use__bubble {
+  background: $input-button-background;
+  &:hover {
+    background: $input-button-background-hover;
+  }
+}
+.btn__add {
+  background: $button__add__background;
+  &:hover {
+    background: $button__add__hover;
+  }
+}
+.btn__remove {
+  background: $button__remove__background;
+  &:hover {
+    background: $button__remove__hover;
+  }
+}

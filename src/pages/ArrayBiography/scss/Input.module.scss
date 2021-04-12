@@ -1,0 +1,53 @@
+@import "../../../styles/variables";
+.input__field {
+  padding: 0.8rem;
+  width: 15rem;
+  border: $input-fild-border;
+  border-radius: 0.4rem;
+  margin-right: 1rem;
+  margin-top: 0.5rem;
+  margin-bottom: 0.5rem;
+}
+.input__field:focus {
+  border: $input-fild-border-hover;
+}
+
+.formflex {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;
+}
+.valid__flex {
+  display: flex;
+  flex-direction: column;
+}
+.valid__text {
+  color: red;
+}
+.input__submit {
+  border-radius: 0.4rem;
+  border: none;
+  font-size: 1.1rem;
+  color: $input-button-text;
+  padding: 1rem 6rem;
+  cursor: pointer;
+  background: $input-button-background;
+  margin-bottom: 0.5rem;
+
+  &:hover {
+    background: $input-button-background-hover;
+  }
+}
+.input__delete {
+  border-radius: 0.4rem;
+  border: none;
+  font-size: 1.1rem;
+  color: $input-button-text;
+  padding: 1rem 5.8rem;
+  cursor: pointer;
+  background: $button__remove__background;
+  margin-bottom: 0.5rem;
+  &:hover {
+    background: $button__remove__hover;
+  }
+}

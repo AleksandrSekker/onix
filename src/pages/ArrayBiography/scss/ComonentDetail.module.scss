@@ -1,0 +1,18 @@
+@import "../../../styles/variables";
+section.dark {
+  background: $background-main-dark;
+  transition: 1s;
+
+  h1,
+  p {
+    color: $color-text-dark;
+  }
+}
+.title {
+  text-align: center;
+  padding-top: 3rem;
+  padding-bottom: 2rem;
+}
+.content {
+  padding-bottom: 2rem;
+}
