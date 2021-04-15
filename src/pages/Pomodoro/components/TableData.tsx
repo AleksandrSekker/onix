@@ -7,7 +7,7 @@ import {
 } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 
-import styles from "./Array.module.scss";
+import styles from "../scss/Array.module.scss";
 import React, { useState } from "react";
 import { motion } from "framer-motion";
 

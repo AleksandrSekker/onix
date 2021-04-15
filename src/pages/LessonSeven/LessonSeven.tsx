@@ -6,15 +6,16 @@ import { Cards } from "./Cards";
 import { Pagination } from "../../components/Pagination/Pagination";
 
 import useFetchWithPagination from "../../hooks/useFetchWithPagination";
+import useDarkTheme from "../../hooks/useDarkTheme";
 
-export const LessonSeven = () => {
+const LessonSeven = () => {
   const [isNameActive, setIsNameActive] = useState(false);
   const [isPopulationActive, setIsPopulationActive] = useState(false);
   const [isRegionActive, setIsRegionActive] = useState(false);
   const [isCapitalActive, setIsCapitalActive] = useState(false);
   const [currentPage, setCurrentPage] = useState(1);
   const [postsPerPage] = useState(20);
-
+  const { darkTheme } = useDarkTheme(styles);
   const {
     loaded,
     state,
@@ -104,34 +105,37 @@ export const LessonSeven = () => {
     setCurrent(listCopy);
   };
   return (
-    <div className='container'>
-      {!loaded ? (
-        <Loader />
-      ) : isError ? (
-        <Error />
-      ) : (
-        <>
-          <Pagination
-            paginate={paginate}
-            postsPerPage={postsPerPage}
-            totalPosts={state.length}
-          />
-          <Cards
-            state={current}
-            handleDragEnter={handleDragEnter}
-            handleDragStart={handleDragStart}
-            nameHanler={nameHanler}
-            ternaryStyles={ternaryStyles}
-            isNameActive={isNameActive}
-            populationHandler={populationHandler}
-            isPopulationActive={isPopulationActive}
-            regionHandler={regionHandler}
-            isRegionActive={isRegionActive}
-            capitalHandler={capitalHandler}
-            isCapitalActive={isCapitalActive}
-          />
-        </>
-      )}
+    <div className={darkTheme}>
+      <div className='container'>
+        {!loaded ? (
+          <Loader />
+        ) : isError ? (
+          <Error />
+        ) : (
+          <>
+            <Pagination
+              paginate={paginate}
+              postsPerPage={postsPerPage}
+              totalPosts={state.length}
+            />
+            <Cards
+              state={current}
+              handleDragEnter={handleDragEnter}
+              handleDragStart={handleDragStart}
+              nameHanler={nameHanler}
+              ternaryStyles={ternaryStyles}
+              isNameActive={isNameActive}
+              populationHandler={populationHandler}
+              isPopulationActive={isPopulationActive}
+              regionHandler={regionHandler}
+              isRegionActive={isRegionActive}
+              capitalHandler={capitalHandler}
+              isCapitalActive={isCapitalActive}
+            />
+          </>
+        )}
+      </div>
     </div>
   );
 };
+export default LessonSeven;

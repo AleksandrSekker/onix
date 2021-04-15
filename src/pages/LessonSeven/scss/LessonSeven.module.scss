@@ -1,3 +1,7 @@
+@import "../../../styles/variables";
+div.dark {
+  background-color: $background-main-dark;
+}
 .card {
   display: flex;
   flex-wrap: wrap;

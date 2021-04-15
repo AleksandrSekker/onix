@@ -6,7 +6,7 @@ import {
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import { AnimatePresence, motion } from "framer-motion";
 import React from "react";
-import styles from "./Array.module.scss";
+import styles from "../scss/Array.module.scss";
 interface Props {
   isModal: boolean;
   setTitle: any;

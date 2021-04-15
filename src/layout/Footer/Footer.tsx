@@ -6,18 +6,33 @@ import {
   faTelegram,
   faGithub,
 } from "@fortawesome/free-brands-svg-icons";
-import { useSelector } from "react-redux";
-import { selectCheck } from "../../redux/checkedSlice";
+import useDarkTheme from "../../hooks/useDarkTheme";
+import useLanguages from "../../hooks/useLanguages";
+import {
+  buttonTextEng,
+  buttonTextRu,
+  buttonTextUa,
+  creatorNameEng,
+  creatorNameRu,
+  creatorNameUa,
+} from "../../constants/Text";
 
 export const Footer = () => {
-  const checked = useSelector(selectCheck);
-  const buttonText = "Button";
-  const creatorName = "Created by Aleksandr Sekker";
+  const { darkTheme } = useDarkTheme(styles);
   const currentYear = new Date().getFullYear();
-
+  const { currentLanguage: button } = useLanguages(
+    buttonTextEng,
+    buttonTextRu,
+    buttonTextUa
+  );
+  const { currentLanguage: creator } = useLanguages(
+    creatorNameEng,
+    creatorNameRu,
+    creatorNameUa
+  );
   return (
     <>
-      <footer className={checked ? styles.dark : ""}>
+      <footer className={darkTheme}>
         <div className={styles.footer}>
           <div className={styles.cont1}>
             <input
@@ -25,7 +40,7 @@ export const Footer = () => {
               placeholder='Placeholder'
               className={styles.input__field}
             />
-            <button className={styles.input__btn}>{buttonText}</button>
+            <button className={styles.input__btn}>{button}</button>
           </div>
           <div className={styles.cont2}>
             <div>
@@ -45,7 +60,7 @@ export const Footer = () => {
           <div className={styles.created__by__child}>
             <h4>
               &copy;
-              {currentYear} {creatorName}
+              {currentYear} {creator}
             </h4>
           </div>
         </div>

@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from "react";
-import styles from "./Counter.module.scss";
+import styles from "../scss/Counter.module.scss";
 export const Counter = () => {
   const [minutes, setMinutes] = useState(25);
   const [seconds, setSeconds] = useState(0);

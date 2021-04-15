@@ -1,18 +1,18 @@
 @import url("https://fonts.googleapis.com/css2?family=EB+Garamond&display=swap");
-@import "styles/variables";
+@import "./styles/variables";
 * {
   box-sizing: border-box;
   margin: 0;
   padding: 0;
   font-family: "EB Garamond", serif;
 }
-
 .container {
   max-width: 1200px;
   margin: auto;
   padding-left: 1rem;
   padding-right: 1rem;
 }
+
 main {
   position: relative;
 }

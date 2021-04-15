@@ -1,9 +1,9 @@
 import { faCheckCircle } from "@fortawesome/free-solid-svg-icons";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
 import React from "react";
-import { ArrayDB } from "./ArrayDB";
-import { Counter } from "./Counter";
-import styles from "./Pomodoro.module.scss";
+import { ArrayDB } from "./components/ArrayDB";
+import { Counter } from "./components/Counter";
+import styles from "./scss/Pomodoro.module.scss";
 interface Props {}
 
 export const Pomodoro = (props: Props) => {

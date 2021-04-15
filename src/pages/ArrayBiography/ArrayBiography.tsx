@@ -1,6 +1,4 @@
 import React, { useState } from "react";
-import { useSelector } from "react-redux";
-import { selectCheck } from "../../redux/checkedSlice";
 import styled from "./scss/ComonentDetail.module.scss";
 import { v4 as uuid } from "uuid";
 import data from "../../data/Data";
@@ -9,6 +7,7 @@ import { cloneDeep } from "lodash";
 import { Table } from "./components/Table";
 import { SortButton } from "./components/SortButton";
 import { Form } from "./components/Form";
+import useDarkTheme from "../../hooks/useDarkTheme";
 
 interface IFormInputs {
   number: number;
@@ -16,7 +15,6 @@ interface IFormInputs {
 }
 
 export const ArrayBiography = () => {
-  const checked = useSelector(selectCheck);
   const [number, setNumber] = useState(1);
   const [numberModal, setNumberModal] = useState(1);
   const [text, setText] = useState(String);
@@ -25,7 +23,7 @@ export const ArrayBiography = () => {
   const [showAlert, setShowAlert] = useState(false);
   const arrayTitle = "Array Biography";
   const { register, errors, handleSubmit } = useForm<IFormInputs>();
-
+  const { darkTheme } = useDarkTheme(styled);
   const onSubmitPushToArray = () => {
     const newstate = cloneDeep(state);
     const somenew: any = {
@@ -121,7 +119,7 @@ export const ArrayBiography = () => {
   };
 
   return (
-    <section className={checked ? styled.dark : ""}>
+    <section className={darkTheme}>
       <div className='container'>
         <h1 className={styled.title}>{arrayTitle}</h1>
         <Table

@@ -3,6 +3,7 @@ import { Loader } from "../../components/Loader/Loader";
 import { CardCountry } from "./CardCountry";
 import { SearchCountry } from "./components/SearchCountry";
 import { Error } from "../../components/Error/Error";
+
 interface Props {}
 interface State {
   isLoaded?: boolean;
@@ -72,6 +73,7 @@ export default class RestCountries extends Component<Props, State> {
       transition: { duration: 1 },
     },
   };
+
   render() {
     const { isLoaded, items, inputString } = this.state;
 
