@@ -33,6 +33,77 @@ export const creatorNameRu = "Александр Секкер";
 export const buttonTextUa = "Кнопка";
 export const creatorNameUa = "Олександр Секкер";
 
-// home
+// array biography
 
 //english
+export const buttonSortEng = "Sorted by sort";
+export const buttonSortByBubbleEng = "Sorted by bubble";
+export const placeholderTextEng = "Please type text";
+export const placeholderYearEng = "Please type year";
+export const placeholderTextErrorEng = "text is required";
+export const placeholderYearErrorEng = "year is required";
+export const alertMessageEng = "Item added successfully";
+export const pushValueEng = "Push value";
+
+//russian
+export const buttonSortRu = "Сортировка";
+export const buttonSortByBubbleRu = "Пузырьковая сортировка";
+export const placeholderTextRu = "Пожалуйста, введите текст";
+export const placeholderYearRu = "Please type year";
+export const placeholderTextErrorRu = "текст обязателен";
+export const placeholderYearErrorRu = "год обязателен";
+export const alertMessageRu = "Елемент успешно добавлен";
+export const pushValueRu = "Отправить значение";
+//ukrainian
+export const buttonSortUa = "Сортування";
+export const buttonSortByBubbleUa = "Бульбашкове сортування";
+export const placeholderTextUa = "Введіть текст";
+export const placeholderYearUa = "Please type year";
+export const placeholderTextErrorUa = "текст обов’язковий";
+export const placeholderYearErrorUa = "рік обов’язковий";
+export const alertMessageUa = "Елемент успішно додано";
+export const pushValueUa = "Відправити значення";
+
+// Lesson Seven
+
+// english
+export const nativeNameEng = "Native Name";
+export const populationEng = "Population";
+export const regionEng = "Region";
+export const capitalEng = "Capital";
+export const detailPageEng = "Detail Page";
+export const subRegionEng = "Subregion";
+export const borderCountriesEng = "Border Countries";
+export const topLevelDomainEng = "Top Level Domain";
+export const CurrenciesEng = "Currencies";
+export const LanguagesEng = "Languages";
+export const alertSuccessEng = "Image successfully loaded";
+export const alertFailedEng = "Image don't loaded";
+// russian
+export const populationRu = "Население";
+export const regionRu = "Регион";
+export const capitalRu = "Столица";
+export const detailPageRu = "Подробная страница";
+export const nativeNameRu = "Названия";
+export const subRegionRu = "Субрегион";
+export const borderCountriesRu = "Приграничные страны";
+export const topLevelDomainRu = "Домен верхнего уровня";
+export const CurrenciesRu = "Валюты";
+export const LanguagesRu = "Языки";
+export const alertSuccessRu = "Изображение успешно загружено";
+export const alertFailedRu = "Изображение не загружено";
+// ukraine
+export const populationUa = "Населення";
+export const regionUa = "Регіон";
+export const capitalUa = "Столиця";
+export const detailPageUa = "Сторінка деталей";
+export const nativeNameUa = "Назва";
+export const subRegionUa = "Підрегіон";
+export const borderCountriesUa = "Прикордонні країни";
+export const topLevelDomainUa = "Домен верхнього рівня";
+export const CurrenciesUa = "Валюти";
+export const LanguagesUa = "Мови";
+export const alertSuccessUa = "Зображення успішно завантажено";
+export const alertFailedUa = "Изображение не загружено";
+
+// Pomodoro app

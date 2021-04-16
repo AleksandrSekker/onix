@@ -8,6 +8,36 @@ import { Table } from "./components/Table";
 import { SortButton } from "./components/SortButton";
 import { Form } from "./components/Form";
 import useDarkTheme from "../../hooks/useDarkTheme";
+import useLanguages from "../../hooks/useLanguages";
+import {
+  alertMessageEng,
+  alertMessageRu,
+  alertMessageUa,
+  arrayBiographyEng,
+  arrayBiographyRu,
+  arrayBiographyUa,
+  buttonSortByBubbleEng,
+  buttonSortByBubbleRu,
+  buttonSortByBubbleUa,
+  buttonSortEng,
+  buttonSortRu,
+  buttonSortUa,
+  placeholderTextEng,
+  placeholderTextErrorEng,
+  placeholderTextErrorRu,
+  placeholderTextErrorUa,
+  placeholderTextRu,
+  placeholderTextUa,
+  placeholderYearEng,
+  placeholderYearErrorEng,
+  placeholderYearErrorRu,
+  placeholderYearErrorUa,
+  placeholderYearRu,
+  placeholderYearUa,
+  pushValueEng,
+  pushValueRu,
+  pushValueUa,
+} from "../../constants/Text";
 
 interface IFormInputs {
   number: number;
@@ -21,7 +51,7 @@ export const ArrayBiography = () => {
   const [textModal, setTextModal] = useState(String);
   const [state, setState] = useState(data);
   const [showAlert, setShowAlert] = useState(false);
-  const arrayTitle = "Array Biography";
+
   const { register, errors, handleSubmit } = useForm<IFormInputs>();
   const { darkTheme } = useDarkTheme(styled);
   const onSubmitPushToArray = () => {
@@ -118,10 +148,56 @@ export const ArrayBiography = () => {
     modalexit: { opacity: 0, scale: 0 },
   };
 
+  const { currentLanguage: arrayText } = useLanguages(
+    arrayBiographyEng,
+    arrayBiographyRu,
+    arrayBiographyUa
+  );
+  const { currentLanguage: sort } = useLanguages(
+    buttonSortEng,
+    buttonSortRu,
+    buttonSortUa
+  );
+  const { currentLanguage: sortByBubble } = useLanguages(
+    buttonSortByBubbleEng,
+    buttonSortByBubbleRu,
+    buttonSortByBubbleUa
+  );
+  const { currentLanguage: placeholderText } = useLanguages(
+    placeholderTextEng,
+    placeholderTextRu,
+    placeholderTextUa
+  );
+  const { currentLanguage: placeholderTextError } = useLanguages(
+    placeholderTextErrorEng,
+    placeholderTextErrorRu,
+    placeholderTextErrorUa
+  );
+  const { currentLanguage: placeholderYear } = useLanguages(
+    placeholderYearEng,
+    placeholderYearRu,
+    placeholderYearUa
+  );
+  const { currentLanguage: placeholderYearError } = useLanguages(
+    placeholderYearErrorEng,
+    placeholderYearErrorRu,
+    placeholderYearErrorUa
+  );
+  const { currentLanguage: alertMessage } = useLanguages(
+    alertMessageEng,
+    alertMessageRu,
+    alertMessageUa
+  );
+  const { currentLanguage: pushValue } = useLanguages(
+    pushValueEng,
+    pushValueRu,
+    pushValueUa
+  );
+
   return (
     <section className={darkTheme}>
       <div className='container'>
-        <h1 className={styled.title}>{arrayTitle}</h1>
+        <h1 className={styled.title}>{arrayText}</h1>
         <Table
           state={state}
           deleteHandler={deleteHandler}
@@ -140,6 +216,8 @@ export const ArrayBiography = () => {
           buttonVariant={buttonVariant}
           sortedUseSort={sortedUseSort}
           sortedUseBabel={sortedUseBabel}
+          sort={sort}
+          sortByBubble={sortByBubble}
         />
         <Form
           alertVariant={alertVariant}
@@ -153,6 +231,12 @@ export const ArrayBiography = () => {
           errors={errors}
           handleSubmit={handleSubmit}
           onSubmitPushToArray={onSubmitPushToArray}
+          placeholderText={placeholderText}
+          placeholderTextError={placeholderTextError}
+          placeholderYear={placeholderYear}
+          placeholderYearError={placeholderYearError}
+          alertMessage={alertMessage}
+          pushValue={pushValue}
         />
       </div>
     </section>

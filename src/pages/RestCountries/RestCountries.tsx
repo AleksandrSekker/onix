@@ -3,8 +3,13 @@ import { Loader } from "../../components/Loader/Loader";
 import { CardCountry } from "./CardCountry";
 import { SearchCountry } from "./components/SearchCountry";
 import { Error } from "../../components/Error/Error";
+import { connect } from "react-redux";
+import style from "./scss/RestCountries.module.scss";
+import { switching } from "../../redux/checkedSlice";
+import { RootState } from "../../app/store";
+// interface Props {
 
-interface Props {}
+// }
 interface State {
   isLoaded?: boolean;
   items?: any;
@@ -16,9 +21,11 @@ interface State {
   apiDirection?: string;
   inputString?: any;
   isError?: boolean;
+  switching?: () => void;
+  checked?: boolean;
 }
 
-export default class RestCountries extends Component<Props, State> {
+class RestCountries extends Component<State> {
   state: State = { apiDirection: "all" };
 
   dataCall = async () => {
@@ -52,7 +59,7 @@ export default class RestCountries extends Component<Props, State> {
     this.setState({ isLoaded: false, items: [] });
     // unsubscirbe
   }
-  componentDidUpdate(prevProps: Object[], prevState: { apiDirection: string }) {
+  componentDidUpdate(prevProps: any, prevState: { apiDirection: string }) {
     if (
       prevState.apiDirection !== this.state.apiDirection &&
       this.state.apiDirection !== "name/"
@@ -78,20 +85,26 @@ export default class RestCountries extends Component<Props, State> {
     const { isLoaded, items, inputString } = this.state;
 
     return (
-      <div className='container'>
-        <SearchCountry
-          inputString={inputString}
-          onChangeInputHandler={this.onChangeInputHandler}
-        />
+      <div className={this.props.checked ? style.dark : ""}>
+        <div className='container'>
+          <SearchCountry
+            inputString={inputString}
+            onChangeInputHandler={this.onChangeInputHandler}
+          />
 
-        {!isLoaded ? (
-          <Loader />
-        ) : this.state.isError ? (
-          <Error />
-        ) : (
-          <CardCountry items={items} variantCard={this.variantCard} />
-        )}
+          {!isLoaded ? (
+            <Loader />
+          ) : this.state.isError ? (
+            <Error />
+          ) : (
+            <CardCountry items={items} variantCard={this.variantCard} />
+          )}
+        </div>
       </div>
     );
   }
 }
+const mapStateToProps = (state: RootState) => ({
+  checked: state.checked.value,
+});
+export default connect(mapStateToProps, { switching })(RestCountries);

@@ -5,6 +5,8 @@ import styles from "../scss/Array.module.scss";
 interface Props {
   sortedUseSort: () => void;
   sortedUseBabel: () => void;
+  sortByBubble: string;
+  sort: string;
   buttonVariant: {
     buttonAnimation: {
       scale: number[];
@@ -20,6 +22,8 @@ export const SortButton = ({
   sortedUseSort,
   sortedUseBabel,
   buttonVariant,
+  sortByBubble,
+  sort,
 }: Props) => {
   return (
     <div className={styles.flex}>
@@ -27,13 +31,13 @@ export const SortButton = ({
         onClick={sortedUseSort}
         variants={buttonVariant}
         whileHover='buttonAnimation'>
-        <Button text='Sorted by sort' color='btn__sorted__by__sort' />
+        <Button text={sort} color='btn__sorted__by__sort' />
       </motion.div>
       <motion.div
         onClick={sortedUseBabel}
         variants={buttonVariant}
         whileHover='buttonAnimation'>
-        <Button text='bubble sort' color='btn__sorted__use__bubble' />
+        <Button text={sortByBubble} color='btn__sorted__use__bubble' />
       </motion.div>
     </div>
   );

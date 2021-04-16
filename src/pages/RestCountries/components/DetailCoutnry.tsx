@@ -7,6 +7,42 @@ import { useParams } from "react-router-dom";
 import { v4 as uuid } from "uuid";
 import { Error } from "../../../components/Error/Error";
 import { Loader } from "../../../components/Loader/Loader";
+import {
+  alertFailedEng,
+  alertFailedRu,
+  alertFailedUa,
+  alertSuccessEng,
+  alertSuccessRu,
+  alertSuccessUa,
+  borderCountriesEng,
+  borderCountriesRu,
+  borderCountriesUa,
+  capitalEng,
+  capitalRu,
+  capitalUa,
+  CurrenciesEng,
+  CurrenciesRu,
+  CurrenciesUa,
+  LanguagesEng,
+  LanguagesRu,
+  LanguagesUa,
+  nativeNameEng,
+  nativeNameRu,
+  nativeNameUa,
+  populationEng,
+  populationRu,
+  populationUa,
+  regionEng,
+  regionRu,
+  regionUa,
+  subRegionEng,
+  subRegionRu,
+  subRegionUa,
+  topLevelDomainEng,
+  topLevelDomainRu,
+  topLevelDomainUa,
+} from "../../../constants/Text";
+import useLanguages from "../../../hooks/useLanguages";
 import styles from "../scss/DetailCoutnry.module.scss";
 interface Props {
   currencies: [{ name: string }];
@@ -31,14 +67,24 @@ export const DetailCoutnry = () => {
   const [alertMessage, setAlertMessage] = useState(String);
   const [showAlert, setShowAlert] = useState(true);
   const [isError, setisError] = useState(false);
+  const { currentLanguage: alertSuccess } = useLanguages(
+    alertSuccessEng,
+    alertSuccessRu,
+    alertSuccessUa
+  );
+  const { currentLanguage: AlertFailed } = useLanguages(
+    alertFailedEng,
+    alertFailedRu,
+    alertFailedUa
+  );
   const onLoad = () => {
-    setAlertMessage("Image successfully loaded");
+    setAlertMessage(alertSuccess);
     setTimeout(() => {
       setShowAlert(false);
     }, 2000);
   };
   const onErrorHandler = () => {
-    setAlertMessage("Image don't loaded");
+    setAlertMessage(AlertFailed);
     setTimeout(() => {
       setShowAlert(false);
     }, 2000);
@@ -70,6 +116,51 @@ export const DetailCoutnry = () => {
     alertAnimate: { x: 0, opacity: 1, transition: { duration: 1 } },
     exitAlert: { x: -1000, transition: { duration: 1 } },
   };
+  const { currentLanguage: nativeNameLanguage } = useLanguages(
+    nativeNameEng,
+    nativeNameRu,
+    nativeNameUa
+  );
+  const { currentLanguage: populationLanguage } = useLanguages(
+    populationEng,
+    populationRu,
+    populationUa
+  );
+  const { currentLanguage: regionLanguage } = useLanguages(
+    regionEng,
+    regionRu,
+    regionUa
+  );
+  const { currentLanguage: subRegion } = useLanguages(
+    subRegionEng,
+    subRegionRu,
+    subRegionUa
+  );
+  const { currentLanguage: capitalLanguage } = useLanguages(
+    capitalEng,
+    capitalRu,
+    capitalUa
+  );
+  const { currentLanguage: borderCountries } = useLanguages(
+    borderCountriesEng,
+    borderCountriesRu,
+    borderCountriesUa
+  );
+  const { currentLanguage: topLevelDomainLanguage } = useLanguages(
+    topLevelDomainEng,
+    topLevelDomainRu,
+    topLevelDomainUa
+  );
+  const { currentLanguage: Currencies } = useLanguages(
+    CurrenciesEng,
+    CurrenciesRu,
+    CurrenciesUa
+  );
+  const { currentLanguage: Languages } = useLanguages(
+    LanguagesEng,
+    LanguagesRu,
+    LanguagesUa
+  );
   return (
     <div className='container'>
       {state.map(
@@ -124,18 +215,27 @@ export const DetailCoutnry = () => {
                     <div className={styles.detail__container}>
                       <div>
                         <p>
-                          Native name:
-                          {nativeName}
+                          {nativeNameLanguage}:{nativeName}
                         </p>
-                        <p>Population: {population}</p>
-                        <p>Region: {region}</p>
-                        <p>Sub Region: {subregion}</p>
-                        <p>Capital: {capital}</p>
+                        <p>
+                          {populationLanguage}: {population}
+                        </p>
+                        <p>
+                          {regionLanguage}: {region}
+                        </p>
+                        <p>
+                          {subRegion}: {subregion}
+                        </p>
+                        <p>
+                          {capitalLanguage}: {capital}
+                        </p>
                       </div>
                       <div>
-                        <p>Top Level Domain: {topLevelDomain}</p>
+                        <p>
+                          {topLevelDomainLanguage}: {topLevelDomain}
+                        </p>
                         <div className={styles.text__flex}>
-                          <p> Currencies:</p>
+                          <p> {Currencies}:</p>
                           {currencies.map(currenci => {
                             return (
                               <p
@@ -147,7 +247,7 @@ export const DetailCoutnry = () => {
                           })}
                         </div>
                         <div className={styles.text__flex}>
-                          <p>Languages:</p>
+                          <p>{Languages}:</p>
                           {languages.map((language: { name: string }) => {
                             return (
                               <p
@@ -161,7 +261,7 @@ export const DetailCoutnry = () => {
                       </div>
                     </div>
                     <div className={styles.border__country}>
-                      <p>Border Countries:</p>
+                      <p>{borderCountries}:</p>
                       {borders.map(border => {
                         return <button key={uuid()}>{border}</button>;
                       })}

@@ -15,6 +15,9 @@ import {
   creatorNameEng,
   creatorNameRu,
   creatorNameUa,
+  placeholderTextEng,
+  placeholderTextRu,
+  placeholderTextUa,
 } from "../../constants/Text";
 
 export const Footer = () => {
@@ -30,6 +33,11 @@ export const Footer = () => {
     creatorNameRu,
     creatorNameUa
   );
+  const { currentLanguage: placeholderText } = useLanguages(
+    placeholderTextEng,
+    placeholderTextRu,
+    placeholderTextUa
+  );
   return (
     <>
       <footer className={darkTheme}>
@@ -37,7 +45,7 @@ export const Footer = () => {
           <div className={styles.cont1}>
             <input
               type='text'
-              placeholder='Placeholder'
+              placeholder={placeholderText}
               className={styles.input__field}
             />
             <button className={styles.input__btn}>{button}</button>

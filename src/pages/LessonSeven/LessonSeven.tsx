@@ -3,28 +3,35 @@ import styles from "./scss/LessonSeven.module.scss";
 import { Loader } from "../../components/Loader/Loader";
 import { Error } from "../../components/Error/Error";
 import { Cards } from "./Cards";
-import { Pagination } from "../../components/Pagination/Pagination";
 
-import useFetchWithPagination from "../../hooks/useFetchWithPagination";
 import useDarkTheme from "../../hooks/useDarkTheme";
+import useFetch from "../../hooks/useFetch";
+import useLanguages from "../../hooks/useLanguages";
+import {
+  capitalEng,
+  capitalRu,
+  capitalUa,
+  detailPageEng,
+  detailPageRu,
+  detailPageUa,
+  populationEng,
+  populationRu,
+  populationUa,
+  regionEng,
+  regionRu,
+  regionUa,
+} from "../../constants/Text";
 
 const LessonSeven = () => {
   const [isNameActive, setIsNameActive] = useState(false);
   const [isPopulationActive, setIsPopulationActive] = useState(false);
   const [isRegionActive, setIsRegionActive] = useState(false);
   const [isCapitalActive, setIsCapitalActive] = useState(false);
-  const [currentPage, setCurrentPage] = useState(1);
-  const [postsPerPage] = useState(20);
+  const [isChange] = useState(true);
   const { darkTheme } = useDarkTheme(styles);
-  const {
-    loaded,
-    state,
-    isError,
-    current,
-    setCurrent,
-  } = useFetchWithPagination(
+  const { loaded, state, setState, isError } = useFetch(
     "https://restcountries.eu/rest/v2/all",
-    postsPerPage
+    isChange
   );
   // onclick events
 
@@ -71,14 +78,6 @@ const LessonSeven = () => {
     return () => window.removeEventListener("keydown", keyboardEvents);
   });
 
-  // Pagination
-  const indexOfLastPost = currentPage * postsPerPage;
-  const indexOfFirstPost = indexOfLastPost - postsPerPage;
-
-  const paginate = (pageNumber: number) => {
-    setCurrentPage(pageNumber);
-    setCurrent(state.slice(indexOfFirstPost, indexOfLastPost));
-  };
   // Drag events
   const draggingItem: React.MutableRefObject<any> = useRef();
   const dragOverItem: React.MutableRefObject<
@@ -96,14 +95,35 @@ const LessonSeven = () => {
     position: number
   ) => {
     dragOverItem.current = position;
-    const listCopy = [...current];
+    const listCopy = [...state];
     const draggingItemContent = listCopy[draggingItem.current];
     listCopy.splice(draggingItem.current, 1);
     listCopy.splice(dragOverItem.current, 0, draggingItemContent);
     draggingItem.current = dragOverItem.current;
     dragOverItem.current = null;
-    setCurrent(listCopy);
+    setState(listCopy);
   };
+  // language
+  const { currentLanguage: population } = useLanguages(
+    populationEng,
+    populationRu,
+    populationUa
+  );
+  const { currentLanguage: region } = useLanguages(
+    regionEng,
+    regionRu,
+    regionUa
+  );
+  const { currentLanguage: capital } = useLanguages(
+    capitalEng,
+    capitalRu,
+    capitalUa
+  );
+  const { currentLanguage: detailPage } = useLanguages(
+    detailPageEng,
+    detailPageRu,
+    detailPageUa
+  );
   return (
     <div className={darkTheme}>
       <div className='container'>
@@ -113,13 +133,8 @@ const LessonSeven = () => {
           <Error />
         ) : (
           <>
-            <Pagination
-              paginate={paginate}
-              postsPerPage={postsPerPage}
-              totalPosts={state.length}
-            />
             <Cards
-              state={current}
+              state={state}
               handleDragEnter={handleDragEnter}
               handleDragStart={handleDragStart}
               nameHanler={nameHanler}
@@ -131,6 +146,10 @@ const LessonSeven = () => {
               isRegionActive={isRegionActive}
               capitalHandler={capitalHandler}
               isCapitalActive={isCapitalActive}
+              populationLanguage={population}
+              regionLanguage={region}
+              capitalLanguage={capital}
+              detailPageLanguage={detailPage}
             />
           </>
         )}

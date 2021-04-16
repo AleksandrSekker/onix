@@ -23,6 +23,10 @@ interface Props {
   isRegionActive: boolean;
   capitalHandler: () => void;
   isCapitalActive: boolean;
+  populationLanguage: string;
+  regionLanguage: string;
+  capitalLanguage: string;
+  detailPageLanguage: string;
 }
 interface State {
   name: string;
@@ -45,6 +49,10 @@ export const Cards = ({
   isRegionActive,
   capitalHandler,
   isCapitalActive,
+  populationLanguage,
+  regionLanguage,
+  capitalLanguage,
+  detailPageLanguage,
 }: Props) => {
   return (
     <div className={styles.card}>
@@ -69,20 +77,23 @@ export const Cards = ({
                 <p
                   onClick={populationHandler}
                   className={ternaryStyles(isPopulationActive)}>
-                  Population: {population}
+                  {populationLanguage}: {population}
                 </p>
                 <p
                   onClick={regionHandler}
                   className={ternaryStyles(isRegionActive)}>
-                  Region: {region}
+                  {regionLanguage}: {region}
                 </p>
                 <p
                   onClick={capitalHandler}
                   className={ternaryStyles(isCapitalActive)}>
-                  Capital: {capital}
+                  {capitalLanguage}: {capital}
                 </p>
                 <Link to={`/${name}`} className={styles.link}>
-                  <Button text='Detail page' color='btn__sorted__use__bubble' />
+                  <Button
+                    text={detailPageLanguage}
+                    color='btn__sorted__use__bubble'
+                  />
                 </Link>
               </div>
             </div>

@@ -40,6 +40,12 @@ interface Props {
       };
     };
   };
+  placeholderText: string;
+  placeholderTextError: string;
+  placeholderYear: string;
+  placeholderYearError: string;
+  alertMessage: string;
+  pushValue: string;
 }
 
 export const Form = ({
@@ -54,6 +60,12 @@ export const Form = ({
   errors,
   handleSubmit,
   onSubmitPushToArray,
+  placeholderText,
+  placeholderTextError,
+  placeholderYear,
+  placeholderYearError,
+  alertMessage,
+  pushValue,
 }: Props) => {
   return (
     <div className={styles.flex}>
@@ -67,13 +79,13 @@ export const Form = ({
             type='number'
             value={number}
             className={stylei.input__field}
-            placeholder='Please type year'
+            placeholder={placeholderYear}
             onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
               setNumber(parseInt(e.target.value))
             }
           />
           <h5 className={stylei.valid__text}>
-            {errors.number && "Year is required"}
+            {errors.number && placeholderYearError}
           </h5>
         </div>
         <div className={stylei.valid__flex}>
@@ -83,20 +95,20 @@ export const Form = ({
             type='text'
             value={text}
             className={stylei.input__field}
-            placeholder='Please type text'
+            placeholder={placeholderText}
             onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
               setText(e.target.value)
             }
           />
           <h5 className={stylei.valid__text}>
-            {errors.text && "text is required"}
+            {errors.text && placeholderTextError}
           </h5>
         </div>
         <motion.input
           variants={buttonVariant}
           whileHover='buttonAnimation'
           type='submit'
-          value='Push value'
+          value={pushValue}
           className={stylei.input__submit}
         />
         <AnimatePresence>
@@ -106,7 +118,7 @@ export const Form = ({
               initial='alertInitial'
               animate='alertAnimate'
               exit='exitAlert'>
-              Item added successfully
+              {alertMessage}
             </motion.p>
           )}
         </AnimatePresence>
