@@ -1,6 +1,6 @@
-import React from "react";
-import style from "./scss/Home.module.scss";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import React from 'react';
+import style from './scss/Home.module.scss';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 
 import {
   faHtml5,
@@ -8,11 +8,11 @@ import {
   faGitAlt,
   faNodeJs,
   faNpm,
-} from "@fortawesome/free-brands-svg-icons";
-import AOS from "aos";
-import "aos/dist/aos.css";
-import useDarkTheme from "../../hooks/useDarkTheme";
-import useLanguages from "../../hooks/useLanguages";
+} from '@fortawesome/free-brands-svg-icons';
+import AOS from 'aos';
+import 'aos/dist/aos.css';
+import useDarkTheme from '../../hooks/useDarkTheme';
+import useLanguages from '../../hooks/useLanguages';
 
 interface Props {}
 

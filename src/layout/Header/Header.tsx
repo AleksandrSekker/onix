@@ -1,17 +1,17 @@
-import React, { useState } from "react";
-import { useSelector, useDispatch } from "react-redux";
-import styles from "./scss/Header.module.scss";
-import { Link } from "react-router-dom";
-import { switching, selectCheck } from "../../redux/checkedSlice";
-import { motion } from "framer-motion";
-import { faChevronDown } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import withLink from "../../hoc/withLink/withLink";
-import useDarkTheme from "../../hooks/useDarkTheme";
-import useLanguages from "../../hooks/useLanguages";
-import uk from "../../assets/images/ukraine.svg";
-import en from "../../assets/images/unitedstates.svg";
-import ru from "../../assets/images/russia.svg";
+import React, { useState } from 'react';
+import { useSelector, useDispatch } from 'react-redux';
+import { Link } from 'react-router-dom';
+import { motion } from 'framer-motion';
+import { faChevronDown } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import styles from './scss/Header.module.scss';
+import { switching, selectCheck } from '../../redux/checkedSlice.ts';
+import withLink from '../../hoc/withLink/withLink.tsx';
+import useDarkTheme from '../../hooks/useDarkTheme.ts';
+import useLanguages from '../../hooks/useLanguages.ts';
+import uk from '../../assets/images/ukraine.svg';
+import en from '../../assets/images/unitedstates.svg';
+import ru from '../../assets/images/russia.svg';
 import {
   arrayBiographyEng,
   arrayBiographyRu,
@@ -31,15 +31,15 @@ import {
   technologyEng,
   technologyRu,
   technologyUa,
-} from "../../constants/Text";
+} from '../../constants/Text.ts';
 import {
   selectLanguage,
   russian,
   ukrainian,
   english,
-} from "../../redux/languagesSlice";
+} from '../../redux/languagesSlice.ts';
 
-export const Header = () => {
+const Header = () => {
   const [isActive, setIsActive] = useState(false);
   const [navFalse, setNavFalse] = useState(false);
   const [isHover, toggleHover] = React.useState(false);
@@ -54,7 +54,7 @@ export const Header = () => {
       transition: {
         duration: 0.8,
       },
-      display: "block",
+      display: 'block',
     },
     exit: {
       opacity: 0,
@@ -64,7 +64,7 @@ export const Header = () => {
         delay: 0.3,
       },
       transitionEnd: {
-        display: "none",
+        display: 'none',
       },
     },
   };
@@ -80,12 +80,12 @@ export const Header = () => {
     toggleHover(!isHover);
   };
 
-  const versionControl: String = "Version Control";
-  const git: String = "Git";
-  const node: String = "Node";
-  const npm: String = "Npm";
-  const html: String = "HTML";
-  const css: String = "CSS";
+  const versionControl: String = 'Version Control';
+  const git: String = 'Git';
+  const node: String = 'Node';
+  const npm: String = 'Npm';
+  const html: String = 'HTML';
+  const css: String = 'CSS';
 
   const { currentLanguage: home } = useLanguages(homeEng, homeRu, homeUa);
   const { currentLanguage: technologies } = useLanguages(
@@ -119,94 +119,93 @@ export const Header = () => {
       <header className={darkTheme}>
         <div className={styles.header__container}>
           <div className={styles.container__for__logo__and__switch}>
-            <Link to='/onix' className={styles.link__decoration}>
+            <Link to="/onix" className={styles.link__decoration}>
               <p className={styles.logo}>{home}</p>
             </Link>
 
             <div>
-              <label className={styles.switch}>
+              <label className={styles.switch} htmlFor="check">
                 <input
-                  type='checkbox'
+                  type="checkbox"
+                  id="check"
                   checked={checked}
                   onChange={() => dispatch(switching())}
                 />
-                <span className={`${styles.slider} ${styles.round}`}></span>
+                <span className={`${styles.slider} ${styles.round}`} />
               </label>
             </div>
-            <img
-              alt={language}
-              className={styles.language__image}
-              src={en}
-              onClick={() => dispatch(english())}
-            />
-            <img
-              alt={language}
-              className={styles.language__image}
-              src={ru}
-              onClick={() => dispatch(russian())}
-            />
-            <img
-              alt={language}
-              className={styles.language__image}
-              src={uk}
-              onClick={() => dispatch(ukrainian())}
-            />
+            <button type="button" onClick={() => dispatch(english())}>
+              <img className={styles.language__image} alt={language} src={en} />
+            </button>
+            <button type="button" onClick={() => dispatch(russian())}>
+              <img className={styles.language__image} alt={language} src={ru} />
+            </button>
+            <button type="button" onClick={() => dispatch(ukrainian())}>
+              <img className={styles.language__image} alt={language} src={uk} />
+            </button>
           </div>
           <div className={styles.navigation__content}>
             <motion.div
-              className='menu-item'
+              className="menu-item"
               onHoverStart={toggleHoverMenu}
-              onHoverEnd={toggleHoverMenu}>
+              onHoverEnd={toggleHoverMenu}
+            >
               <p>
-                {technologies} <FontAwesomeIcon icon={faChevronDown} />
+                {technologies}
+                <FontAwesomeIcon icon={faChevronDown} />
               </p>
               <motion.div
-                initial='exit'
-                animate={isHover ? "enter" : "exit"}
-                variants={subMenuAnimate}>
+                initial="exit"
+                animate={isHover ? 'enter' : 'exit'}
+                variants={subMenuAnimate}
+              >
                 <div>
-                  <AppLink to='/vcs'>{versionControl}</AppLink>
-                  <AppLink to='/git'>{git}</AppLink>
-                  <AppLink to='/node'>{node}</AppLink>
-                  <AppLink to='/npm'>{npm}</AppLink>
-                  <AppLink to='/html'>{html}</AppLink>
-                  <AppLink to='/css'>{css}</AppLink>
+                  <AppLink to="/vcs">{versionControl}</AppLink>
+                  <AppLink to="/git">{git}</AppLink>
+                  <AppLink to="/node">{node}</AppLink>
+                  <AppLink to="/npm">{npm}</AppLink>
+                  <AppLink to="/html">{html}</AppLink>
+                  <AppLink to="/css">{css}</AppLink>
                 </div>
               </motion.div>
             </motion.div>
-            <AppLink to='/array'>{arrayBiography}</AppLink>
-            <AppLink to='/pomodoro'>{pomodoro}</AppLink>
-            <AppLink to='/counries'>{countries}</AppLink>
-            <AppLink to='/lessonseven'>{lessonSeven}</AppLink>
+            <AppLink to="/array">{arrayBiography}</AppLink>
+            <AppLink to="/pomodoro">{pomodoro}</AppLink>
+            <AppLink to="/counries">{countries}</AppLink>
+            <AppLink to="/lessonseven">{lessonSeven}</AppLink>
           </div>
 
-          <div
+          <button
+            type="button"
             className={`${styles.hamburger}
-           ${isActive ? styles.open : ""}
+           ${isActive ? styles.open : ''}
            `}
-            onClick={hamburgerHandler}>
-            <span></span>
-            <span></span>
-            <span></span>
-          </div>
+            onClick={hamburgerHandler}
+          >
+            <span />
+            <span />
+            <span />
+          </button>
         </div>
 
         <div
           className={`${styles.navcontent__vertical} ${
-            navFalse ? styles.nav__false : ""
-          } ${darkTheme}`}>
-          <AppLink to='/vcs'>{versionControl}</AppLink>
-          <AppLink to='/git'>{git}</AppLink>
-          <AppLink to='/node'>{node}</AppLink>
-          <AppLink to='/npm'>{npm}</AppLink>
-          <AppLink to='/html'>{html}</AppLink>
-          <AppLink to='/css'>{css}</AppLink>
-          <AppLink to='/array'>{arrayBiography}</AppLink>
-          <AppLink to='/pomodoro'>{pomodoro}</AppLink>
-          <AppLink to='/counries'>{countries}</AppLink>
-          <AppLink to='/lessonseven'>{lessonSeven}</AppLink>
+            navFalse ? styles.nav__false : ''
+          } ${darkTheme}`}
+        >
+          <AppLink to="/vcs">{versionControl}</AppLink>
+          <AppLink to="/git">{git}</AppLink>
+          <AppLink to="/node">{node}</AppLink>
+          <AppLink to="/npm">{npm}</AppLink>
+          <AppLink to="/html">{html}</AppLink>
+          <AppLink to="/css">{css}</AppLink>
+          <AppLink to="/array">{arrayBiography}</AppLink>
+          <AppLink to="/pomodoro">{pomodoro}</AppLink>
+          <AppLink to="/counries">{countries}</AppLink>
+          <AppLink to="/lessonseven">{lessonSeven}</AppLink>
         </div>
       </header>
     </>
   );
 };
+export default Header;

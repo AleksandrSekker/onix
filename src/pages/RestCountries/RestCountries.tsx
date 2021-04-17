@@ -1,12 +1,12 @@
-import React, { Component } from "react";
-import { Loader } from "../../components/Loader/Loader";
-import { CardCountry } from "./CardCountry";
-import { SearchCountry } from "./components/SearchCountry";
-import { Error } from "../../components/Error/Error";
-import { connect } from "react-redux";
-import style from "./scss/RestCountries.module.scss";
-import { switching } from "../../redux/checkedSlice";
-import { RootState } from "../../app/store";
+import React, { Component } from 'react';
+import Loader from '../../components/Loader/Loader';
+import { CardCountry } from './CardCountry';
+import { SearchCountry } from './components/SearchCountry';
+import Error from '../../components/Error/Error';
+import { connect } from 'react-redux';
+import style from './scss/RestCountries.module.scss';
+import { switching } from '../../redux/checkedSlice';
+import { RootState } from '../../app/store';
 // interface Props {
 
 // }
@@ -26,7 +26,7 @@ interface State {
 }
 
 class RestCountries extends Component<State> {
-  state: State = { apiDirection: "all" };
+  state: State = { apiDirection: 'all' };
 
   dataCall = async () => {
     try {
@@ -62,7 +62,7 @@ class RestCountries extends Component<State> {
   componentDidUpdate(prevProps: any, prevState: { apiDirection: string }) {
     if (
       prevState.apiDirection !== this.state.apiDirection &&
-      this.state.apiDirection !== "name/"
+      this.state.apiDirection !== 'name/'
     ) {
       this.dataCall();
     }
@@ -85,8 +85,8 @@ class RestCountries extends Component<State> {
     const { isLoaded, items, inputString } = this.state;
 
     return (
-      <div className={this.props.checked ? style.dark : ""}>
-        <div className='container'>
+      <div className={this.props.checked ? style.dark : ''}>
+        <div className="container">
           <SearchCountry
             inputString={inputString}
             onChangeInputHandler={this.onChangeInputHandler}

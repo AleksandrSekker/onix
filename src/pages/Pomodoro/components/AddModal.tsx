@@ -8,6 +8,12 @@ import { AnimatePresence, motion } from "framer-motion";
 import React from "react";
 import styles from "../scss/Array.module.scss";
 interface Props {
+  placeholderLanguage: string;
+  amountLanguage: string;
+  addNotesLanguage: string;
+  notesPlaceholderLanguage: string;
+  cancelLanguage: string;
+  saveLanguage: string;
   isModal: boolean;
   setTitle: any;
   year: number;
@@ -29,6 +35,12 @@ export const AddModal = ({
   setLinkAdd,
   modalToggler,
   pushHandler,
+  placeholderLanguage,
+  amountLanguage,
+  addNotesLanguage,
+  notesPlaceholderLanguage,
+  cancelLanguage,
+  saveLanguage,
 }: Props) => {
   const modalVariant = {
     modalInitial: { opacity: 0, scale: 0.3 },
@@ -51,13 +63,13 @@ export const AddModal = ({
           <input
             type='text'
             className={styles.title__input}
-            placeholder='What are you working on?'
+            placeholder={placeholderLanguage}
             autoFocus
             onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
               setTitle(e.target.value)
             }
           />
-          <p>Est Pomodoros</p>
+          <p>{amountLanguage}</p>
           <div className={styles.flex}>
             <input
               type='number'
@@ -86,7 +98,7 @@ export const AddModal = ({
             <input
               type='text'
               className={styles.subtitle__input}
-              placeholder='Some notes...'
+              placeholder={notesPlaceholderLanguage}
               onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
                 setSubTitle(e.target.value)
               }
@@ -97,16 +109,16 @@ export const AddModal = ({
               onClick={() => {
                 setLinkAdd(!linkAdd);
               }}>
-              + Add notes
+              {addNotesLanguage}
             </p>
           )}
           <div className={styles.modal__footer__background}>
             <div className={styles.modal__footer}>
               <button onClick={modalToggler} className={styles.cancel}>
-                Cancel
+                {cancelLanguage}
               </button>
               <button onClick={pushHandler} className={styles.save}>
-                Save
+                {saveLanguage}
               </button>
             </div>
           </div>

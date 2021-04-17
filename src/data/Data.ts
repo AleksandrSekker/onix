@@ -1,9 +1,9 @@
-import { v4 as uuid } from "uuid";
+import { v4 as uuid } from 'uuid';
 
 const data = {
   [uuid()]: {
     year: 1835,
-    title: "Mark Twain (Samuel Langhorne Clemens) Born",
+    title: 'Mark Twain (Samuel Langhorne Clemens) Born',
     id: uuid(),
     ismodal: false,
   },
@@ -16,13 +16,13 @@ const data = {
   },
   [uuid()]: {
     year: 1851,
-    title: "Mark Twain Takes Work as Printer",
+    title: 'Mark Twain Takes Work as Printer',
     id: uuid(),
     ismodal: false,
   },
   [uuid()]: {
     year: 1857,
-    title: "Mark Twain Begins Two-Year Apprenticeship to Become a River Pilot",
+    title: 'Mark Twain Begins Two-Year Apprenticeship to Become a River Pilot',
     id: uuid(),
     ismodal: false,
   },
@@ -35,7 +35,7 @@ const data = {
   },
   [uuid()]: {
     year: 1862,
-    title: "Mark Twain Fails as a Miner and Works as a Reporter",
+    title: 'Mark Twain Fails as a Miner and Works as a Reporter',
     id: uuid(),
     ismodal: false,
   },
@@ -115,7 +115,7 @@ const data = {
   },
   [uuid()]: {
     year: 1908,
-    title: "Mark Twain Forms a Club of Young Girls Called the Angelfish Club",
+    title: 'Mark Twain Forms a Club of Young Girls Called the Angelfish Club',
     id: uuid(),
     ismodal: false,
   },

@@ -1,5 +1,6 @@
-import { useEffect, useState } from "react";
-import { v4 as uuid } from "uuid";
+import { useEffect, useState } from 'react';
+import { v4 as uuid } from 'uuid';
+
 const useFetch = (url: string, isChange: boolean) => {
   const [loaded, setLoaded] = useState(Boolean);
   const [state, setState]: any = useState([]);
@@ -21,7 +22,6 @@ const useFetch = (url: string, isChange: boolean) => {
   useEffect(() => {
     fetchData();
     return () => setLoaded(false);
-    // eslint-disable-next-line
   }, [isChange]);
   return {
     loaded,

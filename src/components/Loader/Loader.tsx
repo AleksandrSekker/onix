@@ -1,11 +1,11 @@
-import React from "react";
-import styles from "./scss/Loader.module.scss";
-interface Props {}
+import React from 'react';
+import styles from './scss/Loader.module.scss';
 
-export const Loader = (props: Props) => {
+const Loader = () => {
   return (
     <div className={styles.loader__container}>
-      <div className={styles.loader}></div>
+      <div className={styles.loader} />
     </div>
   );
 };
+export default Loader;

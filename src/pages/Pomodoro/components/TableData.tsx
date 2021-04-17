@@ -55,6 +55,12 @@ interface Props {
       };
     };
   };
+  placeholderLanguage: string;
+  amountLanguage: string;
+  addNotesLanguage: string;
+  notesPlaceholderLanguage: string;
+  cancelLanguage: string;
+  saveLanguage: string;
 }
 interface State {
   title: string;
@@ -78,6 +84,12 @@ export const TableData = ({
   yearForUpdate,
   setyearForUpdate,
   updateHandlerAll,
+  placeholderLanguage,
+  amountLanguage,
+  addNotesLanguage,
+  notesPlaceholderLanguage,
+  cancelLanguage,
+  saveLanguage,
 }: Props) => {
   const [linkAdd, setLinkAdd] = useState(false);
 
@@ -127,14 +139,14 @@ export const TableData = ({
                   <input
                     type='text'
                     className={styles.title__input}
-                    placeholder='What are you working on?'
+                    placeholder={placeholderLanguage}
                     autoFocus
                     defaultValue={titleForUpdate}
                     onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
                       settitleForUpdate(e.target.value)
                     }
                   />
-                  <p>Est Pomodoros</p>
+                  <p>{amountLanguage}</p>
                   <div className={styles.flex}>
                     <input
                       type='number'
@@ -164,7 +176,7 @@ export const TableData = ({
                       type='text'
                       className={styles.subtitle__input}
                       defaultValue={subtitleForUpdate}
-                      placeholder='Some notes...'
+                      placeholder={notesPlaceholderLanguage}
                       onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
                         setsubtitleForUpdate(e.target.value)
                       }
@@ -175,7 +187,7 @@ export const TableData = ({
                       onClick={() => {
                         setLinkAdd(!linkAdd);
                       }}>
-                      + Add notes
+                      {addNotesLanguage}
                     </p>
                   )}
                   <div className={styles.modal__footer__background}>
@@ -183,7 +195,7 @@ export const TableData = ({
                       <button
                         onClick={() => updateHandlerModal(_id, index)}
                         className={styles.cancel}>
-                        Cancel
+                        {cancelLanguage}
                       </button>
                       <button
                         onClick={() =>
@@ -195,7 +207,7 @@ export const TableData = ({
                           )
                         }
                         className={styles.save}>
-                        Save
+                        {saveLanguage}
                       </button>
                     </div>
                   </div>

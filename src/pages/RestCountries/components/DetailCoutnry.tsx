@@ -1,12 +1,12 @@
-import { faTimes } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import axios from "axios";
-import { AnimatePresence, motion } from "framer-motion";
-import React, { useEffect, useState } from "react";
-import { useParams } from "react-router-dom";
-import { v4 as uuid } from "uuid";
-import { Error } from "../../../components/Error/Error";
-import { Loader } from "../../../components/Loader/Loader";
+import { faTimes } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import axios from 'axios';
+import { AnimatePresence, motion } from 'framer-motion';
+import React, { useEffect, useState } from 'react';
+import { useParams } from 'react-router-dom';
+import { v4 as uuid } from 'uuid';
+import Error from '../../../components/Error/Error';
+import Loader from '../../../components/Loader/Loader';
 import {
   alertFailedEng,
   alertFailedRu,
@@ -41,9 +41,9 @@ import {
   topLevelDomainEng,
   topLevelDomainRu,
   topLevelDomainUa,
-} from "../../../constants/Text";
-import useLanguages from "../../../hooks/useLanguages";
-import styles from "../scss/DetailCoutnry.module.scss";
+} from '../../../constants/Text';
+import useLanguages from '../../../hooks/useLanguages';
+import styles from '../scss/DetailCoutnry.module.scss';
 interface Props {
   currencies: [{ name: string }];
   languages: [{ name: string }];
@@ -162,7 +162,7 @@ export const DetailCoutnry = () => {
     LanguagesUa
   );
   return (
-    <div className='container'>
+    <div className="container">
       {state.map(
         ({
           flag,
@@ -189,10 +189,11 @@ export const DetailCoutnry = () => {
                       {showAlert && (
                         <motion.div
                           variants={containerVariant}
-                          initial='alertInitial'
-                          animate='alertAnimate'
-                          exit='exitAlert'
-                          className={styles.alert__container}>
+                          initial="alertInitial"
+                          animate="alertAnimate"
+                          exit="exitAlert"
+                          className={styles.alert__container}
+                        >
                           <p>{alertMessage}</p>
                           <FontAwesomeIcon
                             icon={faTimes}
@@ -203,7 +204,7 @@ export const DetailCoutnry = () => {
                     </AnimatePresence>
                     <img
                       src={flag}
-                      alt='flag'
+                      alt="flag"
                       className={styles.image}
                       onLoad={onLoad}
                       onError={onErrorHandler}
@@ -236,11 +237,12 @@ export const DetailCoutnry = () => {
                         </p>
                         <div className={styles.text__flex}>
                           <p> {Currencies}:</p>
-                          {currencies.map(currenci => {
+                          {currencies.map((currenci) => {
                             return (
                               <p
                                 className={styles.text__flex__child}
-                                key={uuid()}>
+                                key={uuid()}
+                              >
                                 {currenci.name},
                               </p>
                             );
@@ -252,7 +254,8 @@ export const DetailCoutnry = () => {
                             return (
                               <p
                                 className={styles.text__flex__child}
-                                key={uuid()}>
+                                key={uuid()}
+                              >
                                 {language.name},
                               </p>
                             );
@@ -262,7 +265,7 @@ export const DetailCoutnry = () => {
                     </div>
                     <div className={styles.border__country}>
                       <p>{borderCountries}:</p>
-                      {borders.map(border => {
+                      {borders.map((border) => {
                         return <button key={uuid()}>{border}</button>;
                       })}
                     </div>

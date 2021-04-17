@@ -1,12 +1,12 @@
-import React, { useEffect, useRef, useState } from "react";
-import styles from "./scss/LessonSeven.module.scss";
-import { Loader } from "../../components/Loader/Loader";
-import { Error } from "../../components/Error/Error";
-import { Cards } from "./Cards";
+import React, { useEffect, useRef, useState } from 'react';
+import styles from './scss/LessonSeven.module.scss';
+import Loader from '../../components/Loader/Loader';
+import Error from '../../components/Error/Error';
+import { Cards } from './Cards';
 
-import useDarkTheme from "../../hooks/useDarkTheme";
-import useFetch from "../../hooks/useFetch";
-import useLanguages from "../../hooks/useLanguages";
+import useDarkTheme from '../../hooks/useDarkTheme';
+import useFetch from '../../hooks/useFetch';
+import useLanguages from '../../hooks/useLanguages';
 import {
   capitalEng,
   capitalRu,
@@ -20,7 +20,7 @@ import {
   regionEng,
   regionRu,
   regionUa,
-} from "../../constants/Text";
+} from '../../constants/Text';
 
 const LessonSeven = () => {
   const [isNameActive, setIsNameActive] = useState(false);
@@ -30,13 +30,13 @@ const LessonSeven = () => {
   const [isChange] = useState(true);
   const { darkTheme } = useDarkTheme(styles);
   const { loaded, state, setState, isError } = useFetch(
-    "https://restcountries.eu/rest/v2/all",
+    'https://restcountries.eu/rest/v2/all',
     isChange
   );
   // onclick events
 
   const ternary = (x: boolean, y: any) => (x === true ? y(false) : y(true));
-  const ternaryStyles = (x: boolean) => (x ? styles.active : "");
+  const ternaryStyles = (x: boolean) => (x ? styles.active : '');
 
   const nameHanler = () => {
     ternary(isNameActive, setIsNameActive);
@@ -56,16 +56,16 @@ const LessonSeven = () => {
   // keyboard events
   const keyboardEvents = (event: KeyboardEvent) => {
     switch (event.key) {
-      case "1":
+      case '1':
         ternary(isNameActive, setIsNameActive);
         break;
-      case "2":
+      case '2':
         ternary(isPopulationActive, setIsPopulationActive);
         break;
-      case "3":
+      case '3':
         ternary(isRegionActive, setIsRegionActive);
         break;
-      case "4":
+      case '4':
         ternary(isCapitalActive, setIsCapitalActive);
         break;
       default:
@@ -73,9 +73,9 @@ const LessonSeven = () => {
     }
   };
   useEffect(() => {
-    window.addEventListener("keydown", keyboardEvents);
+    window.addEventListener('keydown', keyboardEvents);
 
-    return () => window.removeEventListener("keydown", keyboardEvents);
+    return () => window.removeEventListener('keydown', keyboardEvents);
   });
 
   // Drag events
@@ -126,7 +126,7 @@ const LessonSeven = () => {
   );
   return (
     <div className={darkTheme}>
-      <div className='container'>
+      <div className="container">
         {!loaded ? (
           <Loader />
         ) : isError ? (

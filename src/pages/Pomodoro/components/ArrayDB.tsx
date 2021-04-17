@@ -1,10 +1,31 @@
-import axios from "axios";
-import React, { useState, useRef } from "react";
-import { Loader } from "../../../components/Loader/Loader";
-import { Error } from "../../../components/Error/Error";
-import { TableData } from "./TableData";
-import { AddModal } from "./AddModal";
-import useFetch from "../../../hooks/useFetch";
+import axios from 'axios';
+import React, { useState, useRef } from 'react';
+import Loader from '../../../components/Loader/Loader';
+import Error from '../../../components/Error/Error';
+import { TableData } from './TableData';
+import { AddModal } from './AddModal';
+import useFetch from '../../../hooks/useFetch';
+import useLanguages from '../../../hooks/useLanguages';
+import {
+  addNotesLanguageEng,
+  addNotesLanguageRu,
+  addNotesLanguageUa,
+  amountLanguageEng,
+  amountLanguageRu,
+  amountLanguageUa,
+  cancelLanguageEng,
+  cancelLanguageRu,
+  cancelLanguageUa,
+  notesPlaceholderLanguageEng,
+  notesPlaceholderLanguageRu,
+  notesPlaceholderLanguageUa,
+  placeholderLanguageEng,
+  placeholderLanguageRu,
+  placeholderLanguageUa,
+  saveLanguageEng,
+  saveLanguageRu,
+  saveLanguageUa,
+} from '../../../constants/Text';
 export const ArrayDB = () => {
   const [title, setTitle] = useState(String);
   const [titleForUpdate, settitleForUpdate] = useState(String);
@@ -16,16 +37,14 @@ export const ArrayDB = () => {
   const [isModal, setIsModal] = useState(false);
   const [linkAdd, setLinkAdd] = useState(false);
   const { loaded, state, setState, isError } = useFetch(
-    "https://guarded-brook-68937.herokuapp.com/api/todo",
+    'https://guarded-brook-68937.herokuapp.com/api/todo',
     isChange
   );
-
-  console.log(state);
   const pushHandler = async () => {
     try {
       const response = await axios({
-        method: "post",
-        url: "https://guarded-brook-68937.herokuapp.com/api/todo",
+        method: 'post',
+        url: 'https://guarded-brook-68937.herokuapp.com/api/todo',
         data: {
           title: title,
           subtitle: subTitle,
@@ -34,12 +53,12 @@ export const ArrayDB = () => {
           isactive: false,
         },
         headers: {
-          "Content-Type": "application/json",
-          Accept: "application/json",
+          'Content-Type': 'application/json',
+          Accept: 'application/json',
         },
       });
       if (response.status >= 200 && response.status < 300) {
-        console.log("success");
+        console.log('success');
         setIsChange(!isChange);
       }
     } catch (error) {
@@ -52,7 +71,7 @@ export const ArrayDB = () => {
     );
     try {
       if (response.status >= 200 && response.status < 300) {
-        console.log("success");
+        console.log('success');
         setIsChange(!isChange);
       }
     } catch (error) {
@@ -62,7 +81,7 @@ export const ArrayDB = () => {
   const updateHandlerModal = async (id: string, index: number) => {
     try {
       const response = await axios({
-        method: "put",
+        method: 'put',
         url: `https://guarded-brook-68937.herokuapp.com/api/todo/${id}`,
         data: {
           title: result[index].title,
@@ -72,12 +91,12 @@ export const ArrayDB = () => {
           isactive: false,
         },
         headers: {
-          "Content-Type": "application/json",
-          Accept: "application/json",
+          'Content-Type': 'application/json',
+          Accept: 'application/json',
         },
       });
       if (response.status >= 200 && response.status < 300) {
-        console.log("success");
+        console.log('success');
         setIsChange(!isChange);
       }
     } catch (error) {
@@ -92,7 +111,7 @@ export const ArrayDB = () => {
   ) => {
     try {
       const response = await axios({
-        method: "put",
+        method: 'put',
         url: `https://guarded-brook-68937.herokuapp.com/api/todo/${id}`,
         data: {
           title: titleUpdate,
@@ -102,12 +121,12 @@ export const ArrayDB = () => {
           isactive: false,
         },
         headers: {
-          "Content-Type": "application/json",
-          Accept: "application/json",
+          'Content-Type': 'application/json',
+          Accept: 'application/json',
         },
       });
       if (response.status >= 200 && response.status < 300) {
-        console.log("success");
+        console.log('success');
         setIsChange(!isChange);
       }
     } catch (error) {
@@ -151,6 +170,37 @@ export const ArrayDB = () => {
     },
     modalExit: { opacity: 0, scale: 0, transition: { duration: 1 } },
   };
+  // languages
+  const { currentLanguage: placeholderLanguage } = useLanguages(
+    placeholderLanguageEng,
+    placeholderLanguageRu,
+    placeholderLanguageUa
+  );
+  const { currentLanguage: amountLanguage } = useLanguages(
+    amountLanguageEng,
+    amountLanguageRu,
+    amountLanguageUa
+  );
+  const { currentLanguage: addNotesLanguage } = useLanguages(
+    addNotesLanguageEng,
+    addNotesLanguageRu,
+    addNotesLanguageUa
+  );
+  const { currentLanguage: notesPlaceholderLanguage } = useLanguages(
+    notesPlaceholderLanguageEng,
+    notesPlaceholderLanguageRu,
+    notesPlaceholderLanguageUa
+  );
+  const { currentLanguage: cancelLanguage } = useLanguages(
+    cancelLanguageEng,
+    cancelLanguageRu,
+    cancelLanguageUa
+  );
+  const { currentLanguage: saveLanguage } = useLanguages(
+    saveLanguageEng,
+    saveLanguageRu,
+    saveLanguageUa
+  );
   const result = state;
   return (
     <div>
@@ -172,6 +222,12 @@ export const ArrayDB = () => {
           yearForUpdate={yearForUpdate}
           setyearForUpdate={setyearForUpdate}
           updateHandlerAll={updateHandlerAll}
+          placeholderLanguage={placeholderLanguage}
+          amountLanguage={amountLanguage}
+          addNotesLanguage={addNotesLanguage}
+          notesPlaceholderLanguage={notesPlaceholderLanguage}
+          cancelLanguage={cancelLanguage}
+          saveLanguage={saveLanguage}
         />
       )}
       <AddModal
@@ -184,6 +240,12 @@ export const ArrayDB = () => {
         setLinkAdd={setLinkAdd}
         modalToggler={modalToggler}
         pushHandler={pushHandler}
+        placeholderLanguage={placeholderLanguage}
+        amountLanguage={amountLanguage}
+        addNotesLanguage={addNotesLanguage}
+        notesPlaceholderLanguage={notesPlaceholderLanguage}
+        cancelLanguage={cancelLanguage}
+        saveLanguage={saveLanguage}
       />
     </div>
   );

@@ -1,14 +1,14 @@
-import React, { useState } from "react";
-import styled from "./scss/ComonentDetail.module.scss";
-import { v4 as uuid } from "uuid";
-import data from "../../data/Data";
-import { useForm } from "react-hook-form";
-import { cloneDeep } from "lodash";
-import { Table } from "./components/Table";
-import { SortButton } from "./components/SortButton";
-import { Form } from "./components/Form";
-import useDarkTheme from "../../hooks/useDarkTheme";
-import useLanguages from "../../hooks/useLanguages";
+import React, { useState } from 'react';
+import { v4 as uuid } from 'uuid';
+import { useForm } from 'react-hook-form';
+import { cloneDeep } from 'lodash';
+import styled from './scss/ComonentDetail.module.scss';
+import data from '../../data/Data.ts';
+import { Table } from './components/Table.tsx';
+import SortButton from './components/SortButton.tsx';
+import Form from './components/Form.tsx';
+import useDarkTheme from '../../hooks/useDarkTheme.ts';
+import useLanguages from '../../hooks/useLanguages.ts';
 import {
   alertMessageEng,
   alertMessageRu,
@@ -37,14 +37,14 @@ import {
   pushValueEng,
   pushValueRu,
   pushValueUa,
-} from "../../constants/Text";
+} from '../../constants/Text.ts';
 
 interface IFormInputs {
   number: number;
   text: string;
 }
 
-export const ArrayBiography = () => {
+const ArrayBiography = () => {
   const [number, setNumber] = useState(1);
   const [numberModal, setNumberModal] = useState(1);
   const [text, setText] = useState(String);
@@ -58,13 +58,18 @@ export const ArrayBiography = () => {
     const newstate = cloneDeep(state);
     const somenew: any = {
       ...newstate,
-      [uuid()]: { year: number, title: text, id: uuid(), ismodal: false },
+      [uuid()]: {
+        year: number,
+        title: text,
+        id: uuid(),
+        ismodal: false,
+      },
     };
     console.log(somenew);
     setState(somenew);
     console.log(state);
     setNumber(1);
-    setText("");
+    setText('');
     setShowAlert(true);
     setTimeout(() => {
       setShowAlert(false);
@@ -82,12 +87,12 @@ export const ArrayBiography = () => {
   const sortedUseBabel = () => {
     const array: any = cloneDeep(Object.values({ ...state }));
     const n = array.length;
-    for (let i = 0; i < n - 1; i++) {
-      for (let j = 0; j < n - 1 - i; j++) {
-        if (array[j + 1]["year"] < array[j]["year"]) {
-          const t = array[j + 1]["year"];
-          array[j + 1]["year"] = array[j]["year"];
-          array[j]["year"] = t;
+    for (let i = 0; i < n - 1; i += 1) {
+      for (let j = 0; j < n - 1 - i; j += 1) {
+        if (array[j + 1].year < array[j].year) {
+          const t = array[j + 1].year;
+          array[j + 1].year = array[j].year;
+          array[j].year = t;
         }
       }
     }
@@ -126,9 +131,9 @@ export const ArrayBiography = () => {
     textHoverTitle: {
       scale: 1.1,
       originX: 0,
-      color: "rgb(182, 2, 0)",
+      color: 'rgb(182, 2, 0)',
     },
-    textHoverYear: { scale: 1.5, color: "rgb(1, 172, 0)" },
+    textHoverYear: { scale: 1.5, color: 'rgb(1, 172, 0)' },
   };
   const buttonVariant = {
     buttonAnimation: {
@@ -196,7 +201,7 @@ export const ArrayBiography = () => {
 
   return (
     <section className={darkTheme}>
-      <div className='container'>
+      <div className="container">
         <h1 className={styled.title}>{arrayText}</h1>
         <Table
           state={state}
@@ -242,3 +247,4 @@ export const ArrayBiography = () => {
     </section>
   );
 };
+export default ArrayBiography;
