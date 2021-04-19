@@ -51,9 +51,6 @@ interface Props {
   saveLanguage: string;
 }
 // 
-interface State {
-  title: string; _id: string; year: number; subtitle: string; ismodal: boolean;
-}
 const TableData = ({
   result,
   handleDragStart,
@@ -82,8 +79,8 @@ const TableData = ({
       {result.map(
         (
           { 
-            title, _id, year, subtitle, ismodal,
-          }: State, index: any
+            title, _id, year, subtitle, ismodal, index
+          }: any
         ) => (
           <div
             onDragStart={(e) => handleDragStart(e, index)}
