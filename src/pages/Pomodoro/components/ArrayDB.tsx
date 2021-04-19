@@ -1,11 +1,17 @@
 import axios from 'axios';
 import React, { useState, useRef } from 'react';
-import Loader from '../../../components/Loader/Loader';
-import Error from '../../../components/Error/Error';
-import { TableData } from './TableData';
-import { AddModal } from './AddModal';
-import useFetch from '../../../hooks/useFetch';
-import useLanguages from '../../../hooks/useLanguages';
+// @ts-ignore
+import Loader from '../../../components/Loader/Loader.tsx';
+// @ts-ignore
+import Error from '../../../components/Error/Error.tsx';
+// @ts-ignore
+import TableData from './TableData.tsx';
+// @ts-ignore
+import AddModal from './AddModal.tsx';
+// @ts-ignore
+import useFetch from '../../../hooks/useFetch.ts';
+// @ts-ignore
+import useLanguages from '../../../hooks/useLanguages.ts';
 import {
   addNotesLanguageEng,
   addNotesLanguageRu,
@@ -25,7 +31,9 @@ import {
   saveLanguageEng,
   saveLanguageRu,
   saveLanguageUa,
-} from '../../../constants/Text';
+  // @ts-ignore
+} from '../../../constants/Text.ts';
+
 export const ArrayDB = () => {
   const [title, setTitle] = useState(String);
   const [titleForUpdate, settitleForUpdate] = useState(String);
@@ -36,19 +44,23 @@ export const ArrayDB = () => {
   const [isChange, setIsChange] = useState(true);
   const [isModal, setIsModal] = useState(false);
   const [linkAdd, setLinkAdd] = useState(false);
-  const { loaded, state, setState, isError } = useFetch(
+  const [errorState, setErrorState] = useState(false);
+  const { 
+    loaded, state, setState, isError 
+  } = useFetch(
     'https://guarded-brook-68937.herokuapp.com/api/todo',
-    isChange
+    isChange,
   );
+  const result = state;
   const pushHandler = async () => {
     try {
       const response = await axios({
         method: 'post',
         url: 'https://guarded-brook-68937.herokuapp.com/api/todo',
         data: {
-          title: title,
-          subtitle: subTitle,
-          year: year,
+          title,
+          subTitle,
+          year,
           ismodal: false,
           isactive: false,
         },
@@ -58,24 +70,22 @@ export const ArrayDB = () => {
         },
       });
       if (response.status >= 200 && response.status < 300) {
-        console.log('success');
         setIsChange(!isChange);
       }
     } catch (error) {
-      console.error(error);
+      setErrorState(error);
     }
   };
   const deleteHandler = async (id: string) => {
     const response = await axios.delete(
-      `https://guarded-brook-68937.herokuapp.com/api/todo/${id}`
+      `https://guarded-brook-68937.herokuapp.com/api/todo/${id}`,
     );
     try {
       if (response.status >= 200 && response.status < 300) {
-        console.log('success');
         setIsChange(!isChange);
       }
     } catch (error) {
-      console.log(error);
+      setErrorState(error);
     }
   };
   const updateHandlerModal = async (id: string, index: number) => {
@@ -96,18 +106,17 @@ export const ArrayDB = () => {
         },
       });
       if (response.status >= 200 && response.status < 300) {
-        console.log('success');
         setIsChange(!isChange);
       }
     } catch (error) {
-      console.error(error);
+      setErrorState(error);
     }
   };
   const updateHandlerAll = async (
     id: string,
     titleUpdate: string,
     subtitleUpdate: string,
-    yearUpdate: number
+    yearUpdate: number,
   ) => {
     try {
       const response = await axios({
@@ -126,11 +135,10 @@ export const ArrayDB = () => {
         },
       });
       if (response.status >= 200 && response.status < 300) {
-        console.log('success');
         setIsChange(!isChange);
       }
     } catch (error) {
-      console.error(error);
+      setErrorState(error);
     }
   };
   const modalToggler = () => {
@@ -142,14 +150,14 @@ export const ArrayDB = () => {
   const dragOverItem: any = useRef();
   const handleDragStart = (
     e: React.DragEvent<HTMLDivElement>,
-    position: number
+    position: number,
   ) => {
     draggingItem.current = position;
   };
 
   const handleDragEnter = (
     e: React.DragEvent<HTMLDivElement>,
-    position: number
+    position: number,
   ) => {
     dragOverItem.current = position;
     const listCopy = [...state];
@@ -174,42 +182,43 @@ export const ArrayDB = () => {
   const { currentLanguage: placeholderLanguage } = useLanguages(
     placeholderLanguageEng,
     placeholderLanguageRu,
-    placeholderLanguageUa
+    placeholderLanguageUa,
   );
   const { currentLanguage: amountLanguage } = useLanguages(
     amountLanguageEng,
     amountLanguageRu,
-    amountLanguageUa
+    amountLanguageUa,
   );
   const { currentLanguage: addNotesLanguage } = useLanguages(
     addNotesLanguageEng,
     addNotesLanguageRu,
-    addNotesLanguageUa
+    addNotesLanguageUa,
   );
   const { currentLanguage: notesPlaceholderLanguage } = useLanguages(
     notesPlaceholderLanguageEng,
     notesPlaceholderLanguageRu,
-    notesPlaceholderLanguageUa
+    notesPlaceholderLanguageUa,
   );
   const { currentLanguage: cancelLanguage } = useLanguages(
     cancelLanguageEng,
     cancelLanguageRu,
-    cancelLanguageUa
+    cancelLanguageUa,
   );
   const { currentLanguage: saveLanguage } = useLanguages(
     saveLanguageEng,
     saveLanguageRu,
-    saveLanguageUa
+    saveLanguageUa,
   );
-  const result = state;
+
   return (
     <div>
+      <h1>{errorState}</h1>
       {isError && <Error />}
       {!loaded ? (
         <Loader />
       ) : (
         <TableData
-          result={result}
+          result={state}
           handleDragEnter={handleDragEnter}
           handleDragStart={handleDragStart}
           deleteHandler={deleteHandler}
@@ -250,3 +259,4 @@ export const ArrayDB = () => {
     </div>
   );
 };
+export default ArrayDB;

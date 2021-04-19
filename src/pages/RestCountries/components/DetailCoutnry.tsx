@@ -5,8 +5,10 @@ import { AnimatePresence, motion } from 'framer-motion';
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { v4 as uuid } from 'uuid';
-import Error from '../../../components/Error/Error';
-import Loader from '../../../components/Loader/Loader';
+// @ts-ignore
+import Error from '../../../components/Error/Error.tsx';
+// @ts-ignore
+import Loader from '../../../components/Loader/Loader.tsx';
 import {
   alertFailedEng,
   alertFailedRu,
@@ -41,26 +43,16 @@ import {
   topLevelDomainEng,
   topLevelDomainRu,
   topLevelDomainUa,
-} from '../../../constants/Text';
-import useLanguages from '../../../hooks/useLanguages';
+  // @ts-ignore
+} from '../../../constants/Text.ts';
+// @ts-ignore
+import useLanguages from '../../../hooks/useLanguages.ts';
 import styles from '../scss/DetailCoutnry.module.scss';
-interface Props {
-  currencies: [{ name: string }];
-  languages: [{ name: string }];
-  borders: [{ border: string }];
-  name: string;
-  flag: string;
-  nativeName: string;
-  population: string;
-  region: string;
-  subregion: string;
-  capital: string;
-  topLevelDomain: string;
-}
+
 interface ParamTypes {
   handle: string;
 }
-export const DetailCoutnry = () => {
+const DetailCoutnry = () => {
   const [state, setState] = useState([]);
   const [isLoaded, setIsLoaded] = useState(Boolean);
   const { handle } = useParams<ParamTypes>();
@@ -70,12 +62,12 @@ export const DetailCoutnry = () => {
   const { currentLanguage: alertSuccess } = useLanguages(
     alertSuccessEng,
     alertSuccessRu,
-    alertSuccessUa
+    alertSuccessUa,
   );
   const { currentLanguage: AlertFailed } = useLanguages(
     alertFailedEng,
     alertFailedRu,
-    alertFailedUa
+    alertFailedUa,
   );
   const onLoad = () => {
     setAlertMessage(alertSuccess);
@@ -93,12 +85,11 @@ export const DetailCoutnry = () => {
     const fetchData = async () => {
       try {
         const result = await axios(
-          `https://restcountries.eu/rest/v2/name/${handle}`
+          `https://restcountries.eu/rest/v2/name/${handle}`,
         );
         setState(result.data);
         setIsLoaded(true);
       } catch (error) {
-        console.log(error);
         setisError(true);
       }
     };
@@ -119,47 +110,47 @@ export const DetailCoutnry = () => {
   const { currentLanguage: nativeNameLanguage } = useLanguages(
     nativeNameEng,
     nativeNameRu,
-    nativeNameUa
+    nativeNameUa,
   );
   const { currentLanguage: populationLanguage } = useLanguages(
     populationEng,
     populationRu,
-    populationUa
+    populationUa,
   );
   const { currentLanguage: regionLanguage } = useLanguages(
     regionEng,
     regionRu,
-    regionUa
+    regionUa,
   );
   const { currentLanguage: subRegion } = useLanguages(
     subRegionEng,
     subRegionRu,
-    subRegionUa
+    subRegionUa,
   );
   const { currentLanguage: capitalLanguage } = useLanguages(
     capitalEng,
     capitalRu,
-    capitalUa
+    capitalUa,
   );
   const { currentLanguage: borderCountries } = useLanguages(
     borderCountriesEng,
     borderCountriesRu,
-    borderCountriesUa
+    borderCountriesUa,
   );
   const { currentLanguage: topLevelDomainLanguage } = useLanguages(
     topLevelDomainEng,
     topLevelDomainRu,
-    topLevelDomainUa
+    topLevelDomainUa,
   );
   const { currentLanguage: Currencies } = useLanguages(
     CurrenciesEng,
     CurrenciesRu,
-    CurrenciesUa
+    CurrenciesUa,
   );
   const { currentLanguage: Languages } = useLanguages(
     LanguagesEng,
     LanguagesRu,
-    LanguagesUa
+    LanguagesUa,
   );
   return (
     <div className="container">
@@ -176,7 +167,7 @@ export const DetailCoutnry = () => {
           currencies,
           languages,
           borders,
-        }: Props) => {
+        }: any) => {
           return (
             <div key={uuid()}>
               {isError && <Error />}
@@ -216,47 +207,67 @@ export const DetailCoutnry = () => {
                     <div className={styles.detail__container}>
                       <div>
                         <p>
-                          {nativeNameLanguage}:{nativeName}
+                          {nativeNameLanguage}
+                          :
+                          {nativeName}
                         </p>
                         <p>
-                          {populationLanguage}: {population}
+                          {populationLanguage}
+                          : 
+                          {population}
                         </p>
                         <p>
-                          {regionLanguage}: {region}
+                          {regionLanguage}
+                          :
+                          {region}
                         </p>
                         <p>
-                          {subRegion}: {subregion}
+                          {subRegion}
+                          : 
+                          {subregion}
                         </p>
                         <p>
-                          {capitalLanguage}: {capital}
+                          {capitalLanguage}
+                          : 
+                          {capital}
                         </p>
                       </div>
                       <div>
                         <p>
-                          {topLevelDomainLanguage}: {topLevelDomain}
+                          {topLevelDomainLanguage}
+                          : 
+                          {topLevelDomain}
                         </p>
                         <div className={styles.text__flex}>
-                          <p> {Currencies}:</p>
-                          {currencies.map((currenci) => {
+                          <p> 
+                            {Currencies}
+                            :
+                          </p>
+                          {currencies.map((currenci: any) => {
                             return (
                               <p
                                 className={styles.text__flex__child}
                                 key={uuid()}
                               >
-                                {currenci.name},
+                                {currenci.name}
+                                ,
                               </p>
                             );
                           })}
                         </div>
                         <div className={styles.text__flex}>
-                          <p>{Languages}:</p>
+                          <p>
+                            {Languages}
+                            :
+                          </p>
                           {languages.map((language: { name: string }) => {
                             return (
                               <p
                                 className={styles.text__flex__child}
                                 key={uuid()}
                               >
-                                {language.name},
+                                {language.name}
+                                ,
                               </p>
                             );
                           })}
@@ -264,9 +275,12 @@ export const DetailCoutnry = () => {
                       </div>
                     </div>
                     <div className={styles.border__country}>
-                      <p>{borderCountries}:</p>
-                      {borders.map((border) => {
-                        return <button key={uuid()}>{border}</button>;
+                      <p>
+                        {borderCountries}
+                        :
+                      </p>
+                      {borders.map((border: string) => {
+                        return <button type="button" key={uuid()}>{border}</button>;
                       })}
                     </div>
                   </div>
@@ -274,8 +288,9 @@ export const DetailCoutnry = () => {
               )}
             </div>
           );
-        }
+        },
       )}
     </div>
   );
 };
+export default DetailCoutnry;

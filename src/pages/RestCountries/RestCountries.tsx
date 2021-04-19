@@ -1,15 +1,22 @@
 import React, { Component } from 'react';
-import Loader from '../../components/Loader/Loader';
-import { CardCountry } from './CardCountry';
-import { SearchCountry } from './components/SearchCountry';
-import Error from '../../components/Error/Error';
 import { connect } from 'react-redux';
+// @ts-ignore
+import Loader from '../../components/Loader/Loader.tsx';
+// @ts-ignore
+import { CardCountry } from './CardCountry.tsx';
+// @ts-ignore
+import SearchCountry from './components/SearchCountry.tsx';
+// @ts-ignore
+import Error from '../../components/Error/Error.tsx';
+// @ts-ignore
 import style from './scss/RestCountries.module.scss';
-import { switching } from '../../redux/checkedSlice';
-import { RootState } from '../../app/store';
-// interface Props {
+// @ts-ignore
+import { switching } from '../../redux/checkedSlice.ts';
+// @ts-ignore
+import { RootState } from '../../app/store.ts';
+// @ts-ignore
+import { ThemeContext } from '../../App.tsx';
 
-// }
 interface State {
   isLoaded?: boolean;
   items?: any;
@@ -28,51 +35,6 @@ interface State {
 class RestCountries extends Component<State> {
   state: State = { apiDirection: 'all' };
 
-  dataCall = async () => {
-    try {
-      const response = await fetch(
-        `https://restcountries.eu/rest/v2/${this.state.apiDirection}`
-      );
-
-      const json = await response.json();
-      response.ok
-        ? this.setState({
-            items: json,
-            isLoaded: true,
-            isError: false,
-          })
-        : this.setState({
-            isError: true,
-          });
-    } catch (error) {
-      console.error(error);
-      this.setState({
-        isError: true,
-      });
-    }
-  };
-  componentDidMount() {
-    this.dataCall();
-    // first call
-  }
-  componentWillUnmount() {
-    this.setState({ isLoaded: false, items: [] });
-    // unsubscirbe
-  }
-  componentDidUpdate(prevProps: any, prevState: { apiDirection: string }) {
-    if (
-      prevState.apiDirection !== this.state.apiDirection &&
-      this.state.apiDirection !== 'name/'
-    ) {
-      this.dataCall();
-    }
-    // update call
-  }
-  submitForm = (e: React.ChangeEvent<HTMLInputElement>): void =>
-    e.preventDefault();
-
-  onChangeInputHandler = (e: React.ChangeEvent<HTMLInputElement>) =>
-    this.setState({ apiDirection: `name/${e.target.value}` });
   variantCard = {
     cardHover: {
       scale: 0.8,
@@ -81,26 +43,77 @@ class RestCountries extends Component<State> {
     },
   };
 
+  componentDidMount() {
+    this.dataCall();
+    // first call
+  }
+
+  componentDidUpdate(prevProps: any, prevState: { apiDirection: string }) {
+    const { apiDirection } = this.state;
+    if (prevState.apiDirection !== apiDirection && apiDirection !== 'name/') {
+      this.dataCall();
+    }
+    // update call
+  }
+
+  dataCall = async () => {
+    const { apiDirection } = this.state;
+    try {
+      const response = await fetch(
+        `https://restcountries.eu/rest/v2/${apiDirection}`,
+      );
+      const json = await response.json();
+      if (response.ok) {
+        this.setState({
+          items: json,
+          isLoaded: true,
+          isError: false,
+        });
+      } else {
+        this.setState({
+          isError: true,
+        });
+      }
+    } catch (error) {
+      this.setState({
+        isError: true,
+      });
+    }
+  };
+
+  submitForm = (e: React.ChangeEvent<HTMLInputElement>): void => {
+    e.preventDefault();
+  };
+
+  onChangeInputHandler = (e: React.ChangeEvent<HTMLInputElement>) => {
+    this.setState({ apiDirection: `name/${e.target.value}` });
+  };
+
   render() {
-    const { isLoaded, items, inputString } = this.state;
+    const { 
+      isLoaded, items, inputString, isError 
+    } = this.state;
 
     return (
-      <div className={this.props.checked ? style.dark : ''}>
-        <div className="container">
-          <SearchCountry
-            inputString={inputString}
-            onChangeInputHandler={this.onChangeInputHandler}
-          />
-
-          {!isLoaded ? (
-            <Loader />
-          ) : this.state.isError ? (
-            <Error />
-          ) : (
-            <CardCountry items={items} variantCard={this.variantCard} />
-          )}
-        </div>
-      </div>
+      <ThemeContext.Consumer>
+        {(darkTheme: boolean) => (
+          <div className={darkTheme ? style.dark : ''}>
+            <div className="container">
+              <SearchCountry
+                inputString={inputString}
+                onChangeInputHandler={this.onChangeInputHandler}
+              />
+              {isError && <Error />}
+              {!isLoaded ? (
+                <Loader />
+              ) : (
+                <CardCountry items={items} variantCard={this.variantCard} />
+              )}
+            </div>
+          </div>
+        )}
+        
+      </ThemeContext.Consumer>
     );
   }
 }

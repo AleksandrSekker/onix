@@ -1,5 +1,6 @@
 import { motion } from 'framer-motion';
 import React from 'react';
+// @ts-ignore
 import Button from '../../../components/Button/Button.tsx';
 import styles from '../scss/Array.module.scss';
 
@@ -25,24 +26,23 @@ const SortButton = ({
   buttonVariant,
   sortByBubble,
   sort,
-}: Props) => {
-  return (
-    <div className={styles.flex}>
-      <motion.div
-        onClick={sortedUseSort}
-        variants={buttonVariant}
-        whileHover="buttonAnimation"
-      >
-        <Button text={sort} color="btn__sorted__by__sort" />
-      </motion.div>
-      <motion.div
-        onClick={sortedUseBabel}
-        variants={buttonVariant}
-        whileHover="buttonAnimation"
-      >
-        <Button text={sortByBubble} color="btn__sorted__use__bubble" />
-      </motion.div>
-    </div>
-  );
-};
+}: Props) => (
+  <div className={styles.flex}>
+    <motion.div
+      onClick={sortedUseSort}
+      variants={buttonVariant}
+      whileHover="buttonAnimation"
+    >
+      <Button text={sort} color="btn__sorted__by__sort" />
+    </motion.div>
+    <motion.div
+      onClick={sortedUseBabel}
+      variants={buttonVariant}
+      whileHover="buttonAnimation"
+    >
+      <Button text={sortByBubble} color="btn__sorted__use__bubble" />
+    </motion.div>
+  </div>
+);
+
 export default SortButton;

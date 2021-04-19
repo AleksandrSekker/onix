@@ -67,66 +67,65 @@ const Form = ({
   placeholderYearError,
   alertMessage,
   pushValue,
-}: Props) => {
-  return (
-    <div className={styles.flex}>
-      <form
-        onSubmit={handleSubmit(onSubmitPushToArray)}
-        className={stylei.formflex}
-      >
-        <div className={stylei.valid__flex}>
-          <input
-            name="number"
-            ref={register({ required: true })}
-            type="number"
-            value={number}
-            className={stylei.input__field}
-            placeholder={placeholderYear}
-            onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-              setNumber(parseInt(e.target.value));
-            }}
-          />
-          <h5 className={stylei.valid__text}>
-            {errors.number && placeholderYearError}
-          </h5>
-        </div>
-        <div className={stylei.valid__flex}>
-          <input
-            name="text"
-            ref={register({ required: true })}
-            type="text"
-            value={text}
-            className={stylei.input__field}
-            placeholder={placeholderText}
-            onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-              setText(e.target.value);
-            }}
-          />
-          <h5 className={stylei.valid__text}>
-            {errors.text && placeholderTextError}
-          </h5>
-        </div>
-        <motion.input
-          variants={buttonVariant}
-          whileHover="buttonAnimation"
-          type="submit"
-          value={pushValue}
-          className={stylei.input__submit}
+}: Props) => (
+  <div className={styles.flex}>
+    <form
+      onSubmit={handleSubmit(onSubmitPushToArray)}
+      className={stylei.formflex}
+    >
+      <div className={stylei.valid__flex}>
+        <input
+          name="number"
+          ref={register({ required: true })}
+          type="number"
+          value={number}
+          className={stylei.input__field}
+          placeholder={placeholderYear}
+          onChange={(e: any) => {
+            setNumber(e.target.value);
+          }}
         />
-        <AnimatePresence>
-          {showAlert && (
-            <motion.p
-              variants={alertVariant}
-              initial="alertInitial"
-              animate="alertAnimate"
-              exit="exitAlert"
-            >
-              {alertMessage}
-            </motion.p>
-          )}
-        </AnimatePresence>
-      </form>
-    </div>
-  );
-};
+        <h5 className={stylei.valid__text}>
+          {errors.number && placeholderYearError}
+        </h5>
+      </div>
+      <div className={stylei.valid__flex}>
+        <input
+          name="text"
+          ref={register({ required: true })}
+          type="text"
+          value={text}
+          className={stylei.input__field}
+          placeholder={placeholderText}
+          onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+            setText(e.target.value);
+          }}
+        />
+        <h5 className={stylei.valid__text}>
+          {errors.text && placeholderTextError}
+        </h5>
+      </div>
+      <motion.input
+        variants={buttonVariant}
+        whileHover="buttonAnimation"
+        type="submit"
+        value={pushValue}
+        className={stylei.input__submit}
+      />
+      <AnimatePresence>
+        {showAlert && (
+          <motion.p
+            variants={alertVariant}
+            initial="alertInitial"
+            animate="alertAnimate"
+            exit="exitAlert"
+          >
+            {alertMessage}
+          </motion.p>
+        )}
+      </AnimatePresence>
+    </form>
+  </div>
+);
+
 export default Form;

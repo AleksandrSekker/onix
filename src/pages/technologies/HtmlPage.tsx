@@ -1,12 +1,13 @@
-import React from "react";
-import styled from "./scss/ComonentDetail.module.scss";
-import { useSelector } from "react-redux";
-import { selectCheck } from "../../redux/checkedSlice";
-import useLanguages from "../../hooks/useLanguages";
+import React from 'react';
+import styled from './scss/ComonentDetail.module.scss';
+// @ts-ignore
+import useDarkThemeContext from '../../hooks/useDarkThemeContext.ts';
+// @ts-ignore
+import useLanguages from '../../hooks/useLanguages.ts';
 
-export const HtmlPage = () => {
-  const checked = useSelector(selectCheck);
-  const html = "HTML";
+const HtmlPage = () => {
+  const { darkTheme } = useDarkThemeContext(styled);
+  const html = 'HTML';
   const { currentLanguage: htmlText } = useLanguages(
     `Hypertext Markup Language (HTML) is the standard markup language for
   documents designed to be displayed in a web browser. It can be
@@ -76,14 +77,15 @@ export const HtmlPage = () => {
   Включення CSS визначає вигляд та макет вмісту. Світ
   Wide Web Consortium (W3C), колишній супровідник HTML і поточний
   , що підтримує стандарти CSS, заохочує використання CSS
-  явний презентаційний HTML з 1997 року.`
+  явний презентаційний HTML з 1997 року.`,
   );
   return (
-    <section className={checked ? styled.dark : ""}>
-      <div className='container'>
+    <section className={darkTheme}>
+      <div className="container">
         <h1 className={styled.title}>{html}</h1>
         <p className={styled.content}>{htmlText}</p>
       </div>
     </section>
   );
 };
+export default HtmlPage;

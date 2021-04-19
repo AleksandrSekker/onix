@@ -18,9 +18,9 @@ interface Props {
   setNumberModal: React.Dispatch<React.SetStateAction<number>>;
   textModal: string;
   setTextModal: React.Dispatch<React.SetStateAction<string>>;
-  deleteHandler: (a: string) => void;
-  apdateHandler: (a: string) => void;
-  modalHandler: (a: string) => void;
+  deleteHandler: any;
+  apdateHandler: any;
+  modalHandler: any;
   textVariant: {
     textHoverTitle: {
       scale: number;
@@ -57,7 +57,7 @@ interface Props {
   };
 }
 
-export const Table = ({
+const Table = ({
   state,
   apdateHandler,
   deleteHandler,
@@ -69,105 +69,103 @@ export const Table = ({
   setTextModal,
   modalVariant,
   buttonVariant,
-}: Props) => {
-  return (
-    <AnimatePresence>
-      {Object.entries(state).map(([key, value]) => {
-        return (
-          <div key={key}>
-            <motion.div
-              key={value.id}
-              className={styles.flex}
-              initial={{ x: -100, opacity: 0 }}
-              animate={{ x: 0, opacity: 1 }}
-              transition={{ duration: 0.8 }}
-              exit={{ x: -100, opacity: 0 }}
-            >
-              <motion.p variants={textVariant} whileHover="textHoverTitle">
-                {value.title}
-              </motion.p>
-              <motion.div className={styles.flexAround}>
-                <motion.p variants={textVariant} whileHover="textHoverYear">
-                  {value.year}
-                </motion.p>
+}: Props) => (
+  <AnimatePresence>
+    {Object.entries(state).map(([key, value]) => (
+      <div key={key}>
+        <motion.div
+          key={value.id}
+          className={styles.flex}
+          initial={{ x: -100, opacity: 0 }}
+          animate={{ x: 0, opacity: 1 }}
+          transition={{ duration: 0.8 }}
+          exit={{ x: -100, opacity: 0 }}
+        >
+          <motion.p variants={textVariant} whileHover="textHoverTitle">
+            {value.title}
+          </motion.p>
+          <motion.div className={styles.flexAround}>
+            <motion.p variants={textVariant} whileHover="textHoverYear">
+              {value.year}
+            </motion.p>
 
-                <button
-                  type="button"
-                  onClick={() => {
-                    modalHandler(key);
-                  }}
+            <button
+              type="button"
+              onClick={() => {
+                modalHandler(key);
+              }}
+            >
+              <FontAwesomeIcon icon={faPen} />
+            </button>
+            <button type="button" onClick={() => deleteHandler(key)}>
+              <FontAwesomeIcon icon={faTrash} />
+            </button>
+          </motion.div>
+        </motion.div>
+        <AnimatePresence>
+          {value.ismodal && (
+            <motion.div
+              className={styles.modal}
+              variants={modalVariant}
+              initial="modalinitial"
+              animate="modalanimate"
+              exit="modalexit"
+            >
+              <form className={stylei.formflex}>
+                <div className={stylei.valid__flex}>
+                  <input
+                    name="number"
+                    type="number"
+                    value={numberModal}
+                    className={stylei.input__field}
+                    placeholder="Please type year"
+                    onChange={(e: any) => {
+                      setNumberModal(e.target.value);
+                    }}
+                  />
+                </div>
+                <div className={stylei.valid__flex}>
+                  <input
+                    name="text"
+                    type="text"
+                    value={textModal}
+                    className={stylei.input__field}
+                    placeholder="Please type text"
+                    onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+                      setTextModal(e.target.value);
+                    }}
+                  />
+                </div>
+
+                <motion.div
+                  onClick={() => apdateHandler(key)}
+                  variants={buttonVariant}
+                  whileHover="buttonAnimation"
                 >
-                  <FontAwesomeIcon icon={faPen} />
-                </button>
-                <button type="button" onClick={() => deleteHandler(key)}>
-                  <FontAwesomeIcon icon={faTrash} />
-                </button>
+                  <input
+                    type="button"
+                    className={stylei.input__submit}
+                    value="Update"
+                  />
+                </motion.div>
+              </form>
+              <motion.div
+                onClick={() => deleteHandler(value.id)}
+                variants={buttonVariant}
+                whileHover="buttonAnimation"
+              >
+                <input
+                  type="button"
+                  className={stylei.input__delete}
+                  value="Remove"
+                />
               </motion.div>
             </motion.div>
-            <AnimatePresence>
-              {value.ismodal && (
-                <motion.div
-                  className={styles.modal}
-                  variants={modalVariant}
-                  initial="modalinitial"
-                  animate="modalanimate"
-                  exit="modalexit"
-                >
-                  <form className={stylei.formflex}>
-                    <div className={stylei.valid__flex}>
-                      <input
-                        name="number"
-                        type="number"
-                        value={numberModal}
-                        className={stylei.input__field}
-                        placeholder="Please type year"
-                        onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-                          setNumberModal(parseInt(e.target.value));
-                        }}
-                      />
-                    </div>
-                    <div className={stylei.valid__flex}>
-                      <input
-                        name="text"
-                        type="text"
-                        value={textModal}
-                        className={stylei.input__field}
-                        placeholder="Please type text"
-                        onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-                          setTextModal(e.target.value);
-                        }}
-                      />
-                    </div>
+          )}
+        </AnimatePresence>
+      </div>
+    ))}
+  </AnimatePresence>
+);
 
-                    <motion.div
-                      onClick={() => apdateHandler(key)}
-                      variants={buttonVariant}
-                      whileHover="buttonAnimation"
-                    >
-                      <input
-                        type="button"
-                        className={stylei.input__submit}
-                        value="Update"
-                      />
-                    </motion.div>
-                  </form>
-                  <motion.div
-                    onClick={() => deleteHandler(value.id)}
-                    variants={buttonVariant}
-                    whileHover="buttonAnimation"
-                  >
-                    <input
-                      type="button"
-                      className={stylei.input__delete}
-                      value="Remove"
-                    />
-                  </motion.div>
-                </motion.div>
-              )}
-            </AnimatePresence>
-          </div>
-        );
-      })}
-    </AnimatePresence>
-  );
-};
+export default Table;

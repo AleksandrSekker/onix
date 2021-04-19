@@ -1,5 +1,6 @@
-import { createSlice } from "@reduxjs/toolkit";
-import { RootState } from "../app/store";
+import { createSlice } from '@reduxjs/toolkit';
+// @ts-ignore
+import { RootState } from '../app/store.ts';
 
 interface CheckedState {
   value: boolean;
@@ -10,10 +11,10 @@ const initialState: CheckedState = {
 };
 
 export const checkedSlice = createSlice({
-  name: "checked",
+  name: 'checked',
   initialState,
   reducers: {
-    switching: state => {
+    switching: (state) => { 
       state.value = !state.value;
     },
   },

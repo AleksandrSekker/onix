@@ -6,14 +6,13 @@ interface Props {
   color: any;
 }
 
-const Button = ({ text, color }: Props) => {
-  return (
-    <button
-      type="button"
-      className={`${styles.input__btn} ${styles.btn_array} ${styles[color]}`}
-    >
-      {text}
-    </button>
-  );
-};
+const Button = ({ text, color }: Props) => (
+  <button
+    type="button"
+    className={`${styles.input__btn} ${styles.btn_array} ${styles[color]}`}
+  >
+    {text}
+  </button>
+);
+
 export default Button;

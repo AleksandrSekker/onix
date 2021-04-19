@@ -1,7 +1,5 @@
 import React from 'react';
-import style from './scss/Home.module.scss';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-
 import {
   faHtml5,
   faCss3Alt,
@@ -11,12 +9,13 @@ import {
 } from '@fortawesome/free-brands-svg-icons';
 import AOS from 'aos';
 import 'aos/dist/aos.css';
-import useDarkTheme from '../../hooks/useDarkTheme';
-import useLanguages from '../../hooks/useLanguages';
+import style from './scss/Home.module.scss';
+// @ts-ignore
+import useDarkThemeContext from '../../hooks/useDarkThemeContext.ts';
+// @ts-ignore
+import useLanguages from '../../hooks/useLanguages.ts';
 
-interface Props {}
-
-export const Home = (props: Props) => {
+const Home = () => {
   const { currentLanguage: html } = useLanguages(
     `Hypertext Markup Language is the standard markup language for
     documents designed to be displayed in a web browser. It can be
@@ -29,7 +28,7 @@ export const Home = (props: Props) => {
     `Мова розмітки гіпертексту є стандартною мовою розмітки для
     документи, призначені для відображення у веб-браузері. Це може бути
     за допомогою таких технологій, як каскадні таблиці стилів та
-    мови сценаріїв, такі як JavaScript.`
+    мови сценаріїв, такі як JavaScript.`,
   );
   const { currentLanguage: node } = useLanguages(
     `Node.js is an open-source, cross-platform, back-end, JavaScript
@@ -40,15 +39,19 @@ export const Home = (props: Props) => {
   браузер.`,
     `Node.js - це JavaScript із відкритим вихідним кодом, міжплатформеним, бек-ендом
   середовище виконання, яке виконує код JavaScript поза Інтернетом
-  браузер.`
+  браузер.`,
   );
   const { currentLanguage: git } = useLanguages(
     `Git is a distributed version-control system for tracking changes
   in any set of files, originally designed for coordinating work
   among programmers cooperating on source code during software
   development.`,
-    `Git - это распределенная система контроля версий для отслеживания изменений в любом наборе файлов, изначально предназначенная для координации работы программистов, работающих над исходным кодом во время разработки программного обеспечения.`,
-    `Git - це розподілена система контролю версій для відстеження змін у будь-якому наборі файлів, спочатку призначена для координації роботи між програмістами, які співпрацюють над вихідним кодом під час розробки програмного забезпечення.`
+    'Git - это распределенная система контроля версий для отслеживания изменений в любом наборе файлов,' 
+    + 'изначально предназначенная для координации работы программистов,' 
+    + 'работающих над исходным кодом во время разработки программного обеспечения.',
+    'Git - це розподілена система контролю версій для відстеження змін у будь-якому наборі файлів,' 
+    + 'спочатку призначена для координації роботи між програмістами,' 
+    + 'які співпрацюють над вихідним кодом під час розробки програмного забезпечення.',
   );
   const { currentLanguage: css } = useLanguages(
     `Cascading Style Sheets is a style sheet language used for
@@ -62,7 +65,7 @@ export const Home = (props: Props) => {
     `Каскадні таблиці стилів - це мова таблиць стилів, яка використовується
   опис викладу документа, написаного з розміткою
   такою мовою, як HTML. CSS є наріжним каменем технології
-  Всесвітня павутина, поряд із HTML та JavaScript.`
+  Всесвітня павутина, поряд із HTML та JavaScript.`,
   );
   const { currentLanguage: npm } = useLanguages(
     `npm is a package manager for the JavaScript programming language.
@@ -76,55 +79,60 @@ export const Home = (props: Props) => {
     `npm - це менеджер пакетів для мови програмування JavaScript.
   npm, Inc. є дочірньою компанією GitHub, американської багатонаціональної компанії
   корпорація, яка надає хостинг для розробки програмного забезпечення та
-  контроль версій із використанням Git.`
+  контроль версій із використанням Git.`,
   );
   AOS.init();
-  const { darkTheme } = useDarkTheme(style);
+  const { darkTheme } = useDarkThemeContext(style);
   return (
     <div className={darkTheme}>
       <div className={style.flex}>
         <div className={style.flex__column}>
           <div
             className={style.first__container}
-            data-aos='fade-right'
-            data-aos-duration='1500'>
+            data-aos="fade-right"
+            data-aos-duration="1500"
+          >
             <FontAwesomeIcon icon={faHtml5} className={style.html} />
             <p>{html}</p>
           </div>
           <div
             className={style.first__container}
-            data-aos='fade-right'
-            data-aos-duration='1500'>
+            data-aos="fade-right"
+            data-aos-duration="1500"
+          >
             <FontAwesomeIcon icon={faNodeJs} className={style.node} />
             <p>{node}</p>
           </div>
           <div
             className={style.first__container}
-            data-aos='fade-right'
-            data-aos-duration='1500'>
+            data-aos="fade-right"
+            data-aos-duration="1500"
+          >
             <FontAwesomeIcon icon={faGitAlt} className={style.git} />
             <p>{git}</p>
           </div>
         </div>
         <div className={style.vertical__line}>
-          <div className={`${style.dot} ${style.dot__one}`}></div>
-          <div className={`${style.dot} ${style.dot__two}`}></div>
-          <div className={`${style.dot} ${style.dot__three}`}></div>
-          <div className={`${style.dot} ${style.dot__four}`}></div>
-          <div className={`${style.dot} ${style.dot__five}`}></div>
+          <div className={`${style.dot} ${style.dot__one}`} />
+          <div className={`${style.dot} ${style.dot__two}`} />
+          <div className={`${style.dot} ${style.dot__three}`} />
+          <div className={`${style.dot} ${style.dot__four}`} />
+          <div className={`${style.dot} ${style.dot__five}`} />
         </div>
         <div className={style.flex__column__two}>
           <div
             className={style.second__сontainer}
-            data-aos='fade-left'
-            data-aos-duration='1500'>
+            data-aos="fade-left"
+            data-aos-duration="1500"
+          >
             <FontAwesomeIcon icon={faCss3Alt} className={style.css} />
             <p>{css}</p>
           </div>
           <div
             className={style.second__сontainer}
-            data-aos='fade-left'
-            data-aos-duration='1500'>
+            data-aos="fade-left"
+            data-aos-duration="1500"
+          >
             <FontAwesomeIcon icon={faNpm} className={style.npm} />
             <p>{npm}</p>
           </div>
@@ -133,3 +141,4 @@ export const Home = (props: Props) => {
     </div>
   );
 };
+export default Home;

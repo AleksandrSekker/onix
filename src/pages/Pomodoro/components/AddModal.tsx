@@ -2,11 +2,12 @@ import {
   faChevronDown,
   faChevronUp,
   faPlusCircle,
-} from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import { AnimatePresence, motion } from "framer-motion";
-import React from "react";
-import styles from "../scss/Array.module.scss";
+} from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import { AnimatePresence, motion } from 'framer-motion';
+import React from 'react';
+import styles from '../scss/Array.module.scss';
+
 interface Props {
   placeholderLanguage: string;
   amountLanguage: string;
@@ -25,7 +26,7 @@ interface Props {
   pushHandler: () => void;
 }
 
-export const AddModal = ({
+const AddModal = ({
   isModal,
   setTitle,
   year,
@@ -57,67 +58,81 @@ export const AddModal = ({
         <motion.div
           className={styles.modal}
           variants={modalVariant}
-          initial='modalInitial'
-          animate='modalAnimate'
-          exit='modalExit'>
+          initial="modalInitial"
+          animate="modalAnimate"
+          exit="modalExit"
+        >
           <input
-            type='text'
+            type="text"
             className={styles.title__input}
             placeholder={placeholderLanguage}
-            autoFocus
-            onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-              setTitle(e.target.value)
-            }
+            onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+              setTitle(e.target.value);
+            }}
           />
           <p>{amountLanguage}</p>
           <div className={styles.flex}>
             <input
-              type='number'
+              type="number"
               className={styles.numberInput}
               value={year}
-              onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-                setYear(parseInt(e.target.value))
-              }
+              onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+                setYear(e.target.value);
+              }}
             />
             <button
+              type="button"
               className={styles.chevron}
               onClick={() => {
                 setYear(year + 1);
-              }}>
+              }}
+            >
               <FontAwesomeIcon icon={faChevronUp} />
             </button>
             <button
+              type="button"
               className={styles.chevron}
               onClick={() => {
                 setYear(year - 1);
-              }}>
+              }}
+            >
               <FontAwesomeIcon icon={faChevronDown} />
             </button>
           </div>
           {linkAdd ? (
             <input
-              type='text'
+              type="text"
               className={styles.subtitle__input}
               placeholder={notesPlaceholderLanguage}
-              onChange={(e: React.ChangeEvent<HTMLInputElement>) =>
-                setSubTitle(e.target.value)
-              }
+              onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+                setSubTitle(e.target.value);
+              }}
             />
           ) : (
-            <p
+            <button
+              type="button"
               className={styles.link__add}
               onClick={() => {
                 setLinkAdd(!linkAdd);
-              }}>
+              }}
+            >
               {addNotesLanguage}
-            </p>
+            </button>
           )}
           <div className={styles.modal__footer__background}>
             <div className={styles.modal__footer}>
-              <button onClick={modalToggler} className={styles.cancel}>
+              <button
+                type="button"
+                onClick={modalToggler}
+                className={styles.cancel}
+              >
                 {cancelLanguage}
               </button>
-              <button onClick={pushHandler} className={styles.save}>
+              <button
+                type="button"
+                onClick={pushHandler}
+                className={styles.save}
+              >
                 {saveLanguage}
               </button>
             </div>
@@ -125,9 +140,11 @@ export const AddModal = ({
         </motion.div>
       ) : (
         <motion.button className={styles.add} onClick={modalToggler}>
-          <FontAwesomeIcon icon={faPlusCircle} /> Add Task
+          <FontAwesomeIcon icon={faPlusCircle} />
+          Add Task
         </motion.button>
       )}
     </AnimatePresence>
   );
 };
+export default AddModal;

@@ -1,12 +1,15 @@
 import React, { useEffect, useRef, useState } from 'react';
 import styles from './scss/LessonSeven.module.scss';
-import Loader from '../../components/Loader/Loader';
-import Error from '../../components/Error/Error';
-import { Cards } from './Cards';
-
-import useDarkTheme from '../../hooks/useDarkTheme';
-import useFetch from '../../hooks/useFetch';
-import useLanguages from '../../hooks/useLanguages';
+// @ts-ignore
+import Loader from '../../components/Loader/Loader.tsx';
+// @ts-ignore
+import Error from '../../components/Error/Error.tsx';
+// @ts-ignore
+import Cards from './Cards.tsx';
+// @ts-ignore
+import useFetch from '../../hooks/useFetch.ts';
+// @ts-ignore
+import useLanguages from '../../hooks/useLanguages.ts';
 import {
   capitalEng,
   capitalRu,
@@ -20,7 +23,10 @@ import {
   regionEng,
   regionRu,
   regionUa,
-} from '../../constants/Text';
+  // @ts-ignore
+} from '../../constants/Text.ts';
+// @ts-ignore
+import useDarkThemeContext from '../../hooks/useDarkThemeContext.ts';
 
 const LessonSeven = () => {
   const [isNameActive, setIsNameActive] = useState(false);
@@ -28,10 +34,12 @@ const LessonSeven = () => {
   const [isRegionActive, setIsRegionActive] = useState(false);
   const [isCapitalActive, setIsCapitalActive] = useState(false);
   const [isChange] = useState(true);
-  const { darkTheme } = useDarkTheme(styles);
-  const { loaded, state, setState, isError } = useFetch(
+  const { darkTheme } = useDarkThemeContext(styles);
+  const { 
+    loaded, state, setState, isError 
+  } = useFetch(
     'https://restcountries.eu/rest/v2/all',
-    isChange
+    isChange,
   );
   // onclick events
 
@@ -85,14 +93,14 @@ const LessonSeven = () => {
   > = useRef();
   const handleDragStart = (
     e: React.DragEvent<HTMLDivElement>,
-    position: number
+    position: number,
   ) => {
     draggingItem.current = position;
   };
 
   const handleDragEnter = (
     e: React.DragEvent<HTMLDivElement>,
-    position: number
+    position: number,
   ) => {
     dragOverItem.current = position;
     const listCopy = [...state];
@@ -107,30 +115,29 @@ const LessonSeven = () => {
   const { currentLanguage: population } = useLanguages(
     populationEng,
     populationRu,
-    populationUa
+    populationUa,
   );
   const { currentLanguage: region } = useLanguages(
     regionEng,
     regionRu,
-    regionUa
+    regionUa,
   );
   const { currentLanguage: capital } = useLanguages(
     capitalEng,
     capitalRu,
-    capitalUa
+    capitalUa,
   );
   const { currentLanguage: detailPage } = useLanguages(
     detailPageEng,
     detailPageRu,
-    detailPageUa
+    detailPageUa,
   );
   return (
     <div className={darkTheme}>
       <div className="container">
+        {isError && <Error />}
         {!loaded ? (
           <Loader />
-        ) : isError ? (
-          <Error />
         ) : (
           <>
             <Cards

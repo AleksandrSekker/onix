@@ -1,35 +1,59 @@
-import React from 'react';
+import React, { createContext, useState } from 'react';
 import { Route, Switch, useLocation } from 'react-router-dom';
 import { animated, useTransition } from 'react-spring';
-import { Home } from './pages/Home/Home.tsx';
-import { HtmlPage } from './pages/technologies/HtmlPage.tsx';
-import { CssPage } from './pages/technologies/CssPage.tsx';
-import { NpmPage } from './pages/technologies/NpmPage.tsx';
-import { NodePage } from './pages/technologies/NodePage.tsx';
-import { VcsPage } from './pages/technologies/VcsPage.tsx';
-import { GitPage } from './pages/technologies/GitPage.tsx';
+// @ts-ignore
+import Home from './pages/Home/Home.tsx';
+// @ts-ignore
+import HtmlPage from './pages/technologies/HtmlPage.tsx';
+// @ts-ignore
+import CssPage from './pages/technologies/CssPage.tsx';
+// @ts-ignore
+import NpmPage from './pages/technologies/NpmPage.tsx';
+// @ts-ignore
+import NodePage from './pages/technologies/NodePage.tsx';
+// @ts-ignore
+import VcsPage from './pages/technologies/VcsPage.tsx';
+// @ts-ignore
+import GitPage from './pages/technologies/GitPage.tsx';
+// @ts-ignore
 import ArrayBiography from './pages/ArrayBiography/ArrayBiography.tsx';
-import { Pomodoro } from './pages/Pomodoro/Pomodoro.tsx';
+// @ts-ignore
+import Pomodoro from './pages/Pomodoro/Pomodoro.tsx';
+// @ts-ignore
 import RestCountries from './pages/RestCountries/RestCountries.tsx';
-import { DetailCoutnry } from './pages/RestCountries/components/DetailCoutnry.tsx';
+// @ts-ignore
+import DetailCoutnry from './pages/RestCountries/components/DetailCoutnry.tsx';
+// @ts-ignore
 import LessonSeven from './pages/LessonSeven/LessonSeven.tsx';
+// @ts-ignore
 import './index.scss';
-import Layout from './layout/Layout.tsx';
+// @ts-ignore
+import Header from './layout/Header/Header.tsx';
+// @ts-ignore
+import Footer from './layout/Footer/Footer.tsx';
 
-function App() {
+export const ThemeContext = createContext(false);
+
+export const App = () => {
+  const [darkTheme, setdarkTheme] = useState(false);
   const location = useLocation();
-  const transitions = useTransition(location, (location) => location.pathname, {
-    from: { opacity: 0, transform: 'translate3d(100%,0,0)' },
-    enter: { opacity: 1, transform: 'translate3d(0%,0,0)' },
-    leave: { opacity: 0, transform: 'translate3d(-50%,0,0)' },
-  });
+  const transitions = useTransition(
+    location,
+    (locations) => locations.pathname,
+    {
+      from: { opacity: 0, transform: 'translate3d(100%,0,0)' },
+      enter: { opacity: 1, transform: 'translate3d(0%,0,0)' },
+      leave: { opacity: 0, transform: 'translate3d(-50%,0,0)' },
+    },
+  );
   return (
-    <main>
-      <div>
-        {transitions.map(({ item, props, key }) => (
-          <animated.div key={key} style={props}>
-            <div className="absolute__for__animation">
-              <Layout>
+    <ThemeContext.Provider value={darkTheme}>
+      <main>
+        <div>
+          {transitions.map(({ item, props, key }) => (
+            <animated.div key={key} style={props}>
+              <div className="absolute__for__animation">
+                <Header setdarkTheme={setdarkTheme} />
                 <Switch location={item}>
                   <Route exact path="/onix" component={Home} />
                   <Route path="/html" component={HtmlPage} />
@@ -44,12 +68,12 @@ function App() {
                   <Route path="/lessonseven" component={LessonSeven} />
                   <Route path="/:handle" component={DetailCoutnry} />
                 </Switch>
-              </Layout>
-            </div>
-          </animated.div>
-        ))}
-      </div>
-    </main>
+                <Footer />
+              </div>
+            </animated.div>
+          ))}
+        </div>
+      </main>
+    </ThemeContext.Provider>
   );
-}
-export default App;
+};

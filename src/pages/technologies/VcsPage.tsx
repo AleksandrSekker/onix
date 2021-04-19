@@ -1,12 +1,13 @@
-import React from "react";
-import { useSelector } from "react-redux";
-import useLanguages from "../../hooks/useLanguages";
-import { selectCheck } from "../../redux/checkedSlice";
-import styled from "./scss/ComonentDetail.module.scss";
+import React from 'react';
+// @ts-ignore
+import useLanguages from '../../hooks/useLanguages.ts';
+import styled from './scss/ComonentDetail.module.scss';
+// @ts-ignore
+import useDarkThemeContext from '../../hooks/useDarkThemeContext.ts';
 
-export const VcsPage = () => {
-  const checked = useSelector(selectCheck);
-  const vcs = "VCS";
+const VcsPage = () => {
+  const { darkTheme } = useDarkThemeContext(styled);
+  const vcs = 'VCS';
   const { currentLanguage: vcsText } = useLanguages(
     `In software engineering, version control (also known as revision
     control, source control, or source code management) is a class of
@@ -91,11 +92,12 @@ export const VcsPage = () => {
         спам у вікі.`
   );
   return (
-    <section className={checked ? styled.dark : ""}>
-      <div className='container'>
+    <section className={darkTheme}>
+      <div className="container">
         <h1 className={styled.title}>{vcs}</h1>
         <p className={styled.content}>{vcsText}</p>
       </div>
     </section>
   );
 };
+export default VcsPage;

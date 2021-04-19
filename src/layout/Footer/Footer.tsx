@@ -7,7 +7,9 @@ import {
   faGithub,
 } from '@fortawesome/free-brands-svg-icons';
 import styles from './scss/Footer.module.scss';
-import useDarkTheme from '../../hooks/useDarkTheme.ts';
+// @ts-ignore
+import useDarkThemeContext from '../../hooks/useDarkThemeContext.ts';
+// @ts-ignore
 import useLanguages from '../../hooks/useLanguages.ts';
 import {
   buttonTextEng,
@@ -19,25 +21,26 @@ import {
   placeholderTextEng,
   placeholderTextRu,
   placeholderTextUa,
+  // @ts-ignore
 } from '../../constants/Text.ts';
 
 const Footer = () => {
-  const { darkTheme } = useDarkTheme(styles);
+  const { darkTheme } = useDarkThemeContext(styles);
   const currentYear = new Date().getFullYear();
   const { currentLanguage: button } = useLanguages(
     buttonTextEng,
     buttonTextRu,
-    buttonTextUa
+    buttonTextUa,
   );
   const { currentLanguage: creator } = useLanguages(
     creatorNameEng,
     creatorNameRu,
-    creatorNameUa
+    creatorNameUa,
   );
   const { currentLanguage: placeholderText } = useLanguages(
     placeholderTextEng,
     placeholderTextRu,
-    placeholderTextUa
+    placeholderTextUa,
   );
   return (
     <>

@@ -1,12 +1,12 @@
-import React from "react";
-import styled from "./scss/ComonentDetail.module.scss";
-import { useSelector } from "react-redux";
-import { selectCheck } from "../../redux/checkedSlice";
-import useLanguages from "../../hooks/useLanguages";
+import React from 'react';
+import styled from './scss/ComonentDetail.module.scss';
+// @ts-ignore
+import useLanguages from '../../hooks/useLanguages.ts';
+// @ts-ignore
+import useDarkThemeContext from '../../hooks/useDarkThemeContext.ts';
 
-export const CssPage = () => {
-  const checked = useSelector(selectCheck);
-  const css = "CSS";
+const CssPage = () => {
+  const css = 'CSS';
   const { currentLanguage: cssText } = useLanguages(
     `Cascading Style Sheets (CSS) is a style sheet language used for
   describing the presentation of a document written in a markup language
@@ -85,14 +85,16 @@ export const CssPage = () => {
   з CSS за RFC 2318 (березень 1998). W3C працює з безкоштовним CSS
   служба перевірки документів CSS. [5] Крім HTML, інші
   мови розмітки підтримують використання CSS, включаючи XHTML, звичайний XML,
-  SVG та XUL.`
+  SVG та XUL.`,
   );
+  const { darkTheme } = useDarkThemeContext(styled);
   return (
-    <section className={checked ? styled.dark : ""}>
-      <div className='container'>
+    <section className={darkTheme}>
+      <div className="container">
         <h1 className={styled.title}>{css}</h1>
         <p className={styled.content}>{cssText}</p>
       </div>
     </section>
   );
 };
+export default CssPage;

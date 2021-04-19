@@ -5,9 +5,11 @@ import { motion } from 'framer-motion';
 import { faChevronDown } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import styles from './scss/Header.module.scss';
-import { switching, selectCheck } from '../../redux/checkedSlice.ts';
+// @ts-ignore
+import { selectCheck } from '../../redux/checkedSlice.ts';
+// @ts-ignore
 import withLink from '../../hoc/withLink/withLink.tsx';
-import useDarkTheme from '../../hooks/useDarkTheme.ts';
+// @ts-ignore
 import useLanguages from '../../hooks/useLanguages.ts';
 import uk from '../../assets/images/ukraine.svg';
 import en from '../../assets/images/unitedstates.svg';
@@ -31,22 +33,23 @@ import {
   technologyEng,
   technologyRu,
   technologyUa,
+  // @ts-ignore
 } from '../../constants/Text.ts';
 import {
-  selectLanguage,
   russian,
   ukrainian,
   english,
+  // @ts-ignore
 } from '../../redux/languagesSlice.ts';
+// @ts-ignore
+import useDarkThemeContext from '../../hooks/useDarkThemeContext.ts';
 
-const Header = () => {
+const Header = ({ setdarkTheme }: any) => {
   const [isActive, setIsActive] = useState(false);
   const [navFalse, setNavFalse] = useState(false);
   const [isHover, toggleHover] = React.useState(false);
-  const language = useSelector(selectLanguage);
   const AppLink = withLink(Link);
-  const { darkTheme } = useDarkTheme(styles);
-
+  const { darkTheme } = useDarkThemeContext(styles);
   const subMenuAnimate = {
     enter: {
       opacity: 1,
@@ -69,11 +72,16 @@ const Header = () => {
     },
   };
 
-  const checked = useSelector(selectCheck);
+  const checked: boolean = useSelector(selectCheck);
   const dispatch = useDispatch();
   const hamburgerHandler = () => {
-    isActive ? setIsActive(false) : setIsActive(true);
-    navFalse ? setNavFalse(false) : setNavFalse(true);
+    if (isActive && navFalse) {
+      setIsActive(false);
+      setNavFalse(false);
+    } else {
+      setIsActive(true);
+      setNavFalse(true);
+    }
   };
 
   const toggleHoverMenu = () => {
@@ -91,27 +99,27 @@ const Header = () => {
   const { currentLanguage: technologies } = useLanguages(
     technologyEng,
     technologyRu,
-    technologyUa
+    technologyUa,
   );
   const { currentLanguage: arrayBiography } = useLanguages(
     arrayBiographyEng,
     arrayBiographyRu,
-    arrayBiographyUa
+    arrayBiographyUa,
   );
   const { currentLanguage: pomodoro } = useLanguages(
     pomodoroAppEng,
     pomodoroAppRu,
-    pomodoroAppUa
+    pomodoroAppUa,
   );
   const { currentLanguage: countries } = useLanguages(
     countriesEng,
     countriesRu,
-    countriesUa
+    countriesUa,
   );
   const { currentLanguage: lessonSeven } = useLanguages(
     lessonSevenEng,
     lessonSevenRu,
-    lessonSevenUa
+    lessonSevenUa,
   );
 
   return (
@@ -129,19 +137,20 @@ const Header = () => {
                   type="checkbox"
                   id="check"
                   checked={checked}
-                  onChange={() => dispatch(switching())}
+                  onChange={() => setdarkTheme(!darkTheme)}
+                  // onChange={() => dispatch(switching())}
                 />
                 <span className={`${styles.slider} ${styles.round}`} />
               </label>
             </div>
             <button type="button" onClick={() => dispatch(english())}>
-              <img className={styles.language__image} alt={language} src={en} />
+              <img className={styles.language__image} alt="language" src={en} />
             </button>
             <button type="button" onClick={() => dispatch(russian())}>
-              <img className={styles.language__image} alt={language} src={ru} />
+              <img className={styles.language__image} alt="language" src={ru} />
             </button>
             <button type="button" onClick={() => dispatch(ukrainian())}>
-              <img className={styles.language__image} alt={language} src={uk} />
+              <img className={styles.language__image} alt="language" src={uk} />
             </button>
           </div>
           <div className={styles.navigation__content}>

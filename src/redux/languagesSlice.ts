@@ -1,26 +1,27 @@
-import { createSlice } from "@reduxjs/toolkit";
-import { RootState } from "../app/store";
+import { createSlice } from '@reduxjs/toolkit';
+// @ts-ignore
+import { RootState } from '../app/store.ts';
 
 interface LanguagesState {
   value: string;
 }
 
 const initialState: LanguagesState = {
-  value: "ru",
+  value: 'ru',
 };
 
 export const languagesSlice = createSlice({
-  name: "language",
+  name: 'language',
   initialState,
   reducers: {
-    english: state => {
-      state.value = "en";
+    english: (state) => {
+      state.value = 'en';
     },
-    russian: state => {
-      state.value = "ru";
+    russian: (state) => {
+      state.value = 'ru';
     },
-    ukrainian: state => {
-      state.value = "ua";
+    ukrainian: (state) => {
+      state.value = 'ua';
     },
   },
 });

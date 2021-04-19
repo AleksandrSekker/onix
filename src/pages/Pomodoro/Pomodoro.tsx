@@ -1,21 +1,25 @@
-import { faCheckCircle } from "@fortawesome/free-solid-svg-icons";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-import React from "react";
+import { faCheckCircle } from '@fortawesome/free-solid-svg-icons';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import React from 'react';
 import {
   pomodoroAppEng,
   pomodoroAppRu,
   pomodoroAppUa,
-} from "../../constants/Text";
-import useLanguages from "../../hooks/useLanguages";
-import { ArrayDB } from "./components/ArrayDB";
-import { Counter } from "./components/Counter";
-import styles from "./scss/Pomodoro.module.scss";
+  // @ts-ignore
+} from '../../constants/Text.ts';
+// @ts-ignore
+import useLanguages from '../../hooks/useLanguages.ts';
+// @ts-ignore
+import { ArrayDB } from './components/ArrayDB.tsx';
+// @ts-ignore
+import Counter from './components/Counter.tsx';
+import styles from './scss/Pomodoro.module.scss';
 
-export const Pomodoro = () => {
-  const { currentLanguage: Pomodoro } = useLanguages(
+const Pomodoro = () => {
+  const { currentLanguage: PomodoroLang } = useLanguages(
     pomodoroAppEng,
     pomodoroAppRu,
-    pomodoroAppUa
+    pomodoroAppUa,
   );
   return (
     <div className={styles.background}>
@@ -23,7 +27,7 @@ export const Pomodoro = () => {
         <div className={styles.header}>
           <p>
             <FontAwesomeIcon icon={faCheckCircle} className={styles.logo} />
-            {Pomodoro}
+            {PomodoroLang}
           </p>
         </div>
         <Counter />
@@ -32,3 +36,4 @@ export const Pomodoro = () => {
     </div>
   );
 };
+export default Pomodoro;

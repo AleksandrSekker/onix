@@ -1,21 +1,15 @@
 import React from 'react';
-import styles from './scss/LessonSeven.module.scss';
-
 import { Link } from 'react-router-dom';
-import Button from '../../components/Button/Button';
+import styles from './scss/LessonSeven.module.scss';
+// @ts-ignore
+import Button from '../../components/Button/Button.tsx';
 
 interface Props {
   state: any;
-  handleDragStart: (
-    e: React.DragEvent<HTMLDivElement>,
-    position: number
-  ) => void;
-  handleDragEnter: (
-    e: React.DragEvent<HTMLDivElement>,
-    position: number
-  ) => void;
+  handleDragStart: any;
+  handleDragEnter: any;
   nameHanler: () => void;
-  ternaryStyles: (x: boolean) => string;
+  ternaryStyles: any;
   isNameActive: boolean;
   isPopulationActive: boolean;
   populationHandler: () => void;
@@ -28,15 +22,8 @@ interface Props {
   capitalLanguage: string;
   detailPageLanguage: string;
 }
-interface State {
-  name: string;
-  flag: string;
-  population: string;
-  region: string;
-  capital: string;
-}
 
-export const Cards = ({
+const Cards = ({
   state,
   handleDragStart,
   handleDragEnter,
@@ -53,56 +40,69 @@ export const Cards = ({
   regionLanguage,
   capitalLanguage,
   detailPageLanguage,
-}: Props) => {
-  return (
-    <div className={styles.card}>
-      {state &&
-        state.map(
-          (
-            { name, flag, population, region, capital }: State,
-            index: number
-          ) => (
-            <div
-              onDragStart={e => handleDragStart(e, index)}
-              onDragOver={e => e.preventDefault()}
-              onDragEnter={e => handleDragEnter(e, index)}
-              key={index}
-              draggable
-              className={styles.cards}
+}: Props) => (
+  <div className={styles.card}>
+    {state 
+    && state.map(
+      (
+        { 
+          name, flag, population, region, capital, id
+        }: any, index: any
+      ) => (
+        <div
+          onDragStart={(e) => handleDragStart(e, index)}
+          onDragOver={(e) => e.preventDefault()}
+          onDragEnter={(e) => handleDragEnter(e, index)}
+          key={id}
+          draggable
+          className={styles.cards}
+        >
+          <img src={flag} alt="flag" />
+          <div>
+            <button
+              type="button"
+              onClick={nameHanler}
+              className={ternaryStyles(isNameActive)}
             >
-              <img src={flag} alt="flag" />
-              <div>
-                <p onClick={nameHanler} className={ternaryStyles(isNameActive)}>
-                  {name}
-                </p>
-                <p
-                  onClick={populationHandler}
-                  className={ternaryStyles(isPopulationActive)}
-                >
-                  {populationLanguage}: {population}
-                </p>
-                <p
-                  onClick={regionHandler}
-                  className={ternaryStyles(isRegionActive)}
-                >
-                  {regionLanguage}: {region}
-                </p>
-                <p
-                  onClick={capitalHandler}
-                  className={ternaryStyles(isCapitalActive)}
-                >
-                  {capitalLanguage}: {capital}
-                </p>
-                <Link to={`/${name}`} className={styles.link}>
-                  <Button
-                    text={detailPageLanguage}
-                    color="btn__sorted__use__bubble"
-                  />
-                </Link>
-              </div>
-            </div>
-          )
-        )}
-    </div>
-  );
-};
+              {name}
+            </button>
+            <button
+              type="button"
+              onClick={populationHandler}
+              className={ternaryStyles(isPopulationActive)}
+            >
+              {populationLanguage}
+              :
+              {population}
+            </button>
+            <button
+              type="button"
+              onClick={regionHandler}
+              className={ternaryStyles(isRegionActive)}
+            >
+              {regionLanguage}
+              :
+              {region}
+            </button>
+            <button
+              type="button"
+              onClick={capitalHandler}
+              className={ternaryStyles(isCapitalActive)}
+            >
+              {capitalLanguage}
+              :
+              {capital}
+            </button>
+            <Link to={`/${name}`} className={styles.link}>
+              <Button
+                text={detailPageLanguage}
+                color="btn__sorted__use__bubble"
+              />
+            </Link>
+          </div>
+        </div>
+      ),
+    )}
+  </div>
+);
+export default Cards;

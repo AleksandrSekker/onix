@@ -3,11 +3,15 @@ import { v4 as uuid } from 'uuid';
 import { useForm } from 'react-hook-form';
 import { cloneDeep } from 'lodash';
 import styled from './scss/ComonentDetail.module.scss';
+// @ts-ignore
 import data from '../../data/Data.ts';
-import { Table } from './components/Table.tsx';
+// @ts-ignore
+import Table from './components/Table.tsx';
+// @ts-ignore
 import SortButton from './components/SortButton.tsx';
+// @ts-ignore
 import Form from './components/Form.tsx';
-import useDarkTheme from '../../hooks/useDarkTheme.ts';
+// @ts-ignore
 import useLanguages from '../../hooks/useLanguages.ts';
 import {
   alertMessageEng,
@@ -37,7 +41,10 @@ import {
   pushValueEng,
   pushValueRu,
   pushValueUa,
+  // @ts-ignore
 } from '../../constants/Text.ts';
+// @ts-ignore
+import useDarkThemeContext from '../../hooks/useDarkThemeContext.ts';
 
 interface IFormInputs {
   number: number;
@@ -53,7 +60,7 @@ const ArrayBiography = () => {
   const [showAlert, setShowAlert] = useState(false);
 
   const { register, errors, handleSubmit } = useForm<IFormInputs>();
-  const { darkTheme } = useDarkTheme(styled);
+  const { darkTheme } = useDarkThemeContext(styled);
   const onSubmitPushToArray = () => {
     const newstate = cloneDeep(state);
     const somenew: any = {
@@ -65,9 +72,7 @@ const ArrayBiography = () => {
         ismodal: false,
       },
     };
-    console.log(somenew);
     setState(somenew);
-    console.log(state);
     setNumber(1);
     setText('');
     setShowAlert(true);
@@ -104,8 +109,6 @@ const ArrayBiography = () => {
     const newState = cloneDeep(state);
     delete newState[a];
     setState(newState);
-    console.log(state);
-    console.log(newState);
   };
   const apdateHandler = (a: string) => {
     const newState = cloneDeep(state);
@@ -116,16 +119,12 @@ const ArrayBiography = () => {
       id: uuid(),
       ismodal: false,
     };
-    console.log(newState);
-    console.log(state);
     setState({ ...newState });
   };
   const modalHandler = (a: string) => {
     const newState = cloneDeep(state);
     newState[a].ismodal = !newState[a].ismodal;
     setState(newState);
-    console.log(state);
-    console.log(newState);
   };
   const textVariant = {
     textHoverTitle: {
@@ -156,47 +155,47 @@ const ArrayBiography = () => {
   const { currentLanguage: arrayText } = useLanguages(
     arrayBiographyEng,
     arrayBiographyRu,
-    arrayBiographyUa
+    arrayBiographyUa,
   );
   const { currentLanguage: sort } = useLanguages(
     buttonSortEng,
     buttonSortRu,
-    buttonSortUa
+    buttonSortUa,
   );
   const { currentLanguage: sortByBubble } = useLanguages(
     buttonSortByBubbleEng,
     buttonSortByBubbleRu,
-    buttonSortByBubbleUa
+    buttonSortByBubbleUa,
   );
   const { currentLanguage: placeholderText } = useLanguages(
     placeholderTextEng,
     placeholderTextRu,
-    placeholderTextUa
+    placeholderTextUa,
   );
   const { currentLanguage: placeholderTextError } = useLanguages(
     placeholderTextErrorEng,
     placeholderTextErrorRu,
-    placeholderTextErrorUa
+    placeholderTextErrorUa,
   );
   const { currentLanguage: placeholderYear } = useLanguages(
     placeholderYearEng,
     placeholderYearRu,
-    placeholderYearUa
+    placeholderYearUa,
   );
   const { currentLanguage: placeholderYearError } = useLanguages(
     placeholderYearErrorEng,
     placeholderYearErrorRu,
-    placeholderYearErrorUa
+    placeholderYearErrorUa,
   );
   const { currentLanguage: alertMessage } = useLanguages(
     alertMessageEng,
     alertMessageRu,
-    alertMessageUa
+    alertMessageUa,
   );
   const { currentLanguage: pushValue } = useLanguages(
     pushValueEng,
     pushValueRu,
-    pushValueUa
+    pushValueUa,
   );
 
   return (

@@ -1,12 +1,13 @@
-import React from "react";
-import styled from "./scss/ComonentDetail.module.scss";
-import { useSelector } from "react-redux";
-import { selectCheck } from "../../redux/checkedSlice";
-import useLanguages from "../../hooks/useLanguages";
+import React from 'react';
+import styled from './scss/ComonentDetail.module.scss';
+// @ts-ignore
+import useLanguages from '../../hooks/useLanguages.ts';
+// @ts-ignore
+import useDarkThemeContext from '../../hooks/useDarkThemeContext.ts';
 
-export const NpmPage = () => {
-  const checked = useSelector(selectCheck);
-  const npm = "Package manager, npm";
+const NpmPage = () => {
+  const { darkTheme } = useDarkThemeContext(styled);
+  const npm = 'Package manager, npm';
   const { currentLanguage: npmText } = useLanguages(
     `A package manager or package-management system is a collection of
   software tools that automates the process of installing, upgrading,
@@ -94,11 +95,13 @@ export const NpmPage = () => {
   Inc.`
   );
   return (
-    <section className={checked ? styled.dark : ""}>
-      <div className='container'>
+    <section className={darkTheme}>
+      <div className="container">
         <h1 className={styled.title}>{npm}</h1>
         <p className={styled.content}>{npmText}</p>
       </div>
     </section>
   );
 };
+
+export default NpmPage;

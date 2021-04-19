@@ -1,12 +1,13 @@
-import React from "react";
-import styled from "./scss/ComonentDetail.module.scss";
-import { useSelector } from "react-redux";
-import { selectCheck } from "../../redux/checkedSlice";
-import useLanguages from "../../hooks/useLanguages";
+import React from 'react';
+import styled from './scss/ComonentDetail.module.scss';
+// @ts-ignore
+import useLanguages from '../../hooks/useLanguages.ts';
+// @ts-ignore
+import useDarkThemeContext from '../../hooks/useDarkThemeContext.ts';
 
-export const GitPage = () => {
-  const checked = useSelector(selectCheck);
-  const git = "Git";
+const GitPage = () => {
+  const { darkTheme } = useDarkThemeContext(styled);
+  const git = 'Git';
   const { currentLanguage: gitText } = useLanguages(
     `Git (/ɡɪt/)[7] is a distributed version-control system for tracking
   changes in any set of files, originally designed for coordinating work
@@ -49,14 +50,15 @@ export const GitPage = () => {
   Каталог Git на кожному комп'ютері - це повноцінне сховище з
   повна історія та можливості повного відстеження версій, незалежно від
   доступ до мережі або центральний сервер. [13] Git є безкоштовним та відкритим
-  програмне забезпечення, що поширюється під загальною публічною ліцензією GNU, версія 2.`
+  програмне забезпечення, що поширюється під загальною публічною ліцензією GNU, версія 2.`,
   );
   return (
-    <section className={checked ? styled.dark : ""}>
-      <div className='container'>
+    <section className={darkTheme}>
+      <div className="container">
         <h1 className={styled.title}>{git}</h1>
         <p className={styled.content}>{gitText}</p>
       </div>
     </section>
   );
 };
+export default GitPage;

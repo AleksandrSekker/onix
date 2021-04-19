@@ -1,12 +1,13 @@
-import React from "react";
-import styled from "./scss/ComonentDetail.module.scss";
-import { useSelector } from "react-redux";
-import { selectCheck } from "../../redux/checkedSlice";
-import useLanguages from "../../hooks/useLanguages";
+import React from 'react';
+import styled from './scss/ComonentDetail.module.scss';
+// @ts-ignore
+import useDarkThemeContext from '../../hooks/useDarkThemeContext.ts';
+// @ts-ignore
+import useLanguages from '../../hooks/useLanguages.ts';
 
-export const NodePage = () => {
-  const checked = useSelector(selectCheck);
-  const node = "Node.js";
+const NodePage = () => {
+  const { darkTheme } = useDarkThemeContext(styled);
+  const node = 'Node.js';
   const { currentLanguage: nodeText } = useLanguages(
     `Node.js is an open-source, cross-platform, back-end, JavaScript
   runtime environment that executes JavaScript code outside a web
@@ -35,7 +36,7 @@ export const NodePage = () => {
   среда выполнения, которая выполняет код JavaScript вне сети
   браузер. Node.js позволяет разработчикам использовать JavaScript для написания командной строки
   инструменты и для сценариев на стороне сервера - выполнение сценариев на стороне сервера для
-  создавать динамическое содержимое веб-страницы до того, как страница будет отправлена ​​пользователю
+  создавать динамическое содержимое веб-страницы до того, как страница будет отправлена   пользователю
   веб-браузер. Следовательно, Node.js представляет собой 'JavaScript
   повсюду », [6] объединяющая разработку веб-приложений вокруг
   единый язык программирования, а не разные языки для
@@ -58,7 +59,7 @@ export const NodePage = () => {
   середовище виконання, яке виконує код JavaScript поза Інтернетом
   браузер. Node.js дозволяє розробникам використовувати JavaScript для написання командного рядка
   інструменти та для сценаріїв на стороні сервера - запуск скриптів на стороні сервера до
-  створювати динамічний вміст веб-сторінки до того, як сторінка буде відправлена ​​користувачеві
+  створювати динамічний вміст веб-сторінки до того, як сторінка буде відправлена   користувачеві
   веб-браузер. Отже, Node.js представляє "JavaScript
   скрізь 'парадигма [6], що об'єднує розробку веб-додатків навколо a
   одна мова програмування, а не різні мови для
@@ -76,14 +77,15 @@ export const NodePage = () => {
   програма. [9] Корпоративні користувачі програмного забезпечення Node.js включають GoDaddy, [10]
   Groupon, [11] IBM, [12] LinkedIn, [13] [14] Microsoft, [15] [16]
   Netflix, [17] PayPal, [18] [19] Rakuten, SAP, [20] Voxer, [21] Walmart, [22]
-  Yahoo!, [23] та Amazon Web Services. [24]`
+  Yahoo!, [23] та Amazon Web Services. [24]`,
   );
   return (
-    <section className={checked ? styled.dark : ""}>
-      <div className='container'>
+    <section className={darkTheme}>
+      <div className="container">
         <h1 className={styled.title}>{node}</h1>
         <p className={styled.content}>{nodeText}</p>
       </div>
     </section>
   );
 };
+export default NodePage;
