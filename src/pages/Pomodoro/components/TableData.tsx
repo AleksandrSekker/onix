@@ -79,8 +79,8 @@ const TableData = ({
       {result.map(
         (
           { 
-            title, _id, year, subtitle, ismodal, index
-          }: any
+            title, _id, year, subtitle, ismodal, 
+          }: any, index: any
         ) => (
           <div
             onDragStart={(e) => handleDragStart(e, index)}
