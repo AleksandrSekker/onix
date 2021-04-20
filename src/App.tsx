@@ -1,36 +1,21 @@
 import React, { createContext, useState } from 'react';
 import { Route, Switch, useLocation } from 'react-router-dom';
 import { animated, useTransition } from 'react-spring';
-// @ts-ignore
-import Home from './pages/Home/Home.tsx';
-// @ts-ignore
-import HtmlPage from './pages/technologies/HtmlPage.tsx';
-// @ts-ignore
-import CssPage from './pages/technologies/CssPage.tsx';
-// @ts-ignore
-import NpmPage from './pages/technologies/NpmPage.tsx';
-// @ts-ignore
-import NodePage from './pages/technologies/NodePage.tsx';
-// @ts-ignore
-import VcsPage from './pages/technologies/VcsPage.tsx';
-// @ts-ignore
-import GitPage from './pages/technologies/GitPage.tsx';
-// @ts-ignore
-import ArrayBiography from './pages/ArrayBiography/ArrayBiography.tsx';
-// @ts-ignore
-import Pomodoro from './pages/Pomodoro/Pomodoro.tsx';
-// @ts-ignore
-import RestCountries from './pages/RestCountries/RestCountries.tsx';
-// @ts-ignore
-import DetailCoutnry from './pages/RestCountries/components/DetailCoutnry.tsx';
-// @ts-ignore
-import LessonSeven from './pages/LessonSeven/LessonSeven.tsx';
-// @ts-ignore
+import Home from './pages/Home/Home';
+import HtmlPage from './pages/technologies/HtmlPage';
+import CssPage from './pages/technologies/CssPage';
+import NpmPage from './pages/technologies/NpmPage';
+import NodePage from './pages/technologies/NodePage';
+import VcsPage from './pages/technologies/VcsPage';
+import GitPage from './pages/technologies/GitPage';
+import ArrayBiography from './pages/ArrayBiography/ArrayBiography';
+import Pomodoro from './pages/Pomodoro/Pomodoro';
+import RestCountries from './pages/RestCountries/RestCountries';
+import DetailCoutnry from './pages/RestCountries/components/DetailCoutnry';
+import LessonSeven from './pages/LessonSeven/LessonSeven';
 import './index.scss';
-// @ts-ignore
-import Header from './layout/Header/Header.tsx';
-// @ts-ignore
-import Footer from './layout/Footer/Footer.tsx';
+import Header from './layout/Header/Header';
+import Footer from './layout/Footer/Footer';
 
 export const ThemeContext = createContext(false);
 

@@ -1,17 +1,11 @@
 import axios from 'axios';
 import React, { useState, useRef } from 'react';
-// @ts-ignore
-import Loader from '../../../components/Loader/Loader.tsx';
-// @ts-ignore
-import Error from '../../../components/Error/Error.tsx';
-// @ts-ignore
-import TableData from './TableData.tsx';
-// @ts-ignore
-import AddModal from './AddModal.tsx';
-// @ts-ignore
-import useFetch from '../../../hooks/useFetch.ts';
-// @ts-ignore
-import useLanguages from '../../../hooks/useLanguages.ts';
+import Loader from '../../../components/Loader/Loader';
+import Error from '../../../components/Error/Error';
+import TableData from './TableData';
+import AddModal from './AddModal';
+import useFetch from '../../../hooks/useFetch';
+import useLanguages from '../../../hooks/useLanguages';
 import {
   addNotesLanguageEng,
   addNotesLanguageRu,
@@ -31,8 +25,8 @@ import {
   saveLanguageEng,
   saveLanguageRu,
   saveLanguageUa,
-  // @ts-ignore
-} from '../../../constants/Text.ts';
+
+} from '../../../constants/Text';
 
 export const ArrayDB = () => {
   const [title, setTitle] = useState(String);

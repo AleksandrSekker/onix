@@ -1,16 +1,12 @@
 import React, { useState } from 'react';
-import { useSelector, useDispatch } from 'react-redux';
+import { useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { faChevronDown } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import styles from './scss/Header.module.scss';
-// @ts-ignore
-import { selectCheck } from '../../redux/checkedSlice.ts';
-// @ts-ignore
-import withLink from '../../hoc/withLink/withLink.tsx';
-// @ts-ignore
-import useLanguages from '../../hooks/useLanguages.ts';
+import withLink from '../../hoc/withLink/withLink';
+import useLanguages from '../../hooks/useLanguages';
 import uk from '../../assets/images/ukraine.svg';
 import en from '../../assets/images/unitedstates.svg';
 import ru from '../../assets/images/russia.svg';
@@ -33,23 +29,16 @@ import {
   technologyEng,
   technologyRu,
   technologyUa,
-  // @ts-ignore
-} from '../../constants/Text.ts';
-import {
-  russian,
-  ukrainian,
-  english,
-  // @ts-ignore
-} from '../../redux/languagesSlice.ts';
-// @ts-ignore
-import useDarkThemeContext from '../../hooks/useDarkThemeContext.ts';
+} from '../../constants/Text';
+import { russian, ukrainian, english } from '../../redux/languagesSlice';
+import useDarkThemeContext from '../../hooks/useDarkThemeContext';
 
 const Header = ({ setdarkTheme }: any) => {
   const [isActive, setIsActive] = useState(false);
   const [navFalse, setNavFalse] = useState(false);
   const [isHover, toggleHover] = React.useState(false);
   const AppLink = withLink(Link);
-  const { darkTheme } = useDarkThemeContext(styles);
+  const { darkTheme, checked } = useDarkThemeContext(styles);
   const subMenuAnimate = {
     enter: {
       opacity: 1,
@@ -71,8 +60,6 @@ const Header = ({ setdarkTheme }: any) => {
       },
     },
   };
-
-  const checked: boolean = useSelector(selectCheck);
   const dispatch = useDispatch();
   const hamburgerHandler = () => {
     if (isActive && navFalse) {
@@ -143,13 +130,26 @@ const Header = ({ setdarkTheme }: any) => {
                 <span className={`${styles.slider} ${styles.round}`} />
               </label>
             </div>
-            <button type="button" onClick={() => dispatch(english())}>
+            <button
+              type="button"
+              className={styles.button}
+              onClick={() => dispatch(english())}
+            >
               <img className={styles.language__image} alt="language" src={en} />
             </button>
-            <button type="button" onClick={() => dispatch(russian())}>
+
+            <button
+              type="button"
+              className={styles.button}
+              onClick={() => dispatch(russian())}
+            >
               <img className={styles.language__image} alt="language" src={ru} />
             </button>
-            <button type="button" onClick={() => dispatch(ukrainian())}>
+            <button
+              type="button"
+              className={styles.button}
+              onClick={() => dispatch(ukrainian())}
+            >
               <img className={styles.language__image} alt="language" src={uk} />
             </button>
           </div>

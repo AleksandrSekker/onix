@@ -1,15 +1,10 @@
 import React, { useEffect, useRef, useState } from 'react';
 import styles from './scss/LessonSeven.module.scss';
-// @ts-ignore
-import Loader from '../../components/Loader/Loader.tsx';
-// @ts-ignore
-import Error from '../../components/Error/Error.tsx';
-// @ts-ignore
-import Cards from './Cards.tsx';
-// @ts-ignore
-import useFetch from '../../hooks/useFetch.ts';
-// @ts-ignore
-import useLanguages from '../../hooks/useLanguages.ts';
+import Loader from '../../components/Loader/Loader';
+import Error from '../../components/Error/Error';
+import Cards from './Cards';
+import useFetch from '../../hooks/useFetch';
+import useLanguages from '../../hooks/useLanguages';
 import {
   capitalEng,
   capitalRu,
@@ -23,10 +18,8 @@ import {
   regionEng,
   regionRu,
   regionUa,
-  // @ts-ignore
-} from '../../constants/Text.ts';
-// @ts-ignore
-import useDarkThemeContext from '../../hooks/useDarkThemeContext.ts';
+} from '../../constants/Text';
+import useDarkThemeContext from '../../hooks/useDarkThemeContext';
 
 const LessonSeven = () => {
   const [isNameActive, setIsNameActive] = useState(false);

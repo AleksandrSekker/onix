@@ -7,10 +7,8 @@ import {
   faGithub,
 } from '@fortawesome/free-brands-svg-icons';
 import styles from './scss/Footer.module.scss';
-// @ts-ignore
-import useDarkThemeContext from '../../hooks/useDarkThemeContext.ts';
-// @ts-ignore
-import useLanguages from '../../hooks/useLanguages.ts';
+import useDarkThemeContext from '../../hooks/useDarkThemeContext';
+import useLanguages from '../../hooks/useLanguages';
 import {
   buttonTextEng,
   buttonTextRu,
@@ -21,8 +19,7 @@ import {
   placeholderTextEng,
   placeholderTextRu,
   placeholderTextUa,
-  // @ts-ignore
-} from '../../constants/Text.ts';
+} from '../../constants/Text';
 
 const Footer = () => {
   const { darkTheme } = useDarkThemeContext(styles);

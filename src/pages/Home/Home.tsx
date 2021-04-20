@@ -10,10 +10,8 @@ import {
 import AOS from 'aos';
 import 'aos/dist/aos.css';
 import style from './scss/Home.module.scss';
-// @ts-ignore
-import useDarkThemeContext from '../../hooks/useDarkThemeContext.ts';
-// @ts-ignore
-import useLanguages from '../../hooks/useLanguages.ts';
+import useDarkThemeContext from '../../hooks/useDarkThemeContext';
+import useLanguages from '../../hooks/useLanguages';
 
 const Home = () => {
   const { currentLanguage: html } = useLanguages(
@@ -49,8 +47,8 @@ const Home = () => {
     'Git - это распределенная система контроля версий для отслеживания изменений в любом наборе файлов,' 
     + 'изначально предназначенная для координации работы программистов,' 
     + 'работающих над исходным кодом во время разработки программного обеспечения.',
-    'Git - це розподілена система контролю версій для відстеження змін у будь-якому наборі файлів,' 
-    + 'спочатку призначена для координації роботи між програмістами,' 
+    'Git - це розподілена система контролю версій для відстеження змін у будь-якому наборі файлів,'
+    + 'спочатку призначена для координації роботи між програмістами,'
     + 'які співпрацюють над вихідним кодом під час розробки програмного забезпечення.',
   );
   const { currentLanguage: css } = useLanguages(

@@ -1,21 +1,13 @@
 import React, { Component } from 'react';
 import { connect } from 'react-redux';
-// @ts-ignore
-import Loader from '../../components/Loader/Loader.tsx';
-// @ts-ignore
-import { CardCountry } from './CardCountry.tsx';
-// @ts-ignore
-import SearchCountry from './components/SearchCountry.tsx';
-// @ts-ignore
-import Error from '../../components/Error/Error.tsx';
-// @ts-ignore
+import Loader from '../../components/Loader/Loader';
+import { CardCountry } from './CardCountry';
+import SearchCountry from './components/SearchCountry';
+import Error from '../../components/Error/Error';
 import style from './scss/RestCountries.module.scss';
-// @ts-ignore
-import { switching } from '../../redux/checkedSlice.ts';
-// @ts-ignore
-import { RootState } from '../../app/store.ts';
-// @ts-ignore
-import { ThemeContext } from '../../App.tsx';
+import { switching } from '../../redux/checkedSlice';
+import { RootState } from '../../app/store';
+import { ThemeContext } from '../../App';
 
 interface State {
   isLoaded?: boolean;

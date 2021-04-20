@@ -1,9 +1,7 @@
 import React from 'react';
-// @ts-ignore
-import useLanguages from '../../hooks/useLanguages.ts';
+import useLanguages from '../../hooks/useLanguages';
 import styled from './scss/ComonentDetail.module.scss';
-// @ts-ignore
-import useDarkThemeContext from '../../hooks/useDarkThemeContext.ts';
+import useDarkThemeContext from '../../hooks/useDarkThemeContext';
 
 const VcsPage = () => {
   const { darkTheme } = useDarkThemeContext(styled);

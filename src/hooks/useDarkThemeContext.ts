@@ -1,10 +1,9 @@
 import { useContext } from 'react';
-// @ts-ignore
-import { ThemeContext } from '../App.tsx';
+import { ThemeContext } from '../App';
 
 const useDarkThemeContext = (style: any) => {
   const checked = useContext(ThemeContext);
   const darkTheme = checked ? style.dark : '';
-  return { darkTheme };
+  return { darkTheme, checked };
 };
 export default useDarkThemeContext;

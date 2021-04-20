@@ -1,6 +1,5 @@
 import { useSelector } from 'react-redux';
-// @ts-ignore
-import { selectLanguage } from '../redux/languagesSlice.ts';
+import { selectLanguage } from '../redux/languagesSlice';
 
 const useLanguages = (english: string, russian: string, ukranian: string) => {
   let currentLanguage = '';

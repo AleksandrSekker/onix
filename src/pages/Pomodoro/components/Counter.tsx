@@ -6,10 +6,8 @@ import {
   finishEng,
   finishRu,
   finishUa,
-  // @ts-ignore
-} from '../../../constants/Text.ts';
-// @ts-ignore
-import useLanguages from '../../../hooks/useLanguages.ts';
+} from '../../../constants/Text';
+import useLanguages from '../../../hooks/useLanguages';
 import styles from '../scss/Counter.module.scss';
 
 const Counter = () => {

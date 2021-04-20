@@ -1,6 +1,5 @@
 import { createSlice } from '@reduxjs/toolkit';
-// @ts-ignore
-import { RootState } from '../app/store.ts';
+import { RootState } from '../app/store';
 
 interface CheckedState {
   value: boolean;

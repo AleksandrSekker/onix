@@ -3,16 +3,11 @@ import { v4 as uuid } from 'uuid';
 import { useForm } from 'react-hook-form';
 import { cloneDeep } from 'lodash';
 import styled from './scss/ComonentDetail.module.scss';
-// @ts-ignore
-import data from '../../data/Data.ts';
-// @ts-ignore
-import Table from './components/Table.tsx';
-// @ts-ignore
-import SortButton from './components/SortButton.tsx';
-// @ts-ignore
-import Form from './components/Form.tsx';
-// @ts-ignore
-import useLanguages from '../../hooks/useLanguages.ts';
+import data from '../../data/Data';
+import Table from './components/Table';
+import SortButton from './components/SortButton';
+import Form from './components/Form';
+import useLanguages from '../../hooks/useLanguages';
 import {
   alertMessageEng,
   alertMessageRu,
@@ -41,10 +36,8 @@ import {
   pushValueEng,
   pushValueRu,
   pushValueUa,
-  // @ts-ignore
-} from '../../constants/Text.ts';
-// @ts-ignore
-import useDarkThemeContext from '../../hooks/useDarkThemeContext.ts';
+} from '../../constants/Text';
+import useDarkThemeContext from '../../hooks/useDarkThemeContext';
 
 interface IFormInputs {
   number: number;

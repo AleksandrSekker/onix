@@ -5,10 +5,8 @@ import { AnimatePresence, motion } from 'framer-motion';
 import React, { useEffect, useState } from 'react';
 import { useParams } from 'react-router-dom';
 import { v4 as uuid } from 'uuid';
-// @ts-ignore
-import Error from '../../../components/Error/Error.tsx';
-// @ts-ignore
-import Loader from '../../../components/Loader/Loader.tsx';
+import Error from '../../../components/Error/Error';
+import Loader from '../../../components/Loader/Loader';
 import {
   alertFailedEng,
   alertFailedRu,
@@ -43,10 +41,8 @@ import {
   topLevelDomainEng,
   topLevelDomainRu,
   topLevelDomainUa,
-  // @ts-ignore
-} from '../../../constants/Text.ts';
-// @ts-ignore
-import useLanguages from '../../../hooks/useLanguages.ts';
+} from '../../../constants/Text';
+import useLanguages from '../../../hooks/useLanguages';
 import styles from '../scss/DetailCoutnry.module.scss';
 
 interface ParamTypes {

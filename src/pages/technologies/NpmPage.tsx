@@ -1,9 +1,7 @@
 import React from 'react';
 import styled from './scss/ComonentDetail.module.scss';
-// @ts-ignore
-import useLanguages from '../../hooks/useLanguages.ts';
-// @ts-ignore
-import useDarkThemeContext from '../../hooks/useDarkThemeContext.ts';
+import useLanguages from '../../hooks/useLanguages';
+import useDarkThemeContext from '../../hooks/useDarkThemeContext';
 
 const NpmPage = () => {
   const { darkTheme } = useDarkThemeContext(styled);

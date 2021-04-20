@@ -1,7 +1,6 @@
 import { motion } from 'framer-motion';
 import React from 'react';
-// @ts-ignore
-import Button from '../../../components/Button/Button.tsx';
+import Button from '../../../components/Button/Button';
 import styles from '../scss/Array.module.scss';
 
 interface Props {

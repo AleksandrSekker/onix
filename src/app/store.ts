@@ -1,8 +1,6 @@
 import { configureStore, ThunkAction, Action } from '@reduxjs/toolkit';
-// @ts-ignore
-import checkedReducer from '../redux/checkedSlice.ts';
-// @ts-ignore
-import languageReducer from '../redux/languagesSlice.ts';
+import checkedReducer from '../redux/checkedSlice';
+import languageReducer from '../redux/languagesSlice';
 
 export const store = configureStore({
   reducer: {

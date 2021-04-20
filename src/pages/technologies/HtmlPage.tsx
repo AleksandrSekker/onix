@@ -1,9 +1,7 @@
 import React from 'react';
 import styled from './scss/ComonentDetail.module.scss';
-// @ts-ignore
-import useDarkThemeContext from '../../hooks/useDarkThemeContext.ts';
-// @ts-ignore
-import useLanguages from '../../hooks/useLanguages.ts';
+import useDarkThemeContext from '../../hooks/useDarkThemeContext';
+import useLanguages from '../../hooks/useLanguages';
 
 const HtmlPage = () => {
   const { darkTheme } = useDarkThemeContext(styled);

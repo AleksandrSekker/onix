@@ -1,6 +1,5 @@
 import { useSelector } from 'react-redux';
-// @ts-ignore
-import { selectCheck } from '../redux/checkedSlice.ts';
+import { selectCheck } from '../redux/checkedSlice';
 
 const useDarkTheme = (style: any) => {
   const checked = useSelector(selectCheck);

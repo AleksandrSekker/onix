@@ -50,7 +50,9 @@ interface Props {
   cancelLanguage: string;
   saveLanguage: string;
 }
-// 
+// interface State {
+//   title: any; _id: any; year: any; subtitle: any; ismodal: any;
+// }
 const TableData = ({
   result,
   handleDragStart,

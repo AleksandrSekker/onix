@@ -5,14 +5,10 @@ import {
   pomodoroAppEng,
   pomodoroAppRu,
   pomodoroAppUa,
-  // @ts-ignore
-} from '../../constants/Text.ts';
-// @ts-ignore
-import useLanguages from '../../hooks/useLanguages.ts';
-// @ts-ignore
-import { ArrayDB } from './components/ArrayDB.tsx';
-// @ts-ignore
-import Counter from './components/Counter.tsx';
+} from '../../constants/Text';
+import useLanguages from '../../hooks/useLanguages';
+import { ArrayDB } from './components/ArrayDB';
+import Counter from './components/Counter';
 import styles from './scss/Pomodoro.module.scss';
 
 const Pomodoro = () => {

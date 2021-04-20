@@ -1,8 +1,7 @@
 import React from 'react';
 import { Link } from 'react-router-dom';
 import styles from './scss/LessonSeven.module.scss';
-// @ts-ignore
-import Button from '../../components/Button/Button.tsx';
+import Button from '../../components/Button/Button';
 
 interface Props {
   state: any;
@@ -22,7 +21,14 @@ interface Props {
   capitalLanguage: string;
   detailPageLanguage: string;
 }
-
+interface State {
+  name: string, 
+  flag: string, 
+  population: string, 
+  region: string, 
+  capital: string, 
+  id: string
+}
 const Cards = ({
   state,
   handleDragStart,
@@ -47,7 +53,7 @@ const Cards = ({
       (
         { 
           name, flag, population, region, capital, id
-        }: any, index: any
+        }: State, index: any
       ) => (
         <div
           onDragStart={(e) => handleDragStart(e, index)}
