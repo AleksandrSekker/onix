@@ -6,7 +6,7 @@ import styles from './scss/RestCountries.module.scss';
 
 export const CardCountry = ({ items, variantCard }: any) => (
   <div className={styles.card}>
-    {items.map(
+    {items.slice(0, 20).map(
       (
         {
           name, population, region, capital, flag 

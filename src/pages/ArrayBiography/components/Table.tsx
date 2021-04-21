@@ -90,6 +90,7 @@ const Table = ({
             </motion.p>
 
             <button
+              className={styles.transparent__button}
               type="button"
               onClick={() => {
                 modalHandler(key);
@@ -97,7 +98,7 @@ const Table = ({
             >
               <FontAwesomeIcon icon={faPen} />
             </button>
-            <button type="button" onClick={() => deleteHandler(key)}>
+            <button type="button" className={styles.transparent__button} onClick={() => deleteHandler(key)}>
               <FontAwesomeIcon icon={faTrash} />
             </button>
           </motion.div>
@@ -148,18 +149,19 @@ const Table = ({
                     value="Update"
                   />
                 </motion.div>
+                <motion.div
+                  onClick={() => deleteHandler(key)}
+                  variants={buttonVariant}
+                  whileHover="buttonAnimation"
+                >
+                  <input
+                    type="button"
+                    className={stylei.input__delete}
+                    value="Remove"
+                  />
+                </motion.div>
               </form>
-              <motion.div
-                onClick={() => deleteHandler(value.id)}
-                variants={buttonVariant}
-                whileHover="buttonAnimation"
-              >
-                <input
-                  type="button"
-                  className={stylei.input__delete}
-                  value="Remove"
-                />
-              </motion.div>
+              
             </motion.div>
           )}
         </AnimatePresence>

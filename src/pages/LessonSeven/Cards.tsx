@@ -49,7 +49,7 @@ const Cards = ({
 }: Props) => (
   <div className={styles.card}>
     {state 
-    && state.map(
+    && state.slice(0, 20).map(
       (
         { 
           name, flag, population, region, capital, id
@@ -64,18 +64,18 @@ const Cards = ({
           className={styles.cards}
         >
           <img src={flag} alt="flag" />
-          <div>
+          <div className={styles.button__container}>
             <button
               type="button"
               onClick={nameHanler}
-              className={ternaryStyles(isNameActive)}
+              className={`${ternaryStyles(isNameActive)} ${styles.button}`}
             >
               {name}
             </button>
             <button
               type="button"
               onClick={populationHandler}
-              className={ternaryStyles(isPopulationActive)}
+              className={`${ternaryStyles(isPopulationActive)}  ${styles.button}`}
             >
               {populationLanguage}
               :
@@ -84,7 +84,7 @@ const Cards = ({
             <button
               type="button"
               onClick={regionHandler}
-              className={ternaryStyles(isRegionActive)}
+              className={`${ternaryStyles(isRegionActive)}  ${styles.button}`}
             >
               {regionLanguage}
               :
@@ -93,7 +93,7 @@ const Cards = ({
             <button
               type="button"
               onClick={capitalHandler}
-              className={ternaryStyles(isCapitalActive)}
+              className={`${ternaryStyles(isCapitalActive)}  ${styles.button}`}
             >
               {capitalLanguage}
               :

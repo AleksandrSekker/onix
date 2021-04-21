@@ -30,6 +30,11 @@ div.dark {
   margin-bottom: 2rem;
   text-align: center;
   padding: 2rem;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
+
 }
 .second__сontainer {
   background: $background-for-containers;
@@ -37,7 +42,11 @@ div.dark {
   margin-right: 1rem;
   margin-bottom: 2rem;
   text-align: center;
-  padding: 2rem;
+  padding: 2rem; 
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  flex-direction: column;
 }
 .html {
   margin: auto;
@@ -71,7 +80,7 @@ div.dark {
   color: rgb(30, 163, 63);
 }
 .vertical__line {
-  height: 64rem;
+  height: 95rem;
   width: 0.4rem;
   background: rgb(255, 134, 134);
   display: none;
@@ -84,7 +93,7 @@ div.dark {
   border-radius: 100%;
 }
 .dot__one {
-  margin-top: 6.35rem;
+  margin-top: 10rem;
 }
 
 .dot__two {
@@ -92,14 +101,14 @@ div.dark {
 }
 
 .dot__three {
-  margin-top: 16.3rem;
+  margin-top: 26rem;
 }
 
 .dot__four {
   margin-top: 4rem;
 }
 .dot__five {
-  margin-top: 16.2rem;
+  margin-top: 26rem;
 }
 
 .flex__column__two {
@@ -111,7 +120,7 @@ div.dark {
     display: block;
   }
   .first__container {
-    height: 20rem;
+    height: 30rem;
     width: 30rem;
     clip-path: polygon(
       1% 0%,
@@ -124,7 +133,7 @@ div.dark {
     );
   }
   .second__сontainer {
-    height: 20rem;
+    height: 30rem;
     width: 30rem;
     clip-path: polygon(
       100% 0,
@@ -139,4 +148,9 @@ div.dark {
   .flex {
     display: flex;
   }
+}
+.link{  
+  text-decoration: none;
+  display: flex;
+  justify-content: center;
 }

@@ -9,9 +9,12 @@ import {
 } from '@fortawesome/free-brands-svg-icons';
 import AOS from 'aos';
 import 'aos/dist/aos.css';
+import { Link } from 'react-router-dom';
 import style from './scss/Home.module.scss';
 import useDarkThemeContext from '../../hooks/useDarkThemeContext';
 import useLanguages from '../../hooks/useLanguages';
+import Button from '../../components/Button/Button';
+import { detailPageEng, detailPageRu, detailPageUa } from '../../constants/Text';
 
 const Home = () => {
   const { currentLanguage: html } = useLanguages(
@@ -47,8 +50,8 @@ const Home = () => {
     'Git - это распределенная система контроля версий для отслеживания изменений в любом наборе файлов,' 
     + 'изначально предназначенная для координации работы программистов,' 
     + 'работающих над исходным кодом во время разработки программного обеспечения.',
-    'Git - це розподілена система контролю версій для відстеження змін у будь-якому наборі файлів,'
-    + 'спочатку призначена для координації роботи між програмістами,'
+    'Git - це розподілена система контролю версій для відстеження змін у будь-якому наборі файлів,' 
+    + 'спочатку призначена для координації роботи між програмістами,' 
     + 'які співпрацюють над вихідним кодом під час розробки програмного забезпечення.',
   );
   const { currentLanguage: css } = useLanguages(
@@ -81,6 +84,11 @@ const Home = () => {
   );
   AOS.init();
   const { darkTheme } = useDarkThemeContext(style);
+  const { currentLanguage: detailPage } = useLanguages(
+    detailPageEng,
+    detailPageRu,
+    detailPageUa,
+  );
   return (
     <div className={darkTheme}>
       <div className={style.flex}>
@@ -92,6 +100,12 @@ const Home = () => {
           >
             <FontAwesomeIcon icon={faHtml5} className={style.html} />
             <p>{html}</p>
+            <Link to="/html" className={style.link}>
+              <Button
+                text={detailPage}
+                color="btn__sorted__use__bubble"
+              />
+            </Link>
           </div>
           <div
             className={style.first__container}
@@ -100,6 +114,12 @@ const Home = () => {
           >
             <FontAwesomeIcon icon={faNodeJs} className={style.node} />
             <p>{node}</p>
+            <Link to="/node" className={style.link}>
+              <Button
+                text={detailPage}
+                color="btn__sorted__use__bubble"
+              />
+            </Link>
           </div>
           <div
             className={style.first__container}
@@ -108,6 +128,12 @@ const Home = () => {
           >
             <FontAwesomeIcon icon={faGitAlt} className={style.git} />
             <p>{git}</p>
+            <Link to="/git" className={style.link}>
+              <Button
+                text={detailPage}
+                color="btn__sorted__use__bubble"
+              />
+            </Link>
           </div>
         </div>
         <div className={style.vertical__line}>
@@ -125,6 +151,12 @@ const Home = () => {
           >
             <FontAwesomeIcon icon={faCss3Alt} className={style.css} />
             <p>{css}</p>
+            <Link to="/css" className={style.link}>
+              <Button
+                text={detailPage}
+                color="btn__sorted__use__bubble"
+              />
+            </Link>
           </div>
           <div
             className={style.second__сontainer}
@@ -133,6 +165,12 @@ const Home = () => {
           >
             <FontAwesomeIcon icon={faNpm} className={style.npm} />
             <p>{npm}</p>
+            <Link to="/npm" className={style.link}>
+              <Button
+                text={detailPage}
+                color="btn__sorted__use__bubble"
+              />
+            </Link>
           </div>
         </div>
       </div>

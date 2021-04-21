@@ -3,7 +3,7 @@ import styles from './scss/Buttons.module.scss';
 
 interface Props {
   text: string;
-  color: any;
+  color: string;
 }
 
 const Button = ({ text, color }: Props) => (
