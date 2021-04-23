@@ -7,6 +7,8 @@ export const arrayBiographyEng = 'Array Biography';
 export const pomodoroAppEng = 'Pomodoro';
 export const countriesEng = 'Countries';
 export const lessonSevenEng = 'Lesson Seven';
+export const classEng = 'Class';
+export const functionEng = 'Function';
 // Russian
 export const homeRu = 'Главная';
 export const technologyRu = 'Технологии';
@@ -14,6 +16,8 @@ export const arrayBiographyRu = 'Масив, Биография';
 export const pomodoroAppRu = 'Помадоро';
 export const countriesRu = 'Страны';
 export const lessonSevenRu = 'Урок 7';
+export const classRu = 'Класовый';
+export const functionRu = 'Функциональный';
 // Ukrainian
 export const homeUa = 'Головна';
 export const technologyUa = 'Технології';
@@ -21,6 +25,8 @@ export const arrayBiographyUa = 'Масив, Біографія';
 export const pomodoroAppUa = 'Помадоро';
 export const countriesUa = 'Країни';
 export const lessonSevenUa = 'Урок 7';
+export const classUa = 'Класовий';
+export const functionUa = 'Функціональний';
 // footer
 
 //  english

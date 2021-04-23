@@ -4,13 +4,32 @@ import { Link } from 'react-router-dom';
 import { AnimatePresence, motion } from 'framer-motion';
 import styles from './scss/RestCountries.module.scss';
 
-export const CardCountry = ({ items, variantCard }: any) => (
+interface Props {
+  variantCard: {
+    cardHover: {
+        scale: number;
+        rotate: number;
+        transition: {
+            duration: number;
+        };
+    };
+  }
+  items: any;
+}
+interface State {
+  name: string, 
+  population: string;
+  region: string;
+  capital: string;
+  flag: string;
+}
+export const CardCountry = ({ items, variantCard }: Props) => (
   <div className={styles.card}>
     {items.slice(0, 20).map(
       (
         {
           name, population, region, capital, flag 
-        }: any
+        }: State
       ) => (
         <Link to={`/${name}`} className={styles.link} key={uuid()}>
           <AnimatePresence>

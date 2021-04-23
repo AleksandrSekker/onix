@@ -26,9 +26,12 @@ import {
   pomodoroAppEng,
   pomodoroAppRu,
   pomodoroAppUa,
-  technologyEng,
-  technologyRu,
-  technologyUa,
+  classEng,
+  classRu,
+  classUa,
+  functionEng,
+  functionRu,
+  functionUa,
 } from '../../constants/Text';
 import { russian, ukrainian, english } from '../../redux/languagesSlice';
 import useDarkThemeContext from '../../hooks/useDarkThemeContext';
@@ -83,11 +86,6 @@ const Header = ({ setdarkTheme }: any) => {
   const css: String = 'CSS';
 
   const { currentLanguage: home } = useLanguages(homeEng, homeRu, homeUa);
-  const { currentLanguage: technologies } = useLanguages(
-    technologyEng,
-    technologyRu,
-    technologyUa,
-  );
   const { currentLanguage: arrayBiography } = useLanguages(
     arrayBiographyEng,
     arrayBiographyRu,
@@ -108,6 +106,16 @@ const Header = ({ setdarkTheme }: any) => {
     lessonSevenRu,
     lessonSevenUa,
   );
+  const { currentLanguage: classLanguage } = useLanguages(
+    classEng,
+    classRu,
+    classUa
+  );
+  const { currentLanguage: functionLanguage } = useLanguages(
+    functionEng,
+    functionRu,
+    functionUa
+  );
 
   return (
     <>
@@ -125,7 +133,6 @@ const Header = ({ setdarkTheme }: any) => {
                   id="check"
                   checked={checked}
                   onChange={() => setdarkTheme(!darkTheme)}
-                  // onChange={() => dispatch(switching())}
                 />
                 <span className={`${styles.slider} ${styles.round}`} />
               </label>
@@ -160,7 +167,7 @@ const Header = ({ setdarkTheme }: any) => {
               onHoverEnd={toggleHoverMenu}
             >
               <p>
-                {technologies}
+                {countries}
                 <FontAwesomeIcon icon={faChevronDown} />
               </p>
               <motion.div
@@ -169,19 +176,13 @@ const Header = ({ setdarkTheme }: any) => {
                 variants={subMenuAnimate}
               >
                 <div>
-                  <AppLink to="/vcs">{versionControl}</AppLink>
-                  <AppLink to="/git">{git}</AppLink>
-                  <AppLink to="/node">{node}</AppLink>
-                  <AppLink to="/npm">{npm}</AppLink>
-                  <AppLink to="/html">{html}</AppLink>
-                  <AppLink to="/css">{css}</AppLink>
+                  <AppLink to="/counries">{classLanguage}</AppLink>
+                  <AppLink to="/lessonseven">{functionLanguage}</AppLink>
                 </div>
               </motion.div>
             </motion.div>
             <AppLink to="/array">{arrayBiography}</AppLink>
             <AppLink to="/pomodoro">{pomodoro}</AppLink>
-            <AppLink to="/counries">{countries}</AppLink>
-            <AppLink to="/lessonseven">{lessonSeven}</AppLink>
           </div>
 
           <button

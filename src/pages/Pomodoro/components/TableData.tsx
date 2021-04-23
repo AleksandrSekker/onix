@@ -11,7 +11,7 @@ import { motion } from 'framer-motion';
 import styles from '../scss/Array.module.scss';
 
 interface Props {
-  result: any;
+  result: [];
   titleForUpdate: string;
   settitleForUpdate: React.Dispatch<React.SetStateAction<string>>;
   subtitleForUpdate: string;
@@ -50,9 +50,9 @@ interface Props {
   cancelLanguage: string;
   saveLanguage: string;
 }
-// interface State {
-//   title: any; _id: any; year: any; subtitle: any; ismodal: any;
-// }
+interface State {
+  title: string; _id: string; year: number; subtitle: string; ismodal: boolean;
+}
 const TableData = ({
   result,
   handleDragStart,
@@ -82,7 +82,7 @@ const TableData = ({
         (
           { 
             title, _id, year, subtitle, ismodal, 
-          }: any, index: any
+          }: State, index: number
         ) => (
           <div
             onDragStart={(e) => handleDragStart(e, index)}

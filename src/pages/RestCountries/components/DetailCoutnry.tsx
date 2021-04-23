@@ -48,6 +48,19 @@ import styles from '../scss/DetailCoutnry.module.scss';
 interface ParamTypes {
   handle: string;
 }
+interface State {
+  flag: string;
+  name: string;
+  nativeName: string;
+  population: number
+  region: string;
+  subregion: string;
+  capital: string
+  topLevelDomain: string;
+  currencies: [];
+  languages: [];
+  borders: [];
+}
 const DetailCoutnry = () => {
   const [state, setState] = useState([]);
   const [isLoaded, setIsLoaded] = useState(Boolean);
@@ -163,7 +176,7 @@ const DetailCoutnry = () => {
           currencies,
           languages,
           borders,
-        }: any) => {
+        }: State) => {
           return (
             <div key={uuid()}>
               {isError && <Error />}
@@ -239,7 +252,7 @@ const DetailCoutnry = () => {
                             {Currencies}
                             :
                           </p>
-                          {currencies.map((currenci: any) => {
+                          {currencies.map((currenci: {name: string}) => {
                             return (
                               <p
                                 className={styles.text__flex__child}
@@ -256,7 +269,7 @@ const DetailCoutnry = () => {
                             {Languages}
                             :
                           </p>
-                          {languages.map((language: { name: string }) => {
+                          {languages.map((language: {name: string}) => {
                             return (
                               <p
                                 className={styles.text__flex__child}
