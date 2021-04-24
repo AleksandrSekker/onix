@@ -10,8 +10,7 @@ import VcsPage from './pages/technologies/VcsPage';
 import GitPage from './pages/technologies/GitPage';
 import ArrayBiography from './pages/ArrayBiography/ArrayBiography';
 import Pomodoro from './pages/Pomodoro/Pomodoro';
-import RestCountries from './pages/RestCountries/RestCountries';
-import DetailCoutnry from './pages/RestCountries/components/DetailCoutnry';
+import DetailCoutnry from './pages/LessonSeven/components/DetailCountry';
 import LessonSeven from './pages/LessonSeven/LessonSeven';
 import './index.scss';
 import Header from './layout/Header/Header';
@@ -49,7 +48,6 @@ export const App = () => {
                   <Route path="/git" component={GitPage} />
                   <Route path="/array" component={ArrayBiography} />
                   <Route path="/pomodoro" component={Pomodoro} />
-                  <Route path="/counries" component={RestCountries} />
                   <Route path="/lessonseven" component={LessonSeven} />
                   <Route path="/:handle" component={DetailCoutnry} />
                 </Switch>

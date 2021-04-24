@@ -4,6 +4,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { AnimatePresence, motion } from 'framer-motion';
 import styles from '../scss/Array.module.scss';
 import stylei from '../scss/Input.module.scss';
+import style from '../scss/ComonentDetail.module.scss';
 
 interface Props {
   state: {
@@ -96,10 +97,10 @@ const Table = ({
                 modalHandler(key);
               }}
             >
-              <FontAwesomeIcon icon={faPen} />
+              <FontAwesomeIcon icon={faPen} className={style.icon} />
             </button>
             <button type="button" className={styles.transparent__button} onClick={() => deleteHandler(key)}>
-              <FontAwesomeIcon icon={faTrash} />
+              <FontAwesomeIcon icon={faTrash} className={style.icon} />
             </button>
           </motion.div>
         </motion.div>

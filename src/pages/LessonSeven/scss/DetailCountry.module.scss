@@ -1,0 +1,64 @@
+.display {
+    display: flex;
+    justify-content: space-between;
+  }
+  .image {
+    width: 40vw;
+  }
+  .text__block {
+    width: 40vw;
+  
+    .country__name {
+      margin: 2rem 0;
+    }
+    .detail__container {
+      display: flex;
+      justify-content: space-between;
+      p {
+        font-size: 1rem;
+      }
+      .text__flex {
+        display: flex;
+      }
+    }
+    .border__country {
+      display: flex;
+      button {
+        margin: 0 0.1rem;
+        border: none;
+        background: rgb(230, 229, 229);
+        outline: none;
+        width: 4rem;
+        height: 2rem;
+      }
+    }
+  }
+  .alert__container {
+    padding: 1rem;
+    background: rgb(216, 215, 215);
+    margin-bottom: 2rem;
+    border-radius: 0.5rem;
+    display: flex;
+    justify-content: space-between;
+  }
+  
+  @media only screen and (max-width: 600px) {
+    .detail__container {
+      flex-direction: column;
+    }
+    .border__country {
+      flex-direction: column;
+    }
+  }
+  
+  @media only screen and (max-width: 992px) {
+    .display {
+      flex-direction: column;
+    }
+    .image {
+      width: 100%;
+    }
+    .text__block {
+      width: 100%;
+    }
+  }

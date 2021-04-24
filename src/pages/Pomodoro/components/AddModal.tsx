@@ -7,6 +7,7 @@ import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { AnimatePresence, motion } from 'framer-motion';
 import React from 'react';
 import styles from '../scss/Array.module.scss';
+import useDarkThemeContext from '../../../hooks/useDarkThemeContext';
 
 interface Props {
   placeholderLanguage: string;
@@ -52,6 +53,7 @@ const AddModal = ({
     },
     modalExit: { opacity: 0, scale: 0, transition: { duration: 1 } },
   };
+  const { darkTheme } = useDarkThemeContext(styles);
   return (
     <AnimatePresence>
       {isModal ? (
@@ -139,10 +141,12 @@ const AddModal = ({
           </div>
         </motion.div>
       ) : (
-        <motion.button className={styles.add} onClick={modalToggler}>
-          <FontAwesomeIcon icon={faPlusCircle} />
-          Add Task
-        </motion.button>
+        <div className={darkTheme}>
+          <motion.button className={styles.add} onClick={modalToggler}>
+            <FontAwesomeIcon icon={faPlusCircle} />
+            Add Task
+          </motion.button>
+        </div>
       )}
     </AnimatePresence>
   );

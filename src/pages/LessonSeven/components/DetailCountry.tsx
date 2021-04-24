@@ -43,7 +43,7 @@ import {
   topLevelDomainUa,
 } from '../../../constants/Text';
 import useLanguages from '../../../hooks/useLanguages';
-import styles from '../scss/DetailCoutnry.module.scss';
+import styles from '../scss/DetailCountry.module.scss';
 
 interface ParamTypes {
   handle: string;

@@ -1,3 +1,9 @@
+@import "../../../styles/variables";
+.dark {
+  .add {
+    background-color: $background-for-containers-dark;
+  }
+}
 .array {
   background: white;
   margin: 0.4rem;

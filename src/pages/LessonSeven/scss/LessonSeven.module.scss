@@ -1,6 +1,7 @@
 @import "../../../styles/variables";
 div.dark {
   background-color: $background-main-dark;
+  transition: 1s;
 }
 .card {
   display: flex;

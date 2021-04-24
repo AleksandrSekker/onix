@@ -1,19 +1,28 @@
+@import "../../../styles/variables";
+.dark .main {
+  background: $background-for-containers-dark;
+}
 .main {
   background: rgb(224, 114, 114);
   text-align: center;
   padding: 2rem 0;
   margin-top: 1rem;
+  margin: 0.4rem;
+  border-radius: 0.4rem;
   h1 {
     font-size: 5rem;
     color: white;
   }
-  button {
+  .start {
     background: white;
-    color: rgb(224, 114, 114);
+    color: $background-for-containers-dark;
     padding: 1rem 4rem;
     outline: none;
     border: none;
     border-radius: 0.2rem;
     font-size: 2rem;
+    &:hover {
+      background: $icons-color-hover-dark;
+    }
   }
 }

@@ -1,3 +1,10 @@
+@import "../../../styles/variables";
+.dark {
+  transition: 1s;
+  .background {
+    background-color: $background-main-dark;
+  }
+}
 .background {
   background: rgb(224, 92, 92);
   padding: 2rem 0;
@@ -23,5 +30,6 @@
     border-radius: 0.4rem;
     padding: 0.5rem 1rem;
     outline: none;
+    margin: 0.4rem;
   }
 }

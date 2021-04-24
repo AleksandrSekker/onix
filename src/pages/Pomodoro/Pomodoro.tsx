@@ -10,6 +10,7 @@ import useLanguages from '../../hooks/useLanguages';
 import { ArrayDB } from './components/ArrayDB';
 import Counter from './components/Counter';
 import styles from './scss/Pomodoro.module.scss';
+import useDarkThemeContext from '../../hooks/useDarkThemeContext';
 
 const Pomodoro = () => {
   const { currentLanguage: PomodoroLang } = useLanguages(
@@ -17,17 +18,20 @@ const Pomodoro = () => {
     pomodoroAppRu,
     pomodoroAppUa,
   );
+  const { darkTheme } = useDarkThemeContext(styles);
   return (
-    <div className={styles.background}>
-      <div className={styles.container}>
-        <div className={styles.header}>
-          <p>
-            <FontAwesomeIcon icon={faCheckCircle} className={styles.logo} />
-            {PomodoroLang}
-          </p>
+    <div className={darkTheme}>
+      <div className={styles.background}>
+        <div className={styles.container}>
+          <div className={styles.header}>
+            <p>
+              <FontAwesomeIcon icon={faCheckCircle} className={styles.logo} />
+              {PomodoroLang}
+            </p>
+          </div>
+          <Counter />
+          <ArrayDB />
         </div>
-        <Counter />
-        <ArrayDB />
       </div>
     </div>
   );

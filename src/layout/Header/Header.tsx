@@ -1,9 +1,6 @@
 import React, { useState } from 'react';
 import { useDispatch } from 'react-redux';
 import { Link } from 'react-router-dom';
-import { motion } from 'framer-motion';
-import { faChevronDown } from '@fortawesome/free-solid-svg-icons';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import styles from './scss/Header.module.scss';
 import withLink from '../../hoc/withLink/withLink';
 import useLanguages from '../../hooks/useLanguages';
@@ -26,12 +23,6 @@ import {
   pomodoroAppEng,
   pomodoroAppRu,
   pomodoroAppUa,
-  classEng,
-  classRu,
-  classUa,
-  functionEng,
-  functionRu,
-  functionUa,
 } from '../../constants/Text';
 import { russian, ukrainian, english } from '../../redux/languagesSlice';
 import useDarkThemeContext from '../../hooks/useDarkThemeContext';
@@ -39,30 +30,8 @@ import useDarkThemeContext from '../../hooks/useDarkThemeContext';
 const Header = ({ setdarkTheme }: any) => {
   const [isActive, setIsActive] = useState(false);
   const [navFalse, setNavFalse] = useState(false);
-  const [isHover, toggleHover] = React.useState(false);
   const AppLink = withLink(Link);
   const { darkTheme, checked } = useDarkThemeContext(styles);
-  const subMenuAnimate = {
-    enter: {
-      opacity: 1,
-      rotateX: 0,
-      transition: {
-        duration: 0.8,
-      },
-      display: 'block',
-    },
-    exit: {
-      opacity: 0,
-      rotateX: -15,
-      transition: {
-        duration: 0.8,
-        delay: 0.3,
-      },
-      transitionEnd: {
-        display: 'none',
-      },
-    },
-  };
   const dispatch = useDispatch();
   const hamburgerHandler = () => {
     if (isActive && navFalse) {
@@ -72,10 +41,6 @@ const Header = ({ setdarkTheme }: any) => {
       setIsActive(true);
       setNavFalse(true);
     }
-  };
-
-  const toggleHoverMenu = () => {
-    toggleHover(!isHover);
   };
 
   const versionControl: String = 'Version Control';
@@ -105,16 +70,6 @@ const Header = ({ setdarkTheme }: any) => {
     lessonSevenEng,
     lessonSevenRu,
     lessonSevenUa,
-  );
-  const { currentLanguage: classLanguage } = useLanguages(
-    classEng,
-    classRu,
-    classUa
-  );
-  const { currentLanguage: functionLanguage } = useLanguages(
-    functionEng,
-    functionRu,
-    functionUa
   );
 
   return (
@@ -161,26 +116,7 @@ const Header = ({ setdarkTheme }: any) => {
             </button>
           </div>
           <div className={styles.navigation__content}>
-            <motion.div
-              className="menu-item"
-              onHoverStart={toggleHoverMenu}
-              onHoverEnd={toggleHoverMenu}
-            >
-              <p>
-                {countries}
-                <FontAwesomeIcon icon={faChevronDown} />
-              </p>
-              <motion.div
-                initial="exit"
-                animate={isHover ? 'enter' : 'exit'}
-                variants={subMenuAnimate}
-              >
-                <div>
-                  <AppLink to="/counries">{classLanguage}</AppLink>
-                  <AppLink to="/lessonseven">{functionLanguage}</AppLink>
-                </div>
-              </motion.div>
-            </motion.div>
+            <AppLink to="/lessonseven">{countries}</AppLink>
             <AppLink to="/array">{arrayBiography}</AppLink>
             <AppLink to="/pomodoro">{pomodoro}</AppLink>
           </div>
@@ -211,7 +147,6 @@ const Header = ({ setdarkTheme }: any) => {
           <AppLink to="/css">{css}</AppLink>
           <AppLink to="/array">{arrayBiography}</AppLink>
           <AppLink to="/pomodoro">{pomodoro}</AppLink>
-          <AppLink to="/counries">{countries}</AppLink>
           <AppLink to="/lessonseven">{lessonSeven}</AppLink>
         </div>
       </header>
