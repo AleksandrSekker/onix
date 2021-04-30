@@ -18,7 +18,7 @@ div.dark {
   .first__container {
     background: $background-for-containers-dark;
   }
-  .second__сontainer {
+  .second__container {
     background: $background-for-containers-dark;
   }
 }
@@ -36,7 +36,7 @@ div.dark {
   flex-direction: column;
 
 }
-.second__сontainer {
+.second__container {
   background: $background-for-containers;
   margin-left: 1rem;
   margin-right: 1rem;
@@ -132,7 +132,7 @@ div.dark {
       1% 99%
     );
   }
-  .second__сontainer {
+  .second__container {
     height: 30rem;
     width: 30rem;
     clip-path: polygon(

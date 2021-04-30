@@ -145,7 +145,7 @@ const Home = () => {
         </div>
         <div className={style.flex__column__two}>
           <div
-            className={style.second__сontainer}
+            className={style.second__container}
             data-aos="fade-left"
             data-aos-duration="1500"
           >
@@ -159,7 +159,7 @@ const Home = () => {
             </Link>
           </div>
           <div
-            className={style.second__сontainer}
+            className={style.second__container}
             data-aos="fade-left"
             data-aos-duration="1500"
           >

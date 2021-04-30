@@ -36,38 +36,37 @@ const LessonSeven = () => {
   );
   // onclick events
 
-  const ternary = (x: boolean, y: any) => (x === true ? y(false) : y(true));
   const ternaryStyles = (x: boolean) => (x ? styles.active : '');
 
-  const nameHanler = () => {
-    ternary(isNameActive, setIsNameActive);
+  const nameHandler = () => {
+    setIsNameActive(isNameActive => !isNameActive);
   };
 
   const populationHandler = () => {
-    ternary(isPopulationActive, setIsPopulationActive);
+    setIsPopulationActive(isPopulationActive => !isPopulationActive);
   };
 
   const regionHandler = () => {
-    ternary(isRegionActive, setIsRegionActive);
+    setIsRegionActive(isRegionActive => !isRegionActive);
   };
 
   const capitalHandler = () => {
-    ternary(isCapitalActive, setIsCapitalActive);
+    setIsCapitalActive(isCapitalActive => !isCapitalActive);
   };
   // keyboard events
   const keyboardEvents = (event: KeyboardEvent) => {
     switch (event.key) {
       case '1':
-        ternary(isNameActive, setIsNameActive);
+        setIsNameActive(isNameActive => !isNameActive);
         break;
       case '2':
-        ternary(isPopulationActive, setIsPopulationActive);
+        setIsPopulationActive(isPopulationActive => !isPopulationActive);
         break;
       case '3':
-        ternary(isRegionActive, setIsRegionActive);
+        setIsRegionActive(isRegionActive => !isRegionActive);
         break;
       case '4':
-        ternary(isCapitalActive, setIsCapitalActive);
+        setIsCapitalActive(isCapitalActive => !isCapitalActive);
         break;
       default:
         break;
@@ -137,7 +136,7 @@ const LessonSeven = () => {
               state={state}
               handleDragEnter={handleDragEnter}
               handleDragStart={handleDragStart}
-              nameHanler={nameHanler}
+              nameHanler={nameHandler}
               ternaryStyles={ternaryStyles}
               isNameActive={isNameActive}
               populationHandler={populationHandler}
