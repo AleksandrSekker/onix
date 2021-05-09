@@ -1,32 +1,12 @@
 import axios from 'axios';
-import React, { useState, useRef } from 'react';
+import React, { useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import Loader from '../../../components/Loader/Loader';
 import Error from '../../../components/Error/Error';
 import TableData from './TableData';
 import AddModal from './AddModal';
 import useFetch from '../../../hooks/useFetch';
-import useLanguages from '../../../hooks/useLanguages';
-import {
-  addNotesLanguageEng,
-  addNotesLanguageRu,
-  addNotesLanguageUa,
-  amountLanguageEng,
-  amountLanguageRu,
-  amountLanguageUa,
-  cancelLanguageEng,
-  cancelLanguageRu,
-  cancelLanguageUa,
-  notesPlaceholderLanguageEng,
-  notesPlaceholderLanguageRu,
-  notesPlaceholderLanguageUa,
-  placeholderLanguageEng,
-  placeholderLanguageRu,
-  placeholderLanguageUa,
-  saveLanguageEng,
-  saveLanguageRu,
-  saveLanguageUa,
-
-} from '../../../constants/Text';
+import useDragAndDrop from '../../../hooks/useDragAndDrop';
 
 export const ArrayDB = () => {
   const [title, setTitle] = useState(String);
@@ -39,12 +19,10 @@ export const ArrayDB = () => {
   const [isModal, setIsModal] = useState(false);
   const [linkAdd, setLinkAdd] = useState(false);
   const [errorState, setErrorState] = useState(false);
-  const { 
+  const {
     loaded, state, setState, isError 
-  } = useFetch(
-    'https://guarded-brook-68937.herokuapp.com/api/todo',
-    isChange,
-  );
+  } = useFetch('https://guarded-brook-68937.herokuapp.com/api/todo', isChange);
+  const { t } = useTranslation();
   const result = state;
   const pushHandler = async () => {
     try {
@@ -56,12 +34,12 @@ export const ArrayDB = () => {
           subTitle,
           year,
           ismodal: false,
-          isactive: false,
+          isactive: false
         },
         headers: {
           'Content-Type': 'application/json',
-          Accept: 'application/json',
-        },
+          Accept: 'application/json'
+        }
       });
       if (response.status >= 200 && response.status < 300) {
         setIsChange(!isChange);
@@ -71,9 +49,7 @@ export const ArrayDB = () => {
     }
   };
   const deleteHandler = async (id: string) => {
-    const response = await axios.delete(
-      `https://guarded-brook-68937.herokuapp.com/api/todo/${id}`,
-    );
+    const response = await axios.delete(`https://guarded-brook-68937.herokuapp.com/api/todo/${id}`);
     try {
       if (response.status >= 200 && response.status < 300) {
         setIsChange(!isChange);
@@ -92,12 +68,12 @@ export const ArrayDB = () => {
           subtitle: result[index].subtitle,
           year: result[index].year,
           ismodal: !result[index].ismodal,
-          isactive: false,
+          isactive: false
         },
         headers: {
           'Content-Type': 'application/json',
-          Accept: 'application/json',
-        },
+          Accept: 'application/json'
+        }
       });
       if (response.status >= 200 && response.status < 300) {
         setIsChange(!isChange);
@@ -106,12 +82,7 @@ export const ArrayDB = () => {
       setErrorState(error);
     }
   };
-  const updateHandlerAll = async (
-    id: string,
-    titleUpdate: string,
-    subtitleUpdate: string,
-    yearUpdate: number,
-  ) => {
+  const updateHandlerAll = async (id: string, titleUpdate: string, subtitleUpdate: string, yearUpdate: number) => {
     try {
       const response = await axios({
         method: 'put',
@@ -121,12 +92,12 @@ export const ArrayDB = () => {
           subtitle: subtitleUpdate,
           year: yearUpdate,
           ismodal: false,
-          isactive: false,
+          isactive: false
         },
         headers: {
           'Content-Type': 'application/json',
-          Accept: 'application/json',
-        },
+          Accept: 'application/json'
+        }
       });
       if (response.status >= 200 && response.status < 300) {
         setIsChange(!isChange);
@@ -140,69 +111,17 @@ export const ArrayDB = () => {
   };
 
   // dragging
-  const draggingItem: any = useRef();
-  const dragOverItem: any = useRef();
-  const handleDragStart = (
-    e: React.DragEvent<HTMLDivElement>,
-    position: number,
-  ) => {
-    draggingItem.current = position;
-  };
-
-  const handleDragEnter = (
-    e: React.DragEvent<HTMLDivElement>,
-    position: number,
-  ) => {
-    dragOverItem.current = position;
-    const listCopy = [...state];
-    const draggingItemContent = listCopy[draggingItem.current];
-    listCopy.splice(draggingItem.current, 1);
-    listCopy.splice(dragOverItem.current, 0, draggingItemContent);
-
-    draggingItem.current = dragOverItem.current;
-    dragOverItem.current = null;
-    setState(listCopy);
-  };
+  const { handleDragEnter, handleDragStart } = useDragAndDrop(state, setState);
   const modalVariant = {
     modalInitial: { opacity: 0, scale: 0.3 },
     modalAnimate: {
       opacity: 1,
       scale: 1,
-      transition: { duration: 0.8 },
+      transition: { duration: 0.8 }
     },
-    modalExit: { opacity: 0, scale: 0, transition: { duration: 1 } },
+    modalExit: { opacity: 0, scale: 0, transition: { duration: 1 } }
   };
   // languages
-  const { currentLanguage: placeholderLanguage } = useLanguages(
-    placeholderLanguageEng,
-    placeholderLanguageRu,
-    placeholderLanguageUa,
-  );
-  const { currentLanguage: amountLanguage } = useLanguages(
-    amountLanguageEng,
-    amountLanguageRu,
-    amountLanguageUa,
-  );
-  const { currentLanguage: addNotesLanguage } = useLanguages(
-    addNotesLanguageEng,
-    addNotesLanguageRu,
-    addNotesLanguageUa,
-  );
-  const { currentLanguage: notesPlaceholderLanguage } = useLanguages(
-    notesPlaceholderLanguageEng,
-    notesPlaceholderLanguageRu,
-    notesPlaceholderLanguageUa,
-  );
-  const { currentLanguage: cancelLanguage } = useLanguages(
-    cancelLanguageEng,
-    cancelLanguageRu,
-    cancelLanguageUa,
-  );
-  const { currentLanguage: saveLanguage } = useLanguages(
-    saveLanguageEng,
-    saveLanguageRu,
-    saveLanguageUa,
-  );
 
   return (
     <div>
@@ -225,12 +144,12 @@ export const ArrayDB = () => {
           yearForUpdate={yearForUpdate}
           setyearForUpdate={setyearForUpdate}
           updateHandlerAll={updateHandlerAll}
-          placeholderLanguage={placeholderLanguage}
-          amountLanguage={amountLanguage}
-          addNotesLanguage={addNotesLanguage}
-          notesPlaceholderLanguage={notesPlaceholderLanguage}
-          cancelLanguage={cancelLanguage}
-          saveLanguage={saveLanguage}
+          placeholderLanguage={t('placeholderLanguage')}
+          amountLanguage={t('amountLanguage')}
+          addNotesLanguage={t('addNotesLanguage')}
+          notesPlaceholderLanguage={t('notesPlaceholderLanguage')}
+          cancelLanguage={t('cancelLanguage')}
+          saveLanguage={t('saveLanguage')}
         />
       )}
       <AddModal
@@ -243,12 +162,12 @@ export const ArrayDB = () => {
         setLinkAdd={setLinkAdd}
         modalToggler={modalToggler}
         pushHandler={pushHandler}
-        placeholderLanguage={placeholderLanguage}
-        amountLanguage={amountLanguage}
-        addNotesLanguage={addNotesLanguage}
-        notesPlaceholderLanguage={notesPlaceholderLanguage}
-        cancelLanguage={cancelLanguage}
-        saveLanguage={saveLanguage}
+        placeholderLanguage={t('placeholderLanguage')}
+        amountLanguage={t('amountLanguage')}
+        addNotesLanguage={t('addNotesLanguage')}
+        notesPlaceholderLanguage={t('notesPlaceholderLanguage')}
+        cancelLanguage={t('cancelLanguage')}
+        saveLanguage={t('saveLanguage')}
       />
     </div>
   );

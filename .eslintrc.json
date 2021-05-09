@@ -1,58 +1,59 @@
 {
-    "env": {
-      "browser": true,
-      "es2021": true
+  "env": {
+    "browser": true,
+    "es2021": true
+  },
+  "extends": ["plugin:react/recommended", "prettier", "airbnb"],
+  "parser": "@typescript-eslint/parser",
+  "parserOptions": {
+    "ecmaFeatures": {
+      "jsx": true
     },
-    "extends": ["plugin:react/recommended", "airbnb"],
-    "parser": "@typescript-eslint/parser",
-    "parserOptions": {
-      "ecmaFeatures": {
-        "jsx": true
-      },
-      "ecmaVersion": 12,
-      "sourceType": "module"
-    },
-    "plugins": ["react", "@typescript-eslint"],
-    "settings": {
-      "import/resolver": {
-        "node": {
-          "extensions": [".js", ".jsx", ".ts", ".tsx"]
-        }
+    "ecmaVersion": 12,
+    "sourceType": "module"
+  },
+  "plugins": ["react", "@typescript-eslint"],
+  "settings": {
+    "import/resolver": {
+      "node": {
+        "extensions": [".js", ".jsx", ".ts", ".tsx"]
       }
-    },
-    "rules": {
-      "react/no-unused-prop-types": "off",
-      "react/prop-types": "off",
-      "no-unused-vars": "off",
-      "@typescript-eslint/no-unused-vars": "error",
-      "arrow-parens": 0,
-      "import/extensions": "off",
-      "no-use-before-define": "off",
-      "react/state-in-constructor": "off",
-      "no-shadow": "off",
-      "@typescript-eslint/no-shadow": "off",
-      "no-param-reassign": ["error", {
-        "props": true,
-        "ignorePropertyModificationsFor": [
-          "state"
-        ]
-      }],
-      "@typescript-eslint/no-use-before-define": ["error"],
-      "react/jsx-filename-extension": 0,
-      "arrow-body-style": 0,
-      "react/prefer-stateless-function": 0,
-      "no-trailing-spaces": 0,
-      "comma-dangle": 0,
-      "radix": 0,
-      "max-len": [
-        2,
-        {
-          "code": 120,
-          "ignorePattern": "^import"
-        }
-      ],
-      "jsx-a11y/label-has-for": 0,
-      "class-methods-use-this": 0,
-      "jsx-a11y/no-autofocus": 0
     }
+  },
+  "rules": {
+    "react/no-unused-prop-types": "off",
+    "react/prop-types": "off",
+    "no-unused-vars": "off",
+    "@typescript-eslint/no-unused-vars": "error",
+    "arrow-parens": 0,
+    "import/extensions": "off",
+    "no-use-before-define": "off",
+    "react/state-in-constructor": "off",
+    "no-shadow": "off",
+    "@typescript-eslint/no-shadow": "off",
+    "no-param-reassign": [
+      "error",
+      {
+        "props": true,
+        "ignorePropertyModificationsFor": ["state"]
+      }
+    ],
+    "@typescript-eslint/no-use-before-define": ["error"],
+    "react/jsx-filename-extension": 0,
+    "arrow-body-style": 0,
+    "react/prefer-stateless-function": 0,
+    "no-trailing-spaces": 0,
+    "comma-dangle": 0,
+    "radix": 0,
+    "max-len": [
+      2,
+      {
+        "code": 120,
+        "ignorePattern": "^import"
+      }
+    ],
+    "jsx-a11y/label-has-for": 0,
+    "class-methods-use-this": 0,
+    "jsx-a11y/no-autofocus": 0
+  }
 }

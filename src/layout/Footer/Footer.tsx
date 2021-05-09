@@ -1,56 +1,23 @@
 import React from 'react';
 
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import {
-  faLinkedin,
-  faTelegram,
-  faGithub,
-} from '@fortawesome/free-brands-svg-icons';
+import { faLinkedin, faTelegram, faGithub } from '@fortawesome/free-brands-svg-icons';
+import { useTranslation } from 'react-i18next';
 import styles from './scss/Footer.module.scss';
 import useDarkThemeContext from '../../hooks/useDarkThemeContext';
-import useLanguages from '../../hooks/useLanguages';
-import {
-  buttonTextEng,
-  buttonTextRu,
-  buttonTextUa,
-  creatorNameEng,
-  creatorNameRu,
-  creatorNameUa,
-  placeholderTextEng,
-  placeholderTextRu,
-  placeholderTextUa,
-} from '../../constants/Text';
 
 const Footer = () => {
   const { darkTheme } = useDarkThemeContext(styles);
   const currentYear = new Date().getFullYear();
-  const { currentLanguage: button } = useLanguages(
-    buttonTextEng,
-    buttonTextRu,
-    buttonTextUa,
-  );
-  const { currentLanguage: creator } = useLanguages(
-    creatorNameEng,
-    creatorNameRu,
-    creatorNameUa,
-  );
-  const { currentLanguage: placeholderText } = useLanguages(
-    placeholderTextEng,
-    placeholderTextRu,
-    placeholderTextUa,
-  );
+  const { t } = useTranslation();
   return (
     <>
       <footer className={darkTheme}>
         <div className={styles.footer}>
           <div className={styles.cont1}>
-            <input
-              type="text"
-              placeholder={placeholderText}
-              className={styles.input__field}
-            />
+            <input type="text" className={styles.input__field} />
             <button className={styles.input__btn} type="button">
-              {button}
+              {t('buttonText')}
             </button>
           </div>
           <div className={styles.cont2}>
@@ -72,7 +39,7 @@ const Footer = () => {
             <h4>
               &copy;
               {currentYear}
-              {creator}
+              {t('creatorName')}
             </h4>
           </div>
         </div>

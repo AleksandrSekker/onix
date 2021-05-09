@@ -1,26 +1,18 @@
 import React, { useEffect, useState } from 'react';
-import {
-  startEng,
-  startRu,
-  startUa,
-  finishEng,
-  finishRu,
-  finishUa,
-} from '../../../constants/Text';
-import useLanguages from '../../../hooks/useLanguages';
+import { useTranslation } from 'react-i18next';
 import styles from '../scss/Counter.module.scss';
 import useDarkThemeContext from '../../../hooks/useDarkThemeContext';
 
-const Counter = () => {
+interface Props {
+  minutesPomodoro: number;
+  minutesLong: number;
+  minutesShort: number;
+}
+const Counter = ({ minutesPomodoro, minutesLong, minutesShort }: Props) => {
   const [minutes, setMinutes] = useState(25);
   const [seconds, setSeconds] = useState(0);
   const [start, setStart] = useState(false);
-  const { currentLanguage: Start } = useLanguages(startEng, startRu, startUa);
-  const { currentLanguage: Finish } = useLanguages(
-    finishEng,
-    finishRu,
-    finishUa,
-  );
+  const { t } = useTranslation();
   useEffect(() => {
     if (start === true) {
       if (seconds > 0) {
@@ -32,36 +24,39 @@ const Counter = () => {
     }
   }, [minutes, seconds, start]);
   const pomodoroHandler = () => {
-    setMinutes(25);
+    setMinutes(minutesPomodoro);
     setSeconds(0);
   };
   const longBreakHandler = () => {
-    setMinutes(15);
+    setMinutes(minutesLong);
     setSeconds(0);
   };
   const shortBreakHandler = () => {
-    setMinutes(5);
+    setMinutes(minutesShort);
     setSeconds(0);
   };
   const { darkTheme } = useDarkThemeContext(styles);
   return (
     <div className={darkTheme}>
       <div className={styles.main}>
-        <button type="button" onClick={pomodoroHandler}>Pomodoro</button>
-        <button type="button" onClick={shortBreakHandler}>Short Break</button>
-        <button type="button" onClick={longBreakHandler}>Long Break</button>
+        <button type="button" className={styles.button__time} onClick={pomodoroHandler}>
+          Pomodoro
+        </button>
+        <button type="button" className={styles.button__time} onClick={shortBreakHandler}>
+          Short Break
+        </button>
+        <button type="button" className={styles.button__time} onClick={longBreakHandler}>
+          Long Break
+        </button>
         {minutes === 0 && seconds === 0 ? (
           <h1>Time End</h1>
-        ) 
-          : (
-            <h1>
-              {minutes < 10 ? `0${minutes}` 
-                : minutes}
-              :
-              {seconds < 10 ? `0${seconds}` 
-                : seconds}
-            </h1>
-          )}
+        ) : (
+          <h1>
+            {minutes < 10 ? `0${minutes}` : minutes}
+            :
+            {seconds < 10 ? `0${seconds}` : seconds}
+          </h1>
+        )}
         <button
           type="button"
           className={styles.start}
@@ -69,7 +64,7 @@ const Counter = () => {
             setStart(!start);
           }}
         >
-          {start ? Finish : Start}
+          {start ? t('finish') : t('start')}
         </button>
       </div>
     </div>

@@ -15,21 +15,18 @@ import LessonSeven from './pages/LessonSeven/LessonSeven';
 import './index.scss';
 import Header from './layout/Header/Header';
 import Footer from './layout/Footer/Footer';
+import Chat from './pages/Chat/Chat';
 
 export const ThemeContext = createContext(false);
 
 export const App = () => {
   const [darkTheme, setdarkTheme] = useState(false);
   const location = useLocation();
-  const transitions = useTransition(
-    location,
-    (locations) => locations.pathname,
-    {
-      from: { opacity: 0, transform: 'translate3d(100%,0,0)' },
-      enter: { opacity: 1, transform: 'translate3d(0%,0,0)' },
-      leave: { opacity: 0, transform: 'translate3d(-50%,0,0)' },
-    },
-  );
+  const transitions = useTransition(location, (locations) => locations.pathname, {
+    from: { opacity: 0, transform: 'translate3d(100%,0,0)' },
+    enter: { opacity: 1, transform: 'translate3d(0%,0,0)' },
+    leave: { opacity: 0, transform: 'translate3d(-50%,0,0)' }
+  });
   return (
     <ThemeContext.Provider value={darkTheme}>
       <main>
@@ -49,6 +46,7 @@ export const App = () => {
                   <Route path="/array" component={ArrayBiography} />
                   <Route path="/pomodoro" component={Pomodoro} />
                   <Route path="/lessonseven" component={LessonSeven} />
+                  <Route path="/chat" component={Chat} />
                   <Route path="/:handle" component={DetailCoutnry} />
                 </Switch>
                 <Footer />

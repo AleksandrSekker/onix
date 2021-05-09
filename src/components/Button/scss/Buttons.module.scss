@@ -1,4 +1,4 @@
-@import "../../../styles/variables";
+@import '../../../styles/variables';
 .input__btn {
   border-radius: 0.4rem;
   border: none;
@@ -35,4 +35,14 @@
   &:hover {
     background: $button__remove__hover;
   }
+}
+
+.btn__save {
+  background: rgb(68, 67, 67);
+  color: white;
+  font-size: 1.3rem;
+  outline: none;
+  padding: 0.4rem 2rem;
+  border: none;
+  border-radius: 0.3rem;
 }

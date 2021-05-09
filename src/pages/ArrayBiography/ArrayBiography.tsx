@@ -2,41 +2,12 @@ import React, { useState } from 'react';
 import { v4 as uuid } from 'uuid';
 import { useForm } from 'react-hook-form';
 import { cloneDeep } from 'lodash';
+import { useTranslation } from 'react-i18next';
 import styled from './scss/ComonentDetail.module.scss';
 import data from '../../data/Data';
 import Table from './components/Table';
 import SortButton from './components/SortButton';
 import Form from './components/Form';
-import useLanguages from '../../hooks/useLanguages';
-import {
-  alertMessageEng,
-  alertMessageRu,
-  alertMessageUa,
-  arrayBiographyEng,
-  arrayBiographyRu,
-  arrayBiographyUa,
-  buttonSortByBubbleEng,
-  buttonSortByBubbleRu,
-  buttonSortByBubbleUa,
-  buttonSortEng,
-  buttonSortRu,
-  buttonSortUa,
-  placeholderTextEng,
-  placeholderTextErrorEng,
-  placeholderTextErrorRu,
-  placeholderTextErrorUa,
-  placeholderTextRu,
-  placeholderTextUa,
-  placeholderYearEng,
-  placeholderYearErrorEng,
-  placeholderYearErrorRu,
-  placeholderYearErrorUa,
-  placeholderYearRu,
-  placeholderYearUa,
-  pushValueEng,
-  pushValueRu,
-  pushValueUa,
-} from '../../constants/Text';
 import useDarkThemeContext from '../../hooks/useDarkThemeContext';
 
 interface IFormInputs {
@@ -54,6 +25,7 @@ const ArrayBiography = () => {
 
   const { register, errors, handleSubmit } = useForm<IFormInputs>();
   const { darkTheme } = useDarkThemeContext(styled);
+  const { t } = useTranslation();
   const onSubmitPushToArray = () => {
     const newstate = cloneDeep(state);
     const somenew: any = {
@@ -62,8 +34,8 @@ const ArrayBiography = () => {
         year: number,
         title: text,
         id: uuid(),
-        ismodal: false,
-      },
+        ismodal: false
+      }
     };
     setState(somenew);
     setNumber(1);
@@ -110,7 +82,7 @@ const ArrayBiography = () => {
       year: numberModal,
       title: textModal,
       id: uuid(),
-      ismodal: false,
+      ismodal: false
     };
     setState({ ...newState });
   };
@@ -123,78 +95,32 @@ const ArrayBiography = () => {
     textHoverTitle: {
       scale: 1.1,
       originX: 0,
-      color: 'rgb(182, 2, 0)',
+      color: 'rgb(182, 2, 0)'
     },
-    textHoverYear: { scale: 1.5, color: 'rgb(1, 172, 0)' },
+    textHoverYear: { scale: 1.5, color: 'rgb(1, 172, 0)' }
   };
   const buttonVariant = {
     buttonAnimation: {
       scale: [1, 1.1, 1],
-      transition: { duration: 0.7, repeat: Infinity },
-    },
+      transition: { duration: 0.7, repeat: Infinity }
+    }
   };
 
   const alertVariant = {
     alertInitial: { x: -100, opacity: 0 },
     alertAnimate: { x: 0, opacity: 1, transition: { duration: 1 } },
-    exitAlert: { x: -1000, transition: { duration: 1 } },
+    exitAlert: { x: -1000, transition: { duration: 1 } }
   };
   const modalVariant = {
     modalinitial: { opacity: 0, scale: 0.75 },
     modalanimate: { opacity: 1, scale: 1 },
-    modalexit: { opacity: 0, scale: 0 },
+    modalexit: { opacity: 0, scale: 0 }
   };
-
-  const { currentLanguage: arrayText } = useLanguages(
-    arrayBiographyEng,
-    arrayBiographyRu,
-    arrayBiographyUa,
-  );
-  const { currentLanguage: sort } = useLanguages(
-    buttonSortEng,
-    buttonSortRu,
-    buttonSortUa,
-  );
-  const { currentLanguage: sortByBubble } = useLanguages(
-    buttonSortByBubbleEng,
-    buttonSortByBubbleRu,
-    buttonSortByBubbleUa,
-  );
-  const { currentLanguage: placeholderText } = useLanguages(
-    placeholderTextEng,
-    placeholderTextRu,
-    placeholderTextUa,
-  );
-  const { currentLanguage: placeholderTextError } = useLanguages(
-    placeholderTextErrorEng,
-    placeholderTextErrorRu,
-    placeholderTextErrorUa,
-  );
-  const { currentLanguage: placeholderYear } = useLanguages(
-    placeholderYearEng,
-    placeholderYearRu,
-    placeholderYearUa,
-  );
-  const { currentLanguage: placeholderYearError } = useLanguages(
-    placeholderYearErrorEng,
-    placeholderYearErrorRu,
-    placeholderYearErrorUa,
-  );
-  const { currentLanguage: alertMessage } = useLanguages(
-    alertMessageEng,
-    alertMessageRu,
-    alertMessageUa,
-  );
-  const { currentLanguage: pushValue } = useLanguages(
-    pushValueEng,
-    pushValueRu,
-    pushValueUa,
-  );
 
   return (
     <section className={darkTheme}>
       <div className="container">
-        <h1 className={styled.title}>{arrayText}</h1>
+        <h1 className={styled.title}>{t('arrayBiography')}</h1>
         <Table
           state={state}
           deleteHandler={deleteHandler}
@@ -213,8 +139,8 @@ const ArrayBiography = () => {
           buttonVariant={buttonVariant}
           sortedUseSort={sortedUseSort}
           sortedUseBabel={sortedUseBabel}
-          sort={sort}
-          sortByBubble={sortByBubble}
+          sort={t('buttonSort')}
+          sortByBubble={t('buttonSortByBubble')}
         />
         <Form
           alertVariant={alertVariant}
@@ -228,12 +154,12 @@ const ArrayBiography = () => {
           errors={errors}
           handleSubmit={handleSubmit}
           onSubmitPushToArray={onSubmitPushToArray}
-          placeholderText={placeholderText}
-          placeholderTextError={placeholderTextError}
-          placeholderYear={placeholderYear}
-          placeholderYearError={placeholderYearError}
-          alertMessage={alertMessage}
-          pushValue={pushValue}
+          placeholderText={t('placeholderText')}
+          placeholderTextError={t('placeholderTextError')}
+          placeholderYear={t('placeholderYear')}
+          placeholderYearError={t('placeholderYearError')}
+          alertMessage={t('alertMessage')}
+          pushValue={t('pushValue')}
         />
       </div>
     </section>

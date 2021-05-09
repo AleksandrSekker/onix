@@ -1,4 +1,4 @@
-@import "../../../styles/variables";
+@import '../../../styles/variables';
 p {
   font-size: 1.2rem;
 }
@@ -34,7 +34,6 @@ div.dark {
   align-items: center;
   justify-content: center;
   flex-direction: column;
-
 }
 .second__container {
   background: $background-for-containers;
@@ -42,7 +41,7 @@ div.dark {
   margin-right: 1rem;
   margin-bottom: 2rem;
   text-align: center;
-  padding: 2rem; 
+  padding: 2rem;
   display: flex;
   align-items: center;
   justify-content: center;
@@ -122,34 +121,18 @@ div.dark {
   .first__container {
     height: 30rem;
     width: 30rem;
-    clip-path: polygon(
-      1% 0%,
-      95% 0,
-      95% 26%,
-      98% 34%,
-      95% 44%,
-      95% 100%,
-      1% 99%
-    );
+    clip-path: polygon(1% 0%, 95% 0, 95% 26%, 98% 34%, 95% 44%, 95% 100%, 1% 99%);
   }
   .second__container {
     height: 30rem;
     width: 30rem;
-    clip-path: polygon(
-      100% 0,
-      100% 100%,
-      5% 100%,
-      5% 44%,
-      2% 34%,
-      5% 26%,
-      5% 0
-    );
+    clip-path: polygon(100% 0, 100% 100%, 5% 100%, 5% 44%, 2% 34%, 5% 26%, 5% 0);
   }
   .flex {
     display: flex;
   }
 }
-.link{  
+.link {
   text-decoration: none;
   display: flex;
   justify-content: center;

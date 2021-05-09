@@ -1,3 +1,11 @@
+@import "../../../styles/variables";
+.dark {
+  background-color: $background-main-dark;
+  transition: 1s;
+  p{
+    color: white;
+  }
+}
 .display {
     display: flex;
     justify-content: space-between;

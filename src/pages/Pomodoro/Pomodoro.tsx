@@ -1,39 +1,16 @@
-import { faCheckCircle } from '@fortawesome/free-solid-svg-icons';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
-import React from 'react';
-import {
-  pomodoroAppEng,
-  pomodoroAppRu,
-  pomodoroAppUa,
-} from '../../constants/Text';
-import useLanguages from '../../hooks/useLanguages';
-import { ArrayDB } from './components/ArrayDB';
-import Counter from './components/Counter';
+import React, { useState } from 'react';
+
+import { useTranslation } from 'react-i18next';
 import styles from './scss/Pomodoro.module.scss';
 import useDarkThemeContext from '../../hooks/useDarkThemeContext';
+import PomodoroView from './PomodoroView';
 
 const Pomodoro = () => {
-  const { currentLanguage: PomodoroLang } = useLanguages(
-    pomodoroAppEng,
-    pomodoroAppRu,
-    pomodoroAppUa,
-  );
+  const { t } = useTranslation();
   const { darkTheme } = useDarkThemeContext(styles);
+  const [ismodal, setIsmodal] = useState(false);
   return (
-    <div className={darkTheme}>
-      <div className={styles.background}>
-        <div className={styles.container}>
-          <div className={styles.header}>
-            <p>
-              <FontAwesomeIcon icon={faCheckCircle} className={styles.logo} />
-              {PomodoroLang}
-            </p>
-          </div>
-          <Counter />
-          <ArrayDB />
-        </div>
-      </div>
-    </div>
+    <PomodoroView darkTheme={darkTheme} PomodoroLang={t('pomodoroApp')} ismodal={ismodal} setIsmodal={setIsmodal} />
   );
 };
 export default Pomodoro;

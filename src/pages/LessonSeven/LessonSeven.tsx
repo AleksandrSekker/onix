@@ -1,25 +1,13 @@
-import React, { useEffect, useRef, useState } from 'react';
+import React, { useEffect, useState } from 'react';
+import { useTranslation } from 'react-i18next';
 import styles from './scss/LessonSeven.module.scss';
 import Loader from '../../components/Loader/Loader';
 import Error from '../../components/Error/Error';
 import Cards from './Cards';
 import useFetch from '../../hooks/useFetch';
-import useLanguages from '../../hooks/useLanguages';
-import {
-  capitalEng,
-  capitalRu,
-  capitalUa,
-  detailPageEng,
-  detailPageRu,
-  detailPageUa,
-  populationEng,
-  populationRu,
-  populationUa,
-  regionEng,
-  regionRu,
-  regionUa,
-} from '../../constants/Text';
+
 import useDarkThemeContext from '../../hooks/useDarkThemeContext';
+import useDragAndDrop from '../../hooks/useDragAndDrop';
 
 const LessonSeven = () => {
   const [isNameActive, setIsNameActive] = useState(false);
@@ -28,45 +16,42 @@ const LessonSeven = () => {
   const [isCapitalActive, setIsCapitalActive] = useState(false);
   const [isChange] = useState(true);
   const { darkTheme } = useDarkThemeContext(styles);
-  const { 
+  const {
     loaded, state, setState, isError 
-  } = useFetch(
-    'https://restcountries.eu/rest/v2/all',
-    isChange,
-  );
+  } = useFetch('https://restcountries.eu/rest/v2/all', isChange);
+  const { t } = useTranslation();
   // onclick events
-
   const ternaryStyles = (x: boolean) => (x ? styles.active : '');
 
   const nameHandler = () => {
-    setIsNameActive(isNameActive => !isNameActive);
+    setIsNameActive((isNameActive) => !isNameActive);
   };
 
   const populationHandler = () => {
-    setIsPopulationActive(isPopulationActive => !isPopulationActive);
+    setIsPopulationActive((isPopulationActive) => !isPopulationActive);
   };
 
   const regionHandler = () => {
-    setIsRegionActive(isRegionActive => !isRegionActive);
+    setIsRegionActive((isRegionActive) => !isRegionActive);
   };
 
   const capitalHandler = () => {
-    setIsCapitalActive(isCapitalActive => !isCapitalActive);
+    setIsCapitalActive((isCapitalActive) => !isCapitalActive);
   };
   // keyboard events
   const keyboardEvents = (event: KeyboardEvent) => {
     switch (event.key) {
       case '1':
-        setIsNameActive(isNameActive => !isNameActive);
+        setIsNameActive((isNameActive) => !isNameActive);
         break;
       case '2':
-        setIsPopulationActive(isPopulationActive => !isPopulationActive);
+        setIsPopulationActive((isPopulationActive) => !isPopulationActive);
         break;
       case '3':
-        setIsRegionActive(isRegionActive => !isRegionActive);
+        setIsRegionActive((isRegionActive) => !isRegionActive);
         break;
       case '4':
-        setIsCapitalActive(isCapitalActive => !isCapitalActive);
+        setIsCapitalActive((isCapitalActive) => !isCapitalActive);
         break;
       default:
         break;
@@ -79,51 +64,9 @@ const LessonSeven = () => {
   });
 
   // Drag events
-  const draggingItem: React.MutableRefObject<any> = useRef();
-  const dragOverItem: React.MutableRefObject<
-    number | undefined | null
-  > = useRef();
-  const handleDragStart = (
-    e: React.DragEvent<HTMLDivElement>,
-    position: number,
-  ) => {
-    draggingItem.current = position;
-  };
+  const { handleDragEnter, handleDragStart } = useDragAndDrop(state, setState);
 
-  const handleDragEnter = (
-    e: React.DragEvent<HTMLDivElement>,
-    position: number,
-  ) => {
-    dragOverItem.current = position;
-    const listCopy = [...state];
-    const draggingItemContent = listCopy[draggingItem.current];
-    listCopy.splice(draggingItem.current, 1);
-    listCopy.splice(dragOverItem.current, 0, draggingItemContent);
-    draggingItem.current = dragOverItem.current;
-    dragOverItem.current = null;
-    setState(listCopy);
-  };
   // language
-  const { currentLanguage: population } = useLanguages(
-    populationEng,
-    populationRu,
-    populationUa,
-  );
-  const { currentLanguage: region } = useLanguages(
-    regionEng,
-    regionRu,
-    regionUa,
-  );
-  const { currentLanguage: capital } = useLanguages(
-    capitalEng,
-    capitalRu,
-    capitalUa,
-  );
-  const { currentLanguage: detailPage } = useLanguages(
-    detailPageEng,
-    detailPageRu,
-    detailPageUa,
-  );
   return (
     <div className={darkTheme}>
       <div className="container">
@@ -145,10 +88,10 @@ const LessonSeven = () => {
               isRegionActive={isRegionActive}
               capitalHandler={capitalHandler}
               isCapitalActive={isCapitalActive}
-              populationLanguage={population}
-              regionLanguage={region}
-              capitalLanguage={capital}
-              detailPageLanguage={detailPage}
+              populationLanguage={t('population')}
+              regionLanguage={t('region')}
+              capitalLanguage={t('capital')}
+              detailPageLanguage={t('detailPage')}
             />
           </>
         )}
