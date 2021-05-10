@@ -7,10 +7,12 @@ import uk from '../../assets/images/ukraine.svg';
 import en from '../../assets/images/unitedstates.svg';
 import ru from '../../assets/images/russia.svg';
 import useDarkThemeContext from '../../hooks/useDarkThemeContext';
+import ErrorAlert from '../../components/Alert/ErrorAlert/ErrorAlert';
 
 const Header = ({ setdarkTheme }: any) => {
   const [isActive, setIsActive] = useState(false);
   const [navFalse, setNavFalse] = useState(false);
+  const [showAlert, setShowAlert] = useState(false);
   const AppLink = withLink(Link);
   const { darkTheme, checked } = useDarkThemeContext(styles);
   const hamburgerHandler = () => {
@@ -25,7 +27,15 @@ const Header = ({ setdarkTheme }: any) => {
 
   const { t, i18n } = useTranslation();
   const changeLanguage = (language: string) => {
-    i18n.changeLanguage(language);
+    if (i18n.languages.includes(language)) {
+      i18n.changeLanguage(language);
+    } else {
+      setShowAlert(true);
+      setTimeout(() => {
+        setShowAlert(false);
+      }, 2000);
+      i18n.changeLanguage('en');
+    }
   };
 
   return (
@@ -73,7 +83,26 @@ const Header = ({ setdarkTheme }: any) => {
             <span />
           </button>
         </div>
-
+        <ErrorAlert showAlert={showAlert} setShowAlert={setShowAlert} />
+        {/* <AnimatePresence>
+          {showAlert && (
+            <div className={styles.alert__container}>
+              <motion.div
+                variants={containerVariant}
+                initial="alertInitial"
+                animate="alertAnimate"
+                exit="exitAlert"
+                className={styles.alert__container}
+              >
+                <p>
+                  <FontAwesomeIcon icon={faExclamationTriangle} />
+                </p>
+                <p>Error</p>
+                <FontAwesomeIcon icon={faTimes} onClick={closeAlert} />
+              </motion.div>
+            </div>
+          )}
+        </AnimatePresence> */}
         <div className={`${styles.navcontent__vertical} ${navFalse ? styles.nav__false : ''} ${darkTheme}`}>
           <AppLink to="/array">{t('arrayBiography')}</AppLink>
           <AppLink to="/pomodoro">{t('pomodoroApp')}</AppLink>

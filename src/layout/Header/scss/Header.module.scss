@@ -1,4 +1,4 @@
-@import "../scss/../../../styles/variables";
+@import '../scss/../../../styles/variables';
 
 .header__container {
   padding: 1rem;
@@ -19,6 +19,22 @@
   height: 35px;
   margin-left: 1rem;
 }
+// .alert__container {
+//   max-width: 1000px;
+//   margin: 0 auto;
+//   .alert__container {
+//     padding: 1rem;
+//     background: rgb(255, 98, 98);
+//     color: white;
+//     width: 10rem;
+//     border-radius: 0.5rem;
+//     display: flex;
+//     justify-content: space-between;
+//     p {
+//       color: white;
+//     }
+//   }
+// }
 header.dark {
   background: $background-main-dark;
   transition: 1s;
@@ -68,7 +84,7 @@ header.dark {
 
   .slider:before {
     position: absolute;
-    content: "";
+    content: '';
     height: 26px;
     width: 26px;
     left: 4px;
@@ -121,7 +137,6 @@ p {
   border: none;
   background: transparent;
   outline: none;
-  
 }
 
 .hamburger span {

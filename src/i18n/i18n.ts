@@ -24,7 +24,7 @@ i18n
   .use(initReactI18next)
   .init({
     resources,
-    fallbackLng: 'ru',
+    fallbackLng: ['en', 'ru', 'ua'],
     debug: true,
     detection: {
       order: ['queryString', 'localStorage', 'cookie'],
