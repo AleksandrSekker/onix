@@ -20,7 +20,7 @@ import Chat from './pages/Chat/Chat';
 export const ThemeContext = createContext(false);
 
 export const App = () => {
-  const [darkTheme, setdarkTheme] = useState(false);
+  const [darkTheme, setdarkTheme] = useState(true);
   const location = useLocation();
   const transitions = useTransition(location, (locations) => locations.pathname, {
     from: { opacity: 0, transform: 'translate3d(100%,0,0)' },

@@ -6,17 +6,17 @@ interface CheckedState {
 }
 
 const initialState: CheckedState = {
-  value: false,
+  value: false
 };
 
 export const checkedSlice = createSlice({
   name: 'checked',
   initialState,
   reducers: {
-    switching: (state) => { 
+    switching: (state) => {
       state.value = !state.value;
-    },
-  },
+    }
+  }
 });
 
 export const { switching } = checkedSlice.actions;

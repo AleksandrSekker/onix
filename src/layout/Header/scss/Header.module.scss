@@ -19,22 +19,12 @@
   height: 35px;
   margin-left: 1rem;
 }
-// .alert__container {
-//   max-width: 1000px;
-//   margin: 0 auto;
-//   .alert__container {
-//     padding: 1rem;
-//     background: rgb(255, 98, 98);
-//     color: white;
-//     width: 10rem;
-//     border-radius: 0.5rem;
-//     display: flex;
-//     justify-content: space-between;
-//     p {
-//       color: white;
-//     }
-//   }
-// }
+.avatar {
+  width: 40px;
+  height: 40px;
+  border-radius: 50%;
+  margin: 2px 5px;
+}
 header.dark {
   background: $background-main-dark;
   transition: 1s;
@@ -51,6 +41,7 @@ header.dark {
 
 .container__for__logo__and__switch {
   display: flex;
+  flex-wrap: wrap;
   .link__decoration {
     text-decoration: none;
   }
@@ -206,6 +197,23 @@ p {
 }
 .nav__false {
   transform: translateX(0%);
+}
+.auth__container {
+  max-width: 1200px;
+  margin: auto;
+  padding-left: 1rem;
+  padding-right: 1rem;
+  display: flex;
+  justify-content: space-between;
+  flex-wrap: wrap;
+}
+.language__and__login__container {
+  max-width: 1200px;
+  margin: auto;
+  padding-left: 1rem;
+  padding-right: 1rem;
+  display: flex;
+  justify-content: space-between;
 }
 
 @media only screen and (min-width: 768px) {

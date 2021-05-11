@@ -1,11 +1,8 @@
 import React from 'react';
-import styles from '../scss/chat.module.scss';
+import { auth } from '../../firebase';
+import styles from './scss/Login.module.scss';
 
-interface Props {
-  auth: any;
-}
-
-const SignOut = ({ auth }: Props) => {
+const SignOutButton = () => {
   return (
     auth.currentUser && (
       <button type="button" className={styles.sign__out} onClick={() => auth.signOut()}>
@@ -14,4 +11,4 @@ const SignOut = ({ auth }: Props) => {
     )
   );
 };
-export default SignOut;
+export default SignOutButton;
