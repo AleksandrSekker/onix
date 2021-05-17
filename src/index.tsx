@@ -4,7 +4,7 @@ import './index.scss';
 import { Provider } from 'react-redux';
 import { BrowserRouter as Router } from 'react-router-dom';
 import { App } from './App';
-import { store } from './app/store';
+import { store } from './redux/store';
 import './i18n/i18n';
 import Loader from './components/Loader/Loader';
 

@@ -62,7 +62,6 @@ const Header = ({ setdarkTheme }: any) => {
             <AppLink to="/lessonseven">{t('countries')}</AppLink>
             <AppLink to="/array">{t('arrayBiography')}</AppLink>
             <AppLink to="/pomodoro">{t('pomodoroApp')}</AppLink>
-            <AppLink to="/chat">{t('chat')}</AppLink>
           </div>
 
           <button
@@ -112,7 +111,6 @@ const Header = ({ setdarkTheme }: any) => {
           <AppLink to="/array">{t('arrayBiography')}</AppLink>
           <AppLink to="/pomodoro">{t('pomodoroApp')}</AppLink>
           <AppLink to="/lessonseven">{t('countries')}</AppLink>
-          <AppLink to="/chat">{t('chat')}</AppLink>
         </div>
       </header>
     </>

@@ -22,12 +22,12 @@ interface Props {
   detailPageLanguage: string;
 }
 interface State {
-  name: string, 
-  flag: string, 
-  population: string, 
-  region: string, 
-  capital: string, 
-  id: string
+  name: string;
+  flag: string;
+  population: string;
+  region: string;
+  capital: string;
+  id: string;
 }
 const Cards = ({
   state,
@@ -45,16 +45,13 @@ const Cards = ({
   populationLanguage,
   regionLanguage,
   capitalLanguage,
-  detailPageLanguage,
+  detailPageLanguage
 }: Props) => (
   <div className={styles.card}>
-    {state 
-    && state.slice(0, 20).map(
-      (
-        { 
-          name, flag, population, region, capital, id
-        }: State, index: any
-      ) => (
+    {state
+      && state.map(({
+        name, flag, population, region, capital, id 
+      }: State, index: any) => (
         <div
           onDragStart={(e) => handleDragStart(e, index)}
           onDragOver={(e) => e.preventDefault()}
@@ -65,11 +62,7 @@ const Cards = ({
         >
           <img src={flag} alt="flag" />
           <div className={styles.button__container}>
-            <button
-              type="button"
-              onClick={nameHanler}
-              className={`${ternaryStyles(isNameActive)} ${styles.button}`}
-            >
+            <button type="button" onClick={nameHanler} className={`${ternaryStyles(isNameActive)} ${styles.button}`}>
               {name}
             </button>
             <button
@@ -100,15 +93,11 @@ const Cards = ({
               {capital}
             </button>
             <Link to={`/${name}`} className={styles.link}>
-              <Button
-                text={detailPageLanguage}
-                color="btn__sorted__use__bubble"
-              />
+              <Button text={detailPageLanguage} color="btn__sorted__use__bubble" />
             </Link>
           </div>
         </div>
-      ),
-    )}
+      ))}
   </div>
 );
 export default Cards;

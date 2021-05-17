@@ -15,6 +15,7 @@ const Home = () => {
   AOS.init();
   const { darkTheme } = useDarkThemeContext(style);
   const { t } = useTranslation();
+
   return (
     <div className={darkTheme}>
       <div className={style.flex}>

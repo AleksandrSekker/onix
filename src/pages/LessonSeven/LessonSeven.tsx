@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
+import { useDispatch, useSelector } from 'react-redux';
 import styles from './scss/LessonSeven.module.scss';
 import Loader from '../../components/Loader/Loader';
 import Error from '../../components/Error/Error';
@@ -8,6 +9,8 @@ import useFetch from '../../hooks/useFetch';
 
 import useDarkThemeContext from '../../hooks/useDarkThemeContext';
 import useDragAndDrop from '../../hooks/useDragAndDrop';
+import Pagination from './Pagination';
+import { selectPagination, currentPosts } from '../../redux/pagination/actions';
 
 const LessonSeven = () => {
   const [isNameActive, setIsNameActive] = useState(false);
@@ -15,6 +18,8 @@ const LessonSeven = () => {
   const [isRegionActive, setIsRegionActive] = useState(false);
   const [isCapitalActive, setIsCapitalActive] = useState(false);
   const [isChange] = useState(true);
+  const [currentPage, setCurrentPage] = useState(1);
+  const [postsPerPage] = useState(10);
   const { darkTheme } = useDarkThemeContext(styles);
   const {
     loaded, state, setState, isError 
@@ -22,19 +27,15 @@ const LessonSeven = () => {
   const { t } = useTranslation();
   // onclick events
   const ternaryStyles = (x: boolean) => (x ? styles.active : '');
-
   const nameHandler = () => {
     setIsNameActive((isNameActive) => !isNameActive);
   };
-
   const populationHandler = () => {
     setIsPopulationActive((isPopulationActive) => !isPopulationActive);
   };
-
   const regionHandler = () => {
     setIsRegionActive((isRegionActive) => !isRegionActive);
   };
-
   const capitalHandler = () => {
     setIsCapitalActive((isCapitalActive) => !isCapitalActive);
   };
@@ -65,8 +66,16 @@ const LessonSeven = () => {
 
   // Drag events
   const { handleDragEnter, handleDragStart } = useDragAndDrop(state, setState);
+  const indexOfLastPost = currentPage * postsPerPage;
+  const indexOfFirstPost = indexOfLastPost - postsPerPage;
 
-  // language
+  const current = useSelector(selectPagination);
+  const dispatch = useDispatch();
+  dispatch(currentPosts(state));
+  const currentPost = current.slice(indexOfFirstPost, indexOfLastPost);
+  const paginate = (pageNumber: number) => {
+    setCurrentPage(pageNumber);
+  };
   return (
     <div className={darkTheme}>
       <div className="container">
@@ -75,8 +84,9 @@ const LessonSeven = () => {
           <Loader />
         ) : (
           <>
+            <Pagination paginate={paginate} postsPerPage={postsPerPage} totalPosts={state.length} />
             <Cards
-              state={state}
+              state={currentPost}
               handleDragEnter={handleDragEnter}
               handleDragStart={handleDragStart}
               nameHanler={nameHandler}
