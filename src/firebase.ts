@@ -4,14 +4,14 @@ import 'firebase/auth';
 import 'firebase/storage';
 
 firebase.initializeApp({
-  apiKey: 'AIzaSyCDjlDo4U_89PKGVj51vGGcPx6phd8McmE',
-  authDomain: 'myproject-21d64.firebaseapp.com',
-  databaseURL: 'https://myproject-21d64-default-rtdb.firebaseio.com',
-  projectId: 'myproject-21d64',
-  storageBucket: 'myproject-21d64.appspot.com',
-  messagingSenderId: '124788208408',
-  appId: '1:124788208408:web:fbe44a8de8806bc02da46d',
-  measurementId: 'G-CYC839BXYZ'
+  apiKey: process.env.REACT_APP_FIREBASE_API_KEY,
+  authDomain: process.env.REACT_APP_FIREBASE_AUTH_DOMAIN,
+  databaseURL: process.env.REACT_APP_FIREBASE_DATABASE_URL,
+  projectId: process.env.REACT_APP_FIREBASE_PROJECT_ID,
+  storageBucket: process.env.REACT_APP_FIREBASE_STORAGE_BUCKET,
+  messagingSenderId: process.env.REACT_APP_FIREBASE_MESSAGING_SENDER_ID,
+  appId: process.env.REACT_APP_FIREBASE_APP_ID,
+  measurementId: process.env.REACT_APP_FIREBASE_MEASURMENT_ID
 });
 const auth = firebase.auth();
 const firestore = firebase.firestore();

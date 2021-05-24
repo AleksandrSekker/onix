@@ -6,7 +6,6 @@ import Error from '../../../components/Error/Error';
 import TableData from './TableData';
 import AddModal from './AddModal';
 import useFetch from '../../../hooks/useFetch';
-import useDragAndDrop from '../../../hooks/useDragAndDrop';
 
 export const ArrayDB = () => {
   const [title, setTitle] = useState(String);
@@ -19,9 +18,7 @@ export const ArrayDB = () => {
   const [isModal, setIsModal] = useState(false);
   const [linkAdd, setLinkAdd] = useState(false);
   const [errorState, setErrorState] = useState(false);
-  const {
-    loaded, state, setState, isError 
-  } = useFetch('https://guarded-brook-68937.herokuapp.com/api/todo', isChange);
+  const { loaded, state, isError } = useFetch('https://guarded-brook-68937.herokuapp.com/api/todo', isChange);
   const { t } = useTranslation();
   const result = state;
   const pushHandler = async () => {
@@ -111,7 +108,7 @@ export const ArrayDB = () => {
   };
 
   // dragging
-  const { handleDragEnter, handleDragStart } = useDragAndDrop(state, setState);
+
   const modalVariant = {
     modalInitial: { opacity: 0, scale: 0.3 },
     modalAnimate: {
@@ -132,8 +129,6 @@ export const ArrayDB = () => {
       ) : (
         <TableData
           result={state}
-          handleDragEnter={handleDragEnter}
-          handleDragStart={handleDragStart}
           deleteHandler={deleteHandler}
           updateHandlerModal={updateHandlerModal}
           modalVariant={modalVariant}

@@ -3,7 +3,7 @@ import { useTranslation } from 'react-i18next';
 import styles from './scss/Buttons.module.scss';
 
 interface Props {
-  onClick: any;
+  onClick: () => void;
 }
 
 export const ButtonSave = ({ onClick }: Props) => {

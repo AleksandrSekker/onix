@@ -1,6 +1,10 @@
 import React, { useRef } from 'react';
+import { useDispatch, useSelector } from 'react-redux';
+import { currentPosts, selectPagination } from '../redux/pagination/actions';
 
-const useDragAndDrop = (state: any, setState: any) => {
+const useDragAndDrop = () => {
+  const state = useSelector(selectPagination);
+  const dispatch = useDispatch();
   const draggingItem: React.MutableRefObject<any> = useRef();
   const dragOverItem: React.MutableRefObject<number | undefined | null> = useRef();
   const handleDragStart = (e: React.DragEvent<HTMLDivElement>, position: number) => {
@@ -15,7 +19,7 @@ const useDragAndDrop = (state: any, setState: any) => {
     listCopy.splice(dragOverItem.current, 0, draggingItemContent);
     draggingItem.current = dragOverItem.current;
     dragOverItem.current = null;
-    setState(listCopy);
+    dispatch(currentPosts(listCopy));
   };
   return { handleDragEnter, handleDragStart };
 };

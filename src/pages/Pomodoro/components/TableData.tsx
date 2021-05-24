@@ -1,10 +1,6 @@
 import React, { useState } from 'react';
 import {
-  faCheckCircle,
-  faChevronDown,
-  faChevronUp,
-  faEdit,
-  faTrash,
+  faCheckCircle, faChevronDown, faChevronUp, faEdit, faTrash 
 } from '@fortawesome/free-solid-svg-icons';
 import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 import { motion } from 'framer-motion';
@@ -19,8 +15,6 @@ interface Props {
   yearForUpdate: number;
   setyearForUpdate: React.Dispatch<React.SetStateAction<number>>;
   updateHandlerAll: any;
-  handleDragStart: any;
-  handleDragEnter: any;
   deleteHandler: any;
   updateHandlerModal: any;
   modalVariant: {
@@ -51,12 +45,14 @@ interface Props {
   saveLanguage: string;
 }
 interface State {
-  title: string; _id: string; year: number; subtitle: string; ismodal: boolean;
+  title: string;
+  _id: string;
+  year: number;
+  subtitle: string;
+  ismodal: boolean;
 }
 const TableData = ({
   result,
-  handleDragStart,
-  handleDragEnter,
   deleteHandler,
   updateHandlerModal,
   modalVariant,
@@ -72,147 +68,122 @@ const TableData = ({
   addNotesLanguage,
   notesPlaceholderLanguage,
   cancelLanguage,
-  saveLanguage,
+  saveLanguage
 }: Props) => {
   const [linkAdd, setLinkAdd] = useState(false);
 
   return (
     <div>
-      {result.map(
-        (
-          { 
-            title, _id, year, subtitle, ismodal, 
-          }: State, index: number
-        ) => (
-          <div
-            onDragStart={(e) => handleDragStart(e, index)}
-            onDragOver={(e) => e.preventDefault()}
-            onDragEnter={(e) => handleDragEnter(e, index)}
-            key={_id}
-            draggable
-          >
-            {!ismodal ? (
-              <div className={styles.array}>
-                <div className={styles.flex__container}>
-                  <div className={styles.title__container}>
-                    <p>
-                      <FontAwesomeIcon icon={faCheckCircle} />
-                    </p>
-                    <p>{title}</p>
-                  </div>
-                  <div className={styles.edit__container}>
-                    <p>{year}</p>
-                    <p>
-                      <FontAwesomeIcon
-                        icon={faEdit}
-                        onClick={() => updateHandlerModal(_id, index)}
-                      />
-                      <FontAwesomeIcon
-                        icon={faTrash}
-                        onClick={() => deleteHandler(_id)}
-                      />
-                    </p>
-                  </div>
+      {result.map(({
+        title, _id, year, subtitle, ismodal 
+      }: State, index: number) => (
+        <div key={_id}>
+          {!ismodal ? (
+            <div className={styles.array}>
+              <div className={styles.flex__container}>
+                <div className={styles.title__container}>
+                  <p>
+                    <FontAwesomeIcon icon={faCheckCircle} />
+                  </p>
+                  <p>{title}</p>
                 </div>
-                <p>{subtitle}</p>
+                <div className={styles.edit__container}>
+                  <p>{year}</p>
+                  <p>
+                    <FontAwesomeIcon icon={faEdit} onClick={() => updateHandlerModal(_id, index)} />
+                    <FontAwesomeIcon icon={faTrash} onClick={() => deleteHandler(_id)} />
+                  </p>
+                </div>
               </div>
-            ) : (
-              <motion.div
-                className={styles.modal}
-                variants={modalVariant}
-                initial="modalInitial"
-                animate="modalAnimate"
-                exit="modalExit"
-              >
+              <p>{subtitle}</p>
+            </div>
+          ) : (
+            <motion.div
+              className={styles.modal}
+              variants={modalVariant}
+              initial="modalInitial"
+              animate="modalAnimate"
+              exit="modalExit"
+            >
+              <input
+                type="text"
+                className={styles.title__input}
+                placeholder={placeholderLanguage}
+                defaultValue={titleForUpdate}
+                onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+                  settitleForUpdate(e.target.value);
+                }}
+              />
+              <p>{amountLanguage}</p>
+              <div className={styles.flex}>
                 <input
-                  type="text"
-                  className={styles.title__input}
-                  placeholder={placeholderLanguage}
-                  defaultValue={titleForUpdate}
-                  onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-                    settitleForUpdate(e.target.value);
+                  type="number"
+                  className={styles.numberInput}
+                  value={yearForUpdate}
+                  onChange={(e: any) => {
+                    setyearForUpdate(e.target.value);
                   }}
                 />
-                <p>{amountLanguage}</p>
-                <div className={styles.flex}>
-                  <input
-                    type="number"
-                    className={styles.numberInput}
-                    value={yearForUpdate}
-                    onChange={(e: any) => {
-                      setyearForUpdate(e.target.value);
-                    }}
-                  />
-                  <button
-                    type="button"
-                    className={styles.chevron}
-                    onClick={() => {
-                      setyearForUpdate(yearForUpdate + 1);
-                    }}
-                  >
-                    <FontAwesomeIcon icon={faChevronUp} />
+                <button
+                  type="button"
+                  className={styles.chevron}
+                  onClick={() => {
+                    setyearForUpdate(yearForUpdate + 1);
+                  }}
+                >
+                  <FontAwesomeIcon icon={faChevronUp} />
+                </button>
+                <button
+                  type="button"
+                  className={styles.chevron}
+                  onClick={() => {
+                    setyearForUpdate(yearForUpdate - 1);
+                  }}
+                >
+                  <FontAwesomeIcon icon={faChevronDown} />
+                </button>
+              </div>
+              {linkAdd ? (
+                <input
+                  type="text"
+                  className={styles.subtitle__input}
+                  defaultValue={subtitleForUpdate}
+                  placeholder={notesPlaceholderLanguage}
+                  onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+                    setsubtitleForUpdate(e.target.value);
+                  }}
+                />
+              ) : (
+                <button
+                  type="button"
+                  className={styles.link__add}
+                  onClick={() => {
+                    setLinkAdd(!linkAdd);
+                  }}
+                >
+                  {addNotesLanguage}
+                </button>
+              )}
+              <div className={styles.modal__footer__background}>
+                <div className={styles.modal__footer}>
+                  <button type="button" onClick={() => updateHandlerModal(_id, index)} className={styles.cancel}>
+                    {cancelLanguage}
                   </button>
                   <button
                     type="button"
-                    className={styles.chevron}
                     onClick={() => {
-                      setyearForUpdate(yearForUpdate - 1);
+                      updateHandlerAll(_id, titleForUpdate, subtitleForUpdate, yearForUpdate);
                     }}
+                    className={styles.save}
                   >
-                    <FontAwesomeIcon icon={faChevronDown} />
+                    {saveLanguage}
                   </button>
                 </div>
-                {linkAdd ? (
-                  <input
-                    type="text"
-                    className={styles.subtitle__input}
-                    defaultValue={subtitleForUpdate}
-                    placeholder={notesPlaceholderLanguage}
-                    onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-                      setsubtitleForUpdate(e.target.value);
-                    }}
-                  />
-                ) : (
-                  <button
-                    type="button"
-                    className={styles.link__add}
-                    onClick={() => {
-                      setLinkAdd(!linkAdd);
-                    }}
-                  >
-                    {addNotesLanguage}
-                  </button>
-                )}
-                <div className={styles.modal__footer__background}>
-                  <div className={styles.modal__footer}>
-                    <button
-                      type="button"
-                      onClick={() => updateHandlerModal(_id, index)}
-                      className={styles.cancel}
-                    >
-                      {cancelLanguage}
-                    </button>
-                    <button
-                      type="button"
-                      onClick={() => {
-                        updateHandlerAll(
-                          _id,
-                          titleForUpdate,
-                          subtitleForUpdate,
-                          yearForUpdate,
-                        );
-                      }}
-                      className={styles.save}
-                    >
-                      {saveLanguage}
-                    </button>
-                  </div>
-                </div>
-              </motion.div>
-            )}
-          </div>
-        ),
-      )}
+              </div>
+            </motion.div>
+          )}
+        </div>
+      ))}
     </div>
   );
 };

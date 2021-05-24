@@ -1,28 +1,24 @@
 import React, { useEffect, useState } from 'react';
 import { useTranslation } from 'react-i18next';
-import { useDispatch, useSelector } from 'react-redux';
+import { useSelector } from 'react-redux';
 import styles from './scss/LessonSeven.module.scss';
 import Loader from '../../components/Loader/Loader';
-import Error from '../../components/Error/Error';
 import Cards from './Cards';
 import useDarkThemeContext from '../../hooks/useDarkThemeContext';
 import useDragAndDrop from '../../hooks/useDragAndDrop';
-// import Pagination from './Pagination';
-import { selectPagination, currentPosts } from '../../redux/pagination/actions';
 import useInfiniteScroll from '../../hooks/useInfiniteScroll';
+import { selectError, selectPagination } from '../../redux/pagination/actions';
+import Error from '../../components/Error/Error';
 
 const LessonSeven = () => {
   const [isNameActive, setIsNameActive] = useState(false);
   const [isPopulationActive, setIsPopulationActive] = useState(false);
   const [isRegionActive, setIsRegionActive] = useState(false);
   const [isCapitalActive, setIsCapitalActive] = useState(false);
-  // const [isError, setIsError] = useState(false);
   const { darkTheme } = useDarkThemeContext(styles);
   // Infinite Scrolling
 
-  const {
-    state, isError, isFetching, setState 
-  } = useInfiniteScroll('https://restcountries.eu/rest/v2/all');
+  const { isFetching } = useInfiniteScroll();
   // translation
   const { t } = useTranslation();
   // onclick events
@@ -64,17 +60,15 @@ const LessonSeven = () => {
     return () => window.removeEventListener('keydown', keyboardEvents);
   });
 
-  // Drag events
-  const { handleDragEnter, handleDragStart } = useDragAndDrop(state, setState);
-
   // redux
   const current = useSelector(selectPagination);
-  const dispatch = useDispatch();
-  dispatch(currentPosts(state));
+  // Drag events
+  const { handleDragEnter, handleDragStart } = useDragAndDrop();
+  const error = useSelector(selectError);
   return (
     <div className={darkTheme}>
       <div className="container">
-        {isError && <Error />}
+        {error && <Error />}
         <Cards
           state={current}
           handleDragEnter={handleDragEnter}
