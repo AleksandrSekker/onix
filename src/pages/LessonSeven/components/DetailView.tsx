@@ -9,7 +9,7 @@ import Loader from '../../../components/Loader/Loader';
 
 interface Props {
   darkTheme: string;
-  state: any[];
+  state: never[];
   isError: boolean;
   isLoaded: boolean;
   showAlert: boolean;

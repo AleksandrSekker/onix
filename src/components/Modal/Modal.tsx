@@ -2,8 +2,8 @@ import { AnimatePresence, motion } from 'framer-motion';
 import React from 'react';
 
 interface Props {
-  children: any;
-  ismodal: any;
+  children: React.ReactNode;
+  ismodal: boolean;
 }
 
 const Modal = ({ children, ismodal }: Props) => {

@@ -10,13 +10,13 @@ import Loader from './components/Loader/Loader';
 
 ReactDOM.render(
   <React.StrictMode>
-    <Provider store={store}>
-      <Router>
-        <Suspense fallback={<Loader />}>
+    <Suspense fallback={<Loader />}>
+      <Provider store={store}>
+        <Router>
           <App />
-        </Suspense>
-      </Router>
-    </Provider>
+        </Router>
+      </Provider>
+    </Suspense>
   </React.StrictMode>,
   document.getElementById('root')
 );

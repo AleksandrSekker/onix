@@ -6,7 +6,7 @@ import styles from './scss/ErrorAlert.module.scss';
 
 interface Props {
   showAlert: boolean;
-  setShowAlert: any;
+  setShowAlert: (arg0: boolean) => void;
 }
 
 const ErrorAlert = ({ showAlert, setShowAlert }: Props) => {

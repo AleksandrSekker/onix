@@ -13,7 +13,7 @@ import { auth } from '../../firebase';
 import SignInButton from '../../components/LoginButton/SignInButton';
 import SignOutButton from '../../components/LoginButton/SignOutButton';
 
-const Header = ({ setdarkTheme }: any) => {
+const Header = (setdarkTheme: any) => {
   const [isActive, setIsActive] = useState(false);
   const [navFalse, setNavFalse] = useState(false);
   const [showAlert, setShowAlert] = useState(false);
@@ -39,6 +39,7 @@ const Header = ({ setdarkTheme }: any) => {
       setTimeout(() => {
         setShowAlert(false);
       }, 2000);
+      i18n.changeLanguage('en');
     }
   };
 

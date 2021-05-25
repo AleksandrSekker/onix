@@ -32,7 +32,7 @@ const SortButton = ({
       variants={buttonVariant}
       whileHover="buttonAnimation"
     >
-      <Button text={sort} color="btn__sorted__by__sort" />
+      <Button text={sort} color="btn__sorted__use__bubble" />
     </motion.div>
     <motion.div
       onClick={sortedUseBabel}

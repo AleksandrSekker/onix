@@ -5,31 +5,34 @@ import english from './en/translation';
 import russian from './ru/translation';
 import ukranian from './ua/translation';
 
-const resources = {
+const data = {
   en: {
     translation: english
   },
   ru: {
     translation: russian
   },
-  ua: {
+  uk: {
     translation: ukranian
   }
 };
+const fallbackLng = 'en';
+const availableLanguages = ['en', 'ru', 'uk'];
 
+const options = {
+  order: ['localStorage', 'navigator'],
+  lookupLocalStorage: 'i18nextLng',
+  caches: ['localStorage'],
+  checkWhitelist: true
+};
 i18n
   .use(LanguageDetector)
   .use(initReactI18next)
   .init({
-    resources,
-    fallbackLng: ['en', 'ru', 'ua'],
-    debug: true,
-    detection: {
-      order: ['queryString', 'localStorage'],
-      caches: ['localStorage']
-    },
-    interpolation: {
-      escapeValue: false
-    }
+    fallbackLng,
+    whitelist: availableLanguages,
+    detection: options,
+    resources: data,
+    interpolation: { escapeValue: false },
   });
 export default i18n;
