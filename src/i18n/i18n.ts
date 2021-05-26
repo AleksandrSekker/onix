@@ -16,10 +16,15 @@ const data = {
     translation: ukranian
   }
 };
-const fallbackLng = 'en';
-const availableLanguages = ['en', 'ru', 'uk'];
+const fallbackLng: string = 'en';
+const availableLanguages: string[] = ['en', 'ru', 'uk'];
 
-const options = {
+const options: {
+  order: string[];
+  lookupLocalStorage: string;
+  caches: string[];
+  checkWhitelist: boolean;
+} = {
   order: ['localStorage', 'navigator'],
   lookupLocalStorage: 'i18nextLng',
   caches: ['localStorage'],

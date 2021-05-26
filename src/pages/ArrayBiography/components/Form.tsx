@@ -81,8 +81,8 @@ const Form = ({
           value={number}
           className={stylei.input__field}
           placeholder={placeholderYear}
-          onChange={(e: any) => {
-            setNumber(e.target.value);
+          onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+            setNumber(parseInt(e.target.value));
           }}
         />
         <h5 className={stylei.valid__text}>

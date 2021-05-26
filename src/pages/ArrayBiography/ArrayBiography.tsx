@@ -10,6 +10,14 @@ import SortButton from './components/SortButton';
 import Form from './components/Form';
 import useDarkThemeContext from '../../hooks/useDarkThemeContext';
 
+interface DataInterface {
+  [x: string]: {
+    year: number;
+    title: string;
+    id: string;
+    ismodal: boolean;
+};
+}
 interface IFormInputs {
   number: number;
   text: string;
@@ -28,7 +36,7 @@ const ArrayBiography = () => {
   const { t } = useTranslation();
   const onSubmitPushToArray = () => {
     const newstate = cloneDeep(state);
-    const somenew: any = {
+    const somenew: DataInterface = {
       ...newstate,
       [uuid()]: {
         year: number,

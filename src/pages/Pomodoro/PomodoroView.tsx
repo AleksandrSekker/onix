@@ -10,7 +10,7 @@ import ModalFooter from '../../components/ModalView/ModalFooter';
 import { ButtonSave } from '../../components/Button/ButtonSave';
 
 interface Props {
-  darkTheme: any;
+  darkTheme: string;
   PomodoroLang: string;
   ismodal: boolean;
   setIsmodal: React.Dispatch<React.SetStateAction<boolean>>;

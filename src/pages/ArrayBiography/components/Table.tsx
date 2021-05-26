@@ -20,9 +20,9 @@ interface Props {
   setNumberModal: React.Dispatch<React.SetStateAction<number>>;
   textModal: string;
   setTextModal: React.Dispatch<React.SetStateAction<string>>;
-  deleteHandler: any;
-  apdateHandler: any;
-  modalHandler: any;
+  deleteHandler: (a: string) => void;
+  apdateHandler: (a: string) => void;
+  modalHandler: (a: string) => void;
   textVariant: {
     textHoverTitle: {
       scale: number;
@@ -114,8 +114,8 @@ const Table = ({
                   value={numberModal}
                   className={stylei.input__field}
                   placeholder="Please type year"
-                  onChange={(e: any) => {
-                    setNumberModal(e.target.value);
+                  onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+                    setNumberModal(parseInt(e.target.value));
                   }}
                 />
               </div>

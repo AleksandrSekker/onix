@@ -17,12 +17,12 @@ interface Props {
   cancelLanguage: string;
   saveLanguage: string;
   isModal: boolean;
-  setTitle: any;
+  setTitle: React.Dispatch<React.SetStateAction<string>>;
   year: number;
-  setYear: any;
+  setYear: React.Dispatch<React.SetStateAction<number>>;
   linkAdd: boolean;
-  setSubTitle: any;
-  setLinkAdd: any;
+  setSubTitle: React.Dispatch<React.SetStateAction<string>>;
+  setLinkAdd: React.Dispatch<React.SetStateAction<boolean>>;
   modalToggler: () => void;
   pushHandler: () => void;
 }
@@ -79,7 +79,7 @@ const AddModal = ({
               className={styles.numberInput}
               value={year}
               onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
-                setYear(e.target.value);
+                setYear(parseInt(e.target.value));
               }}
             />
             <button

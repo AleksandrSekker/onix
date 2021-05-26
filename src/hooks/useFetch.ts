@@ -2,9 +2,9 @@ import { useEffect, useState } from 'react';
 import { v4 as uuid } from 'uuid';
 
 const useFetch = (url: string, isChange: boolean) => {
-  const [loaded, setLoaded] = useState(Boolean);
-  const [state, setState]: any = useState([]);
-  const [isError, setIsError] = useState(Boolean);
+  const [loaded, setLoaded] = useState<boolean>();
+  const [state, setState] = useState<any>([]);
+  const [isError, setIsError] = useState<boolean>();
   const fetchData = async () => {
     try {
       const response = await fetch(url);

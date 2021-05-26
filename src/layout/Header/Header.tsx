@@ -13,10 +13,10 @@ import { auth } from '../../firebase';
 import SignInButton from '../../components/LoginButton/SignInButton';
 import SignOutButton from '../../components/LoginButton/SignOutButton';
 
-const Header = (setdarkTheme: any) => {
-  const [isActive, setIsActive] = useState(false);
-  const [navFalse, setNavFalse] = useState(false);
-  const [showAlert, setShowAlert] = useState(false);
+const Header = ({ setdarkTheme }: any) => {
+  const [isActive, setIsActive] = useState<boolean>(false);
+  const [navFalse, setNavFalse] = useState<boolean>(false);
+  const [showAlert, setShowAlert] = useState<boolean>(false);
   const [user] = useAuthState(auth);
   const AppLink = withLink(Link);
   const { darkTheme, checked } = useDarkThemeContext(styles);

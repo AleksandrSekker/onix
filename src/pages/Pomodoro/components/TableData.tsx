@@ -14,9 +14,9 @@ interface Props {
   setsubtitleForUpdate: React.Dispatch<React.SetStateAction<string>>;
   yearForUpdate: number;
   setyearForUpdate: React.Dispatch<React.SetStateAction<number>>;
-  updateHandlerAll: any;
-  deleteHandler: any;
-  updateHandlerModal: any;
+  updateHandlerAll: (id: string, titleUpdate: string, subtitleUpdate: string, yearUpdate: number) => Promise<void>;
+  deleteHandler: (id: string) => Promise<void>;
+  updateHandlerModal: (id: string, index: number) => Promise<void>
   modalVariant: {
     modalInitial: {
       opacity: number;
@@ -120,8 +120,8 @@ const TableData = ({
                   type="number"
                   className={styles.numberInput}
                   value={yearForUpdate}
-                  onChange={(e: any) => {
-                    setyearForUpdate(e.target.value);
+                  onChange={(e: React.ChangeEvent<HTMLInputElement>) => {
+                    setyearForUpdate(parseInt(e.target.value));
                   }}
                 />
                 <button

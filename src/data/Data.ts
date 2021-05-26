@@ -1,6 +1,14 @@
 import { v4 as uuid } from 'uuid';
 
-const data = {
+interface Data {
+  [x: string]: {
+    year: number;
+    title: string;
+    id: string;
+    ismodal: boolean;
+};
+}
+const data: Data = {
   [uuid()]: {
     year: 1835,
     title: 'Mark Twain (Samuel Langhorne Clemens) Born',

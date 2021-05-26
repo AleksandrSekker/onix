@@ -4,11 +4,11 @@ import styles from './scss/LessonSeven.module.scss';
 import Button from '../../components/Button/Button';
 
 interface Props {
-  state: any;
-  handleDragStart: any;
-  handleDragEnter: any;
+  state: [];
+  handleDragStart: (e: React.DragEvent<HTMLDivElement>, position: number) => void;
+  handleDragEnter: (e: React.DragEvent<HTMLDivElement>, position: number) => void;
   nameHanler: () => void;
-  ternaryStyles: any;
+  ternaryStyles: (x: boolean) => string;
   isNameActive: boolean;
   isPopulationActive: boolean;
   populationHandler: () => void;
@@ -51,7 +51,7 @@ const Cards = ({
     {state
       && state.map(({
         name, flag, population, region, capital, id 
-      }: State, index: any) => (
+      }: State, index: number) => (
         <div
           onDragStart={(e) => handleDragStart(e, index)}
           onDragOver={(e) => e.preventDefault()}

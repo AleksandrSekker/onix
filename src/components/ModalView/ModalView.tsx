@@ -2,7 +2,7 @@ import React from 'react';
 import styles from './scss/ModalView.module.scss';
 
 interface Props {
-  children: any;
+  children: React.ReactNode;
 }
 
 const ModalView = ({ children }: Props) => {

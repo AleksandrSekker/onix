@@ -7,15 +7,6 @@ import TableData from './TableData';
 import AddModal from './AddModal';
 import useFetch from '../../../hooks/useFetch';
 
-interface Data {
-  id: string;
-  index: number;
-  title: string;
-  subtitle: string;
-  year: number;
-  ismodal: boolean;
-}
-
 export const ArrayDB = () => {
   const [title, setTitle] = useState(String);
   const [titleForUpdate, settitleForUpdate] = useState(String);
@@ -64,7 +55,7 @@ export const ArrayDB = () => {
       setErrorState(error);
     }
   };
-  const updateHandlerModal = async ({ id, index }: Data) => {
+  const updateHandlerModal = async (id: string, index: number) => {
     try {
       const response = await axios({
         method: 'put',

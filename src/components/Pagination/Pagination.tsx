@@ -4,7 +4,7 @@ import styles from './scss/Pagination.module.scss';
 interface Props {
   postsPerPage: number;
   totalPosts: number;
-  paginate: any;
+  paginate: (number: number) => void;
 }
 
 const Pagination = ({ postsPerPage, totalPosts, paginate }: Props) => {
