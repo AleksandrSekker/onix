@@ -7,7 +7,7 @@ interface Props {
   paginate: (number: number) => void;
 }
 
-const Pagination = ({ postsPerPage, totalPosts, paginate }: Props) => {
+const PaginationByPages = ({ postsPerPage, totalPosts, paginate }: Props) => {
   const pageNumbers = [];
 
   for (let i = 1; i <= Math.ceil(totalPosts / postsPerPage); i += 1) {
@@ -31,4 +31,4 @@ const Pagination = ({ postsPerPage, totalPosts, paginate }: Props) => {
   );
 };
 
-export default Pagination;
+export default PaginationByPages;

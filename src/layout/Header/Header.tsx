@@ -49,7 +49,7 @@ const Header = ({ setdarkTheme }: any) => {
         <div className={styles.header__container}>
           <div className={styles.container__for__logo__and__switch}>
             <Link to="/onix" className={styles.link__decoration}>
-              <p className={styles.logo}>{t('home')}</p>
+              <p className={`${styles.logo}`}>{t('home')}</p>
             </Link>
             <div>
               <label className={styles.switch} htmlFor="check">
