@@ -12,6 +12,7 @@ import ErrorAlert from '../../components/Alert/ErrorAlert/ErrorAlert';
 import { auth } from '../../firebase';
 import SignInButton from '../../components/LoginButton/SignInButton';
 import SignOutButton from '../../components/LoginButton/SignOutButton';
+import { availableLanguages } from '../../i18n/i18n';
 
 const Header = ({ setdarkTheme }: any) => {
   const [isActive, setIsActive] = useState<boolean>(false);
@@ -32,7 +33,9 @@ const Header = ({ setdarkTheme }: any) => {
 
   const { t, i18n } = useTranslation();
   const changeLanguage = (language: string) => {
-    if (i18n.languages.includes(language)) {
+    // console.log(i18n.languages);
+    // i18n.changeLanguage(language);
+    if (availableLanguages.includes(language)) {
       i18n.changeLanguage(language);
     } else {
       setShowAlert(true);
@@ -87,7 +90,7 @@ const Header = ({ setdarkTheme }: any) => {
             <button type="button" className={styles.button} onClick={() => changeLanguage('ru')}>
               <img className={styles.language__image} alt="language" src={ru} />
             </button>
-            <button type="button" className={styles.button} onClick={() => changeLanguage('ua')}>
+            <button type="button" className={styles.button} onClick={() => changeLanguage('uk')}>
               <img className={styles.language__image} alt="language" src={uk} />
             </button>
           </div>

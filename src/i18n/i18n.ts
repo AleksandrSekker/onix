@@ -17,7 +17,7 @@ const data = {
   }
 };
 const fallbackLng: string = 'en';
-const availableLanguages: string[] = ['en', 'ru', 'uk'];
+export const availableLanguages: string[] = ['en', 'ru', 'uk'];
 
 const options: {
   order: string[];
